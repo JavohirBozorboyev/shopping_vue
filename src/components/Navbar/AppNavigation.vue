@@ -14,7 +14,7 @@ import { RouterLink } from "vue-router";
       </div>
       <div class="flex items-center gap-3">
         <RouterLink
-          to="/"
+          to="/favorites"
           title="Profil"
           class="bg-gray-100 rounded-md p-1 flex items-center gap-2 md:pr-2 active:scale-95 duration-300"
         >
