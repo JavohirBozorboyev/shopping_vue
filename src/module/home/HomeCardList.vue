@@ -1,8 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import HomeCard from "./HomeCard.vue";
 import Paginator from "primevue/paginator";
-import axios from "axios";
 
 const ApiCall = async () => {
   try {
@@ -16,7 +15,9 @@ const ApiCall = async () => {
   }
 };
 
-// ApiCall();
+onMounted(() => {
+  ApiCall();
+});
 </script>
 
 <template>

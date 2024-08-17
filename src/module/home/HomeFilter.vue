@@ -1,32 +1,26 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import InputText from "primevue/inputtext";
-import Select from "primevue/select";
-import Avatar from "primevue/avatar";
+import MultiSelect from "primevue/multiselect";
 import Button from "primevue/button";
-
 import Skeleton from "primevue/skeleton";
 
 const value = ref(null);
 let ApiCategoryData = ref(null);
+let ApiRegionData = ref(null);
 let loading = ref(true);
 
-const selectedCity = ref();
-const cities = ref([
-  { name: "Tashkent", code: "tsh" },
-  { name: "Namangan", code: "nam" },
-  { name: "Andijon", code: "LDN" },
-  { name: "Farg'ona", code: "IST" },
-  { name: "Buhoro", code: "PRS" },
-]);
-const category = ref([{ name: "Tashkent", code: "tsh" }]);
+const selectedCities = ref();
 
 const ApiCall = async () => {
   try {
     let res = await fetch(
       "https://tez-sotish-api.uz/api/v1/category/get/all-for-front"
     );
+    let region = await fetch("https://tez-sotish-api.uz/api/v1/region/get/all");
     ApiCategoryData.value = (await res.json()).body;
+    ApiRegionData.value = (await region.json()).body;
+    console.log(ApiRegionData.value);
   } catch (error) {
     console.log(error);
   } finally {
@@ -46,15 +40,17 @@ onMounted(() => {
         type="text"
         v-model="value"
         placeholder="Search"
-        class="p-2 col-span-12 md:col-span-7"
+        class="p-2 col-span-12 md:col-span-6 lg:col-span-7"
       />
-      <Select
-        v-model="selectedCity"
-        :options="cities"
+      <MultiSelect
+        v-model="selectedCities"
+        :options="ApiRegionData"
         optionLabel="name"
-        checkmark
-        placeholder="Barcha viloyatlar"
-        class="col-span-8 md:col-span-3"
+        filter
+        :loading
+        placeholder="Select Cities"
+        :maxSelectedLabels="3"
+        class="w-full col-span-8 md:col-span-4 lg:col-span-3"
       />
       <Button label="Qidirish" class="col-span-4 md:col-span-2" />
     </div>
