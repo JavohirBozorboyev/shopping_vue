@@ -1,6 +1,22 @@
 <script setup>
+import { ref } from "vue";
 import HomeCard from "./HomeCard.vue";
 import Paginator from "primevue/paginator";
+import axios from "axios";
+
+const ApiCall = async () => {
+  try {
+    let res = await fetch(
+      "https://tez-sotish-api.uz/api/v1/category/tree/top/ancestors?childId=1"
+    );
+    let data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// ApiCall();
 </script>
 
 <template>
@@ -18,3 +34,5 @@ import Paginator from "primevue/paginator";
     </div>
   </div>
 </template>
+
+<!-- {process.env.Api_URl}/api/v1/category/tree/top/ancestors -->
