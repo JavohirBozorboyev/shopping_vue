@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import AppNavigation from "./components/Navbar/AppNavigation.vue";
+import AppFooter from "./components/Footer/AppFooter.vue";
 </script>
 
 <template>
@@ -8,9 +9,11 @@ import AppNavigation from "./components/Navbar/AppNavigation.vue";
     <AppNavigation />
   </header>
 
-  <main class="bg-gray-100 min-h-screen pt-[60px]">
+  <main class="pt-[65px] pb-5">
     <RouterView />
   </main>
 
-  <footer></footer>
+  <footer>
+    <AppFooter />
+  </footer>
 </template>
