@@ -17,7 +17,7 @@ import router from '@/router';
 import { defineEmits } from 'vue';
 
 function Chatpush(id) {
-    router.push(`/chat/${id}`)
+    router.push(`/chat`)
     const newState = false; // yoki false ga o'zgartirishingiz mumkin
   emit('toggle-menu', newState);
 }

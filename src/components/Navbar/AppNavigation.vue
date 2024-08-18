@@ -36,7 +36,11 @@ const router = useRoute();
         </RouterLink>
 
         <RouterLink
+<<<<<<< HEAD
           to="/chat"
+=======
+          to="/chat/:id"
+>>>>>>> chat
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
           :class="router.path == '/chat' ? 'bg-black' : 'bg-gray-100'"

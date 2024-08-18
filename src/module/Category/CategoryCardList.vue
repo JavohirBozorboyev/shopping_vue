@@ -24,6 +24,7 @@ async function CategoryApiCall() {
   }
 }
 
+
 watchEffect(() => {
   CategoryApiCall();
 });
