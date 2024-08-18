@@ -70,14 +70,17 @@
               </span>
             </div>
             <div class="center flex flex-col">
-              <span
-                ><i class="pi pi-map-marker text-gray-400"></i>
-                <span class="text-sm">Ташкент, Учтепинский район</span></span
+              <span class="flex items-center  gap-2">
+                <i class="pi pi-map-marker text-gray-400"></i>
+                <span class="text-sm">Ташкент, Учтепинский район</span>
+                </span
               >
               <span class="flex justify-between"
                 ><div>
-                  <i class="pi pi-clock text-gray-400"></i>
+                 <span class="flex items-center justify-center gap-2"> 
+                   <i class="pi pi-clock text-gray-400"></i>
                   <span>Сегодня 10:23</span>
+                 </span>
                 </div>
                 <div class="text-end px-2 bg-white rounded-lg">
                   <h1>ID:123456</h1>
