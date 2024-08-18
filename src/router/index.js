@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import AppLayout from "@/layout/AppLayout.vue";
+import ProductLayout from "@/layout/ProductLayout.vue";
 import LoginLayout from "@/layout/LoginLayout.vue";
 import CategoryView from "@/views/CategoryView.vue";
 
@@ -33,6 +34,17 @@ const router = createRouter({
       path: "/favorites",
       name: "favorites",
       component: () => import("../views/FavoriteView.vue"),
+      meta: {
+        layout: ProductLayout,
+      },
+    },
+    {
+      path: "/chat",
+      name: "Chat",
+      component: () => import("../views/ChatsView.vue"),
+      meta: {
+        layout: ProductLayout,
+      },
     },
     {
       path: "/favorites1",

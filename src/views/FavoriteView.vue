@@ -1,39 +1,5 @@
 <template>
   <div class="container mx-auto p-2 text-black bg-white">
-    <div class="top p-1">
-      <div class="inline-flex flex-wrap shadow-sm rounded-md mb-5" role="group">
-        <button
-          type="button"
-          class="rounded-l-lg border border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-        >
-          Sevimlilar
-        </button>
-        <button
-          type="button"
-          class="border-t border-b border border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-        >
-          Xabarlar
-        </button>
-        <button
-          type="button"
-          class="border-t border-b border border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-        >
-          Reklamalar
-        </button>
-        <button
-          type="button"
-          class="border-t border-b border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-        >
-          To'lovlar
-        </button>
-        <button
-          type="button"
-          class="rounded-r-md border border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-        >
-          Sozlash; O'rnatish
-        </button>
-      </div>
-    </div>
     <div class="bottom flex flex-col gap-3 p-1 px-3 w-full overflow-y-auto">
       <div class="grid grid-cols-12 items-center gap-2">
         <div
