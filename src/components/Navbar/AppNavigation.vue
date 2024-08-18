@@ -26,7 +26,7 @@ import { RouterLink } from "vue-router";
           >
         </RouterLink>
         <RouterLink
-          to="/"
+          to="/chat/:id"
           title="Profil"
           class="bg-gray-100 rounded-md p-1 flex items-center gap-2 md:pr-2 active:scale-95 duration-300"
         >

@@ -17,13 +17,14 @@ async function CategoryApiCall() {
       `/api/v1/announcement/get/list/${router.params.slug}?page=0&size=1`
     );
     data.value = res.data.body;
-    console.log(res.data.body);
+    // console.log(res.data.body);
   } catch (error) {
     console.log(error);
   } finally {
     loader.value = false;
   }
 }
+
 
 watchEffect(() => {
   CategoryApiCall();

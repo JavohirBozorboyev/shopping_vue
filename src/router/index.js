@@ -26,6 +26,14 @@ const router = createRouter({
       },
     },
     {
+      path: "/category/:slug/:id",
+      name: "category-info",
+      component: () => import("../views/CategoryIdView.vue"),
+      meta: {
+        layout: AppLayout,
+      },
+    },
+    {
       path: "/about",
       name: "about",
       component: () => import("../views/AboutView.vue"),
@@ -46,14 +54,14 @@ const router = createRouter({
         layout: ProductLayout,
       },
     },
-    {
-      path: "/chat/:slug",
-      name: "ChatId",
-      component: () => import("../module/messages/chat.vue"),
-      meta: {
-        layout: ChatsLayout,
-      },
-    },
+    // {
+    //   path: "/chat/:slug",
+    //   name: "ChatId",
+    //   component: () => import("../module/messages/chat.vue"),
+    //   meta: {
+    //     layout: ChatsLayout,
+    //   },
+    // },
     {
       path: "/favorites1",
       name: "favorites1",
