@@ -5,7 +5,7 @@ import AppLayout from "@/layout/AppLayout.vue";
 import ProductLayout from "@/layout/ProductLayout.vue";
 import LoginLayout from "@/layout/LoginLayout.vue";
 import CategoryView from "@/views/CategoryView.vue";
-
+import ChatsLayout from "../views/ChatsView.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -44,6 +44,14 @@ const router = createRouter({
       component: () => import("../views/ChatsView.vue"),
       meta: {
         layout: ProductLayout,
+      },
+    },
+    {
+      path: "/chat/:slug",
+      name: "ChatId",
+      component: () => import("../module/messages/chat.vue"),
+      meta: {
+        layout: ChatsLayout,
       },
     },
     {
