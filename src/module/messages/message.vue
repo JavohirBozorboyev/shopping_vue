@@ -14,9 +14,12 @@
 <script setup>
 import { ref} from "vue"
 import router from '@/router';
+import { defineEmits } from 'vue';
 
 function Chatpush(id) {
     router.push(`/chat/${id}`)
+    const newState = false; // yoki false ga o'zgartirishingiz mumkin
+  emit('toggle-menu', newState);
 }
 
 const data= ref([
@@ -56,6 +59,9 @@ const data= ref([
         image: "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13"
     }
 ])
+
+const emit = defineEmits(['toggle-menu']);
+
 </script>
 <style scoped>
 ::-webkit-scrollbar {
