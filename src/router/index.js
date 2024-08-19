@@ -5,6 +5,9 @@ import ProductLayout from "@/layout/ProductLayout.vue";
 import CategoryView from "@/views/CategoryView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import NotFoundLayout from "@/layout/NotFoundLayout.vue";
+import FavoriteView from "@/views/FavoriteView.vue";
+import CategoryIdView from "@/views/CategoryIdView.vue";
+import ChatsView from "../views/ChatsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,21 +30,16 @@ const router = createRouter({
     },
     {
       path: "/category/:slug/:id",
-      name: "category-info",
-      component: () => import("../views/CategoryIdView.vue"),
+      name: "category-id",
+      component: CategoryIdView,
       meta: {
         layout: AppLayout,
       },
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
-    },
-    {
       path: "/favorites",
       name: "favorites",
-      component: () => import("../views/FavoriteView.vue"),
+      component: FavoriteView,
       meta: {
         layout: ProductLayout,
       },
@@ -49,7 +47,7 @@ const router = createRouter({
     {
       path: "/chat",
       name: "Chat",
-      component: () => import("../views/ChatsView.vue"),
+      component: ChatsView,
       meta: {
         layout: ProductLayout,
       },

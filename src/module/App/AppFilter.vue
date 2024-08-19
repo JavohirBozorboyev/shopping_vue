@@ -26,7 +26,7 @@ const ApiCall = async () => {
     ApiCategoryData.value = (await res.json()).body;
     ApiRegionData.value = (await region.json()).body;
   } catch (error) {
-    console.log(error);
+    console.log(error, "err");
   } finally {
     loading.value = false; // So'rov tugagach, loaderni yashirish
   }
@@ -80,7 +80,7 @@ onMounted(() => {
               <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
             </span>
             <p
-              class="capitalize mt-1 text-xs "
+              class="capitalize mt-1 text-xs"
               :class="!router.params.slug ? ' text-white' : 'text-gray-700'"
             >
               Asosiy sahifa
