@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
 import AppLayout from "@/layout/AppLayout.vue";
 import ProductLayout from "@/layout/ProductLayout.vue";
-import LoginLayout from "@/layout/LoginLayout.vue";
 import CategoryView from "@/views/CategoryView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 
@@ -41,11 +39,6 @@ const router = createRouter({
       meta: {
         layout: ProductLayout,
       },
-    },
-    {
-      path: "/favorites1",
-      name: "favorites1",
-      component: () => import("../module/favorites/favorits1.vue"),
     },
     {
       path: "/:pathMatch(.*)*", // Yangi 404 yo'nalish
