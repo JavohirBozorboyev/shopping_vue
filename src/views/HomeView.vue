@@ -1,10 +1,7 @@
 <script setup>
-import CategoryCardList from "@/module/Category/CategoryCardList.vue";
 import HomeCardList from "../module/home/HomeCardList.vue";
 </script>
 
 <template>
-  <div class="">
-    <CategoryCardList />
-  </div>
+  <div class=""></div>
 </template>

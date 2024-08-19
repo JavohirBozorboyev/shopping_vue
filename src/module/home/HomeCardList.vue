@@ -22,7 +22,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="container mx-auto px-2 mt-5 bg-gray-50 rounded-md p-2 border grid grid-cols-12"
+    class="container mx-auto px-2 bg-gray-50 rounded-md p-2 grid grid-cols-12"
   >
     <HomeCard />
     <div class="col-span-12 mt-2 border rounded-md overflow-hidden">

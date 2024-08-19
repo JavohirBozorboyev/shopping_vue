@@ -5,6 +5,8 @@ import MultiSelect from "primevue/multiselect";
 import Button from "primevue/button";
 import Skeleton from "primevue/skeleton";
 import { RouterLink, useRoute } from "vue-router";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
 
 const value = ref(null);
 let ApiCategoryData = ref(null);
@@ -39,12 +41,10 @@ onMounted(() => {
   <div class="bg-gray-50 py-4">
     <div class="container mx-auto px-2 p-2 rounded-md">
       <div class="grid grid-cols-12 items-center gap-2">
-        <InputText
-          type="text"
-          v-model="value"
-          placeholder="Search"
-          class="p-2 col-span-12 md:col-span-6 lg:col-span-7"
-        />
+        <IconField class="col-span-12 md:col-span-6 lg:col-span-7">
+          <InputIcon class="pi pi-search" />
+          <InputText v-model="value1" placeholder="Search" class="w-full" />
+        </IconField>
         <MultiSelect
           v-model="selectedCities"
           :options="ApiRegionData"
@@ -75,11 +75,7 @@ onMounted(() => {
           >
             <span
               class="object-cover w-full h-20 rounded-md bg-gradient-to-tr from-teal-500 to-emerald-500"
-              :class="
-                !router.params.slug
-                  ? 'border'
-                  : null
-              "
+              :class="!router.params.slug ? 'border' : null"
             ></span>
             <p
               class="capitalize mt-1 text-xs text-slate-700"
@@ -89,12 +85,12 @@ onMounted(() => {
             </p>
           </RouterLink>
           <RouterLink
-            :to="`/category/${item.router}`"
+            :to="`/category/${item.id}`"
             v-if="!loading"
             v-for="item of ApiCategoryData"
             class="flex flex-col items-center justify-center bg-white p-1 rounded-md min-w-32 cursor-pointer select-none"
             :class="
-              router.params.slug == item.router
+              router.params.slug == item.id
                 ? 'bg-gradient-to-tr from-teal-500 to-emerald-500 text-white'
                 : null
             "
@@ -106,7 +102,7 @@ onMounted(() => {
             />
             <p
               class="capitalize mt-1 text-xs text-slate-700 text-nowrap p-1"
-              :class="router.params.slug == item.router ? ' text-white' : null"
+              :class="router.params.slug == item.id ? ' text-white' : null"
             >
               {{ item.name }}
             </p>

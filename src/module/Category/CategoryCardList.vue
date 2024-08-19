@@ -1,55 +1,99 @@
 <script setup>
-import { ref } from "vue";
-
+import { ref, watchEffect } from "vue";
 import Button from "primevue/button";
 import Badge from "primevue/badge";
-
 import Paginator from "primevue/paginator";
+import axios from "axios";
+import { useRoute } from "vue-router";
+import CategoryLoader from "./CategoryLoader.vue";
+const data = ref(null);
+let loader = ref(true);
 
-const data = ref([1, 2, 3, 4, 1, 1, 1, 1, 1, 1]);
+const router = useRoute();
+
+async function CategoryApiCall() {
+  try {
+    const res = await axios.get(
+      `/api/v1/announcement/get/list/${router.params.slug}?page=0&size=1`
+    );
+    data.value = res.data.body;
+    console.log(res.data.body);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loader.value = false;
+  }
+}
+
+watchEffect(() => {
+  CategoryApiCall();
+});
 </script>
 
 <template>
   <div class="grid grid-cols-12 gap-2 xl:gap-3">
+    <CategoryLoader v-if="loader" v-for="_ in [1, 1, 1, 1, 1, 1]" />
+
     <div
-      v-for="(item, index) in data"
-      class="col-span-6 xl:col-span-4 p-2 xl:p-3 rounded-md border"
+      v-if="data?.rows.length == 0"
+      class="col-span-12 bg-gray-50 rounded-md p-5 min-h-60 flex flex-col gap-5 justify-center items-center"
+    >
+      <i
+        class="pi pi-exclamation-circle text-gray-400"
+        style="font-size: 3rem"
+      ></i>
+      <h1 class="text-xl uppercase text-slate-700">Maxsulot Topilmadi!</h1>
+    </div>
+    <div
+      v-if="!loader"
+      v-for="(item, index) in data?.rows"
+      class="col-span-6 xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-emerald-500 duration-300"
     >
       <div class="">
         <img
-          src="https://i.pinimg.com/originals/d0/3a/c2/d03ac2264bb230c8e86bbabc15d4e667.jpg"
+          :src="item.attachUrlResponses.originFile"
           alt=""
-          class="w-full lg:min-h-56 object-cover rounded-md"
+          class="w-full h-32 md:min-h-48 object-cover rounded-md"
         />
       </div>
       <div class="mt-2">
         <div class="flex justify-between items-center">
-          <div>
-            <p class="text-xs text-gray-400">Accses</p>
-          </div>
-          <Badge value="Yangi" severity="success" size="small"></Badge>
+          <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
+            {{ item.address }}
+          </p>
+
+          <Badge value="Yangi" size="small" severity="secondary"></Badge>
         </div>
-        <h1 class="text-sm md:text-base lg:text-lg mt-1">Blue Band</h1>
-        <h1 class="text-slate-700 font-bold text-xl mt-2">
-          <i class="pi pi-dollar"></i>
-          79
+        <h1
+          class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
+        >
+          {{ item.title }}
         </h1>
-        <div class="mt-4 flex gap-2">
+        <h1
+          class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
+        >
+          <i class="pi pi-money-bill text-gray-400"></i>
+          {{ item.price }} {{ item.currencyCode }}
+        </h1>
+        <div class="mt-4 flex justify-between gap-2">
+          <div class="flex gap-2">
+            <Button class="" icon="pi pi-shopping-cart " size="small"></Button>
+
+            <Button class="" icon="pi pi-heart" size="small" outlined></Button>
+          </div>
           <Button
-            class="w-full"
+            class=""
+            icon="pi pi-arrow-right"
             size="small"
-            icon="pi pi-shopping-cart"
-            label="Add to Card"
+            severity="secondary"
           ></Button>
-          <Button class="" icon="pi pi-heart" size="small" outlined></Button>
         </div>
       </div>
     </div>
 
     <Paginator
       :rows="10"
-      :totalRecords="120"
-      :rowsPerPageOptions="[10, 20, 30]"
+      :totalRecords="data?.total"
       class="col-span-12 mt-5"
     ></Paginator>
   </div>

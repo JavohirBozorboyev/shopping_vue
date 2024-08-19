@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white col-span-6 md:col-span-4 lg:col-span-3 2xl:col-span-2 p-2 rounded-md border cursor-pointer"
+    class="bg-white col-span-6 md:col-span-4 2xl:col-span-3 p-2 rounded-md cursor-pointer"
   >
     <img
       src="https://wallpapers.com/images/hd/cool-cars-modern-blue-lamborghini-8p3hc0xqvu0cv3de.jpg"
