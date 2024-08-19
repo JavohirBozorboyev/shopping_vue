@@ -10,6 +10,7 @@ import CategoryIdView from "@/views/CategoryIdView.vue";
 import ChatsView from "../views/ChatsView.vue";
 import LoginView from "@/views/LoginView.vue";
 import LoginLayout from "@/layout/LoginLayout.vue";
+import CategoryIdLayout from "@/layout/CategoryIdLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,7 +36,7 @@ const router = createRouter({
       name: "category-id",
       component: CategoryIdView,
       meta: {
-        layout: AppLayout,
+        layout: CategoryIdLayout,
       },
     },
     {

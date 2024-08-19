@@ -1,12 +1,12 @@
 <template>
   <div class="container p-2 flex flex-col h-full border gap-2">
     <div class="flex flex-col overflow-y-auto h-full py-3 gap-2">
-      <div v-for="item in data" class="flex gap-2">
+      <div v-for="item in data" :class="item.id==1 ? 'flex flex-row-reverse' : 'flex  gap-2'">
         <div class="h-auto">
           <img class="w-14 h-14 rounded-full" :src="item.image" alt="" />
         </div>
-        <div class="bg-gray-100 h-auto rounded-t-2xl rounded-br-2xl p-2 mb-3">
-          <p>{{ item.message }} {{ task }}</p>
+        <div :class="item.id==1 ? 'bg-gray-100 h-auto rounded-t-2xl rounded-bl-2xl p-2 mb-3' : 'bg-gray-100 h-auto rounded-t-2xl rounded-br-2xl p-2 mb-3'">
+          <p>{{ item.message }}</p>
         </div>
       </div>
     </div>
@@ -48,9 +48,9 @@
 <script setup>
 import { ref, watchEffect } from "vue";
 import router from "@/router";
-const taskId = ref(router.currentRoute);
-let task = taskId.value.params.slug;
-console.log();
+// const taskId = ref(router.currentRoute);
+// let task = taskId.value.params.slug;
+// console.log();
 
 const data = ref([
   {
@@ -68,7 +68,7 @@ const data = ref([
     message: "Hi, I am doing?",
   },
   {
-    id: 2,
+    id: 1,
     name: "Jane Doe",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
@@ -82,7 +82,7 @@ const data = ref([
     message: "Hi, I am doing?",
   },
   {
-    id: 2,
+    id: 1,
     name: "Jane Doe",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
@@ -96,7 +96,7 @@ const data = ref([
     message: "Hi, I am doing?",
   },
   {
-    id: 2,
+    id: 1,
     name: "Jane Doe",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
@@ -110,14 +110,14 @@ const data = ref([
     message: "Hi, I am doing?",
   },
   {
-    id: 2,
+    id: 1,
     name: "Jane Doe",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
     message: "Hi, I am doing?",
   },
   {
-    id: 2,
+    id: 1,
     name: "Jane Doe",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
@@ -152,8 +152,6 @@ const handleFileChange = (event) => {
 
 watchEffect(() => {
   data.value;
-  task;
-  taskId;
 });
 </script>
 <style scoped>

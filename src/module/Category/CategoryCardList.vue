@@ -24,7 +24,6 @@ async function CategoryApiCall() {
   }
 }
 
-
 watchEffect(() => {
   CategoryApiCall();
 });
@@ -92,12 +91,14 @@ watchEffect(() => {
               severity="contrast"
             ></Button>
           </div>
-          <Button
-            class=""
-            icon="pi pi-arrow-right"
-            size="small"
-            severity="secondary"
-          ></Button>
+          <RouterLink :to="`/category/${router.params.slug}/${item.id}`">
+            <Button
+              class=""
+              icon="pi pi-arrow-right"
+              size="small"
+              severity="secondary"
+            ></Button>
+          </RouterLink>
         </div>
       </div>
     </div>
