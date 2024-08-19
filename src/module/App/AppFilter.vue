@@ -70,8 +70,8 @@ onMounted(() => {
           <RouterLink
             to="/"
             v-if="!loading"
-            class="flex flex-col items-center justify-center bg-white p-2 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
-            :class="!router.params.slug ? 'bg-black text-white' : null"
+            class="flex flex-col items-center justify-center p-2 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
+            :class="!router.params.slug ? 'bg-black text-white' : 'bg-white'"
           >
             <span
               class="object-cover w-full h-20 rounded-md bg-black flex items-center justify-center"
@@ -80,8 +80,8 @@ onMounted(() => {
               <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
             </span>
             <p
-              class="capitalize mt-1 text-xs text-slate-700"
-              :class="!router.params.slug ? ' text-white' : null"
+              class="capitalize mt-1 text-xs "
+              :class="!router.params.slug ? ' text-white' : 'text-gray-700'"
             >
               Asosiy sahifa
             </p>
@@ -90,10 +90,8 @@ onMounted(() => {
             :to="`/category/${item.id}`"
             v-if="!loading"
             v-for="item of ApiCategoryData"
-            class="flex flex-col items-center justify-center bg-white p-1 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
-            :class="
-              router.params.slug == item.id ? 'bg-black text-white' : null
-            "
+            class="flex flex-col items-center justify-center p-1 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
+            :class="router.params.slug == item.id ? 'bg-black ' : 'bg-white'"
           >
             <img
               :src="item.attach.originFile"
@@ -101,8 +99,10 @@ onMounted(() => {
               class="w-full h-20 object-cover rounded-md"
             />
             <p
-              class="capitalize mt-1 text-xs text-slate-700 text-nowrap p-1"
-              :class="router.params.slug == item.id ? ' text-white' : null"
+              class="capitalize mt-1 text-xs text-nowrap p-1"
+              :class="
+                router.params.slug == item.id ? ' text-white' : 'text-gray-700'
+              "
             >
               {{ item.name }}
             </p>
