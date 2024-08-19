@@ -15,11 +15,16 @@ const router = useRoute();
         <RouterLink
           to="/favorites"
           title="Profil"
-          class="bg-gray-100 rounded-md p-1 flex items-center gap-2 md:pr-2 active:scale-95 duration-300"
-          :class="router.path == '/favorites' ? 'bg-black' : null"
+          class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
+          :class="router.path == '/favorites' ? 'bg-black' : 'bg-gray-100'"
         >
           <i
-            class="pi pi-heart p-[6px] bg-white rounded-[4px] text-gray-500"
+            class="pi pi-heart p-[6px] rounded-[4px]"
+            :class="
+              router.path == '/favorites'
+                ? 'bg-black text-white'
+                : 'bg-white text-gray-500'
+            "
           ></i>
           <span
             class="text-sm uppercase hidden md:block"
@@ -33,11 +38,16 @@ const router = useRoute();
         <RouterLink
           to="/chat"
           title="Profil"
-          class="bg-gray-100 rounded-md p-1 flex items-center gap-2 md:pr-2 active:scale-95 duration-300"
-          :class="router.path == '/chat' ? 'bg-black' : null"
+          class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
+          :class="router.path == '/chat' ? 'bg-black' : 'bg-gray-100'"
         >
           <i
-            class="pi pi-envelope p-[6px] bg-white rounded-[4px] text-gray-500"
+            class="pi pi-envelope p-[6px] rounded-[4px]"
+            :class="
+              router.path == '/chat'
+                ? 'bg-black text-white'
+                : 'bg-white text-gray-500'
+            "
           ></i>
           <span
             class="text-sm uppercase hidden md:block"
@@ -48,11 +58,16 @@ const router = useRoute();
         <RouterLink
           to="/profil"
           title="Profil"
-          class="bg-gray-100 rounded-md p-1 flex items-center gap-2 md:pr-2 active:scale-95 duration-300"
-          :class="router.path == '/profil' ? 'bg-black' : null"
+          class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
+          :class="router.path == '/profil' ? 'bg-black' : 'bg-gray-100'"
         >
           <i
-            class="pi pi-user p-[6px] bg-white rounded-[4px] text-gray-500"
+            class="pi pi-user p-[6px] rounded-[4px]"
+            :class="
+              router.path == '/profil'
+                ? 'bg-black text-white'
+                : 'bg-white text-gray-500'
+            "
           ></i>
           <span
             class="text-sm uppercase hidden md:block"
