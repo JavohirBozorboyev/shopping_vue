@@ -17,7 +17,6 @@ async function CategoryApiCall() {
       `/api/v1/announcement/get/list/${router.params.slug}?page=0&size=1`
     );
     data.value = res.data.body;
-    console.log(res.data.body);
   } catch (error) {
     console.log(error);
   } finally {
@@ -47,7 +46,7 @@ watchEffect(() => {
     <div
       v-if="!loader"
       v-for="(item, index) in data?.rows"
-      class="col-span-6 xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-emerald-500 duration-300"
+      class="col-span-6 xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-black duration-300"
     >
       <div class="">
         <img
@@ -77,9 +76,20 @@ watchEffect(() => {
         </h1>
         <div class="mt-4 flex justify-between gap-2">
           <div class="flex gap-2">
-            <Button class="" icon="pi pi-shopping-cart " size="small"></Button>
+            <Button
+              class=""
+              icon="pi pi-shopping-cart "
+              size="small"
+              severity="contrast"
+            ></Button>
 
-            <Button class="" icon="pi pi-heart" size="small" outlined></Button>
+            <Button
+              class=""
+              icon="pi pi-heart"
+              size="small"
+              outlined
+              severity="contrast"
+            ></Button>
           </div>
           <Button
             class=""

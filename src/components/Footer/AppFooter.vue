@@ -2,10 +2,8 @@
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 const links = ref([
-  { name: "Main Page", href: "/" },
-  { name: "favorite", href: "/favorite" },
-  { name: "SMS", href: "/sms" },
-  { name: "Profil", href: "/profil" },
+  { name: "Main page", href: "/" },
+  { name: "Favorite", href: "/favorites" },
 ]);
 const developers = ref([
   { name: "Frontend", href: "/" },
@@ -14,33 +12,35 @@ const developers = ref([
 </script>
 
 <template>
-  <div class="bg-gray-50 pt-5 border-t">
+  <div class="bg-black pt-5">
     <div class="container px-2 mx-auto grid grid-cols-12 items-center gap-5">
-      <div class="col-span-12 sm:col-span-4 md:col-span-3">
-        <img
-          src="../../../public/favicon.ico"
-          alt=""
-          class="w-10 h-10 object-cover"
-        />
+      <div
+        class="col-span-12 sm:col-span-4 md:col-span-3 flex items-center justify-center sm:justify-start"
+      >
+        <RouterLink to="/">
+          <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
+        </RouterLink>
       </div>
       <div
-        class="col-span-12 sm:col-span-6 md:col-span-6 flex gap-3 lg:justify-center"
+        class="col-span-12 sm:col-span-6 md:col-span-6 flex gap-5 justify-center"
       >
         <RouterLink
           v-for="item in links"
           :to="item.href"
           title="Profil"
-          class="text-slate-500 text-sm md:text-base capitalize"
+          class="text-gray-300 text-sm md:text-base"
         >
           {{ item.name }}
         </RouterLink>
       </div>
-      <div class="col-span-12 sm:col-span-2 md:col-span-3 flex gap-3 md:justify-end">
+      <div
+        class="col-span-12 sm:col-span-2 md:col-span-3 flex gap-5 justify-center md:justify-end"
+      >
         <RouterLink
           v-for="item in developers"
           :to="item.href"
           title="Profil"
-          class="text-slate-500 text-sm md:text-base capitalize flex items-center justify-center"
+          class="text-gray-300 text-sm md:text-base flex items-center justify-center"
         >
           {{ item.name }}
         </RouterLink>
@@ -50,7 +50,7 @@ const developers = ref([
       <RouterLink
         to="/"
         title="Profil"
-        class="text-emerald-500 text-sm md:text-base uppercase flex items-center justify-center font-medium"
+        class="text-white text-sm md:text-base uppercase flex items-center justify-center font-medium"
       >
         Tezsotish.uz
       </RouterLink>

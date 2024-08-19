@@ -43,7 +43,7 @@ onMounted(() => {
       <div class="grid grid-cols-12 items-center gap-2">
         <IconField class="col-span-12 md:col-span-6 lg:col-span-7">
           <InputIcon class="pi pi-search" />
-          <InputText v-model="value1" placeholder="Search" class="w-full" />
+          <InputText placeholder="Search" class="w-full" />
         </IconField>
         <MultiSelect
           v-model="selectedCities"
@@ -55,7 +55,11 @@ onMounted(() => {
           :maxSelectedLabels="3"
           class="w-full col-span-8 md:col-span-4 lg:col-span-3"
         />
-        <Button label="Qidirish" class="col-span-4 md:col-span-2" />
+        <Button
+          label="Qidirish"
+          class="col-span-4 md:col-span-2"
+          severity="contrast"
+        />
       </div>
       <div class="overflow-x-auto">
         <div class="mt-5 flex items-center gap-2 md:gap-3 min-w-[1200px]">
@@ -66,33 +70,29 @@ onMounted(() => {
           <RouterLink
             to="/"
             v-if="!loading"
-            class="flex flex-col items-center justify-center bg-white p-2 rounded-md min-w-32 cursor-pointer select-none"
-            :class="
-              !router.params.slug
-                ? 'bg-gradient-to-tr from-teal-500 to-emerald-500 text-white'
-                : null
-            "
+            class="flex flex-col items-center justify-center bg-white p-2 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
+            :class="!router.params.slug ? 'bg-black text-white' : null"
           >
             <span
-              class="object-cover w-full h-20 rounded-md bg-gradient-to-tr from-teal-500 to-emerald-500"
-              :class="!router.params.slug ? 'border' : null"
-            ></span>
+              class="object-cover w-full h-20 rounded-md bg-black flex items-center justify-center"
+              :class="!router.params.slug ? '' : null"
+            >
+              <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
+            </span>
             <p
               class="capitalize mt-1 text-xs text-slate-700"
               :class="!router.params.slug ? ' text-white' : null"
             >
-              Barchasi
+              Asosiy sahifa
             </p>
           </RouterLink>
           <RouterLink
             :to="`/category/${item.id}`"
             v-if="!loading"
             v-for="item of ApiCategoryData"
-            class="flex flex-col items-center justify-center bg-white p-1 rounded-md min-w-32 cursor-pointer select-none"
+            class="flex flex-col items-center justify-center bg-white p-1 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
             :class="
-              router.params.slug == item.id
-                ? 'bg-gradient-to-tr from-teal-500 to-emerald-500 text-white'
-                : null
+              router.params.slug == item.id ? 'bg-black text-white' : null
             "
           >
             <img
