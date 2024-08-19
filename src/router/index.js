@@ -29,14 +29,6 @@ const router = createRouter({
       path: "/category/:slug/:id",
       name: "category-info",
       component: () => import("../views/CategoryIdView.vue"),
-      meta: {
-        layout: AppLayout,
-      },
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
     },
     {
       path: "/favorites",
