@@ -1,19 +1,19 @@
 <script setup>
-import Image from 'primevue/image';
+import Image from "primevue/image";
 import Button from "primevue/button";
-import router from '@/router';
+import router from "@/router";
 
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
-let productID=router.currentRoute.value.params.id
+let productID = router.currentRoute.value.params.id;
 console.log(productID);
 let number = ref("");
 let producDescription = ref("");
 let productTitle = ref("");
 let productImg = ref();
 let productPrice = ref("");
-let productValute= ref("");
+let productValute = ref("");
 let productTime = ref();
 
 const product = ref();
@@ -42,17 +42,17 @@ function getProduct() {
 }
 
 function formatDateTime(dateTimeString) {
-    const date = new Date(dateTimeString);
+  const date = new Date(dateTimeString);
 
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Oy 0-indekslangan
-    const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Oy 0-indekslangan
+  const day = String(date.getDate()).padStart(2, "0");
 
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
 
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 onMounted(() => {
@@ -60,150 +60,74 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="container mx-auto p-2 flex flex-col  md:flex-row gap-5 w-full">
-    <div class="left rounded-lg">
-      <div v-if="product" class="container rounded-lg bg-gray-50 flex flex-col gap-2">
-        <div class="flex flex-col rounded-lg gap-2">
-          <div class="top rounded-lg flex flex-col md:flex-row-reverse gap-2 w-full p-2 shadow">
-            <span>
-              <Image
-              class="w-full z-50 h-full object-contain"
-              :src="product.attachUrlResponses[0].originFile"
-              alt=""
-              preview
-            />
-            </span>
-            <span  :class="productImg ? 'flex flex-row md:flex-col gap-2' : 'hidden'">
-              <Image v-for="item in productImg"
-              class="w-[100px] h-[100px] z-50  object-contain"
-              :src="item.originFile"
-              alt=""
-              preview
-            />
-            </span>
-          </div>
-        </div>
+  <div class="container mx-auto p-2 grid grid-cols-1 lg:grid-cols-2 gap-5">
+    <div class="p-2 grid-cols-12 rounded-md bg-gray-50">
+      <div
+        class="rounded-lg bg-gray-50 grid grid-cols-12 gap-2"
+      >
+        <Image  v-for="item in product?.attachUrlResponses"
+          class="w-full h-full object-cover rounded-md overflow-hidden"
+          :class="
+            product?.attachUrlResponses.length == 1
+              ? 'col-span-12'
+              : 'col-span-6'
+          "
+          :src="item?.originFile"
+          alt=""
+          preview
+        />
       </div>
     </div>
-    <div class="right w-full">
-      <div class="container bg-gray-50 flex flex-col gap-2 w-full">
-        <h1 class="px-2 font-semibold text-xl md:text-2xl">
+    <div class="w-full bg-gray-50 p-2 sm:p-3 md:p-4 lg:p-8 rounded-md">
+      <div class="flex flex-col gap-2 w-full">
+        <h1
+          class="font-semibold text-base md:text-2xl xl:text-3xl text-slate-900"
+        >
           {{ productTitle }}
         </h1>
-        <div class="card p-2 flex flex-col md:flex-row gap-2">
-          <div
-            class="flex gap-4 p-4 bg-gray-200 text-white rounded-lg w-full flex-col"
-          >
-            <!-- <span class="text-xs text-slate-800"
-              >Sifatli mahsulot yetkazib berish hizmati mavjut</span
-            > -->
-            <h1 class="md:text-2xl font-bold text-slate-800">{{ productPrice.price }} {{ productValute }}</h1>
-            <span class="text-xs text-slate-800"
-              ><h3>{{ productTime  }}</h3></span>
-              <div class="flex gap-2">
-            <Button
-              class=""
-              icon="pi pi-shopping-cart "
-              size="small"
-              severity="contrast"
-            ></Button>
+        <div class="my-5 ">
+            <h1 class="md:text-2xl font-bold text-slate-800">
+            {{ productPrice.price }} {{ productValute }}
+          </h1>
+        </div>
+        <div class="flex gap-2">
+          <Button
+            class=""
+            icon="pi pi-shopping-cart "
+            severity="contrast"
+            label="Add to cart"
+          ></Button>
 
-            <Button
-              class=""
-              icon="pi pi-heart"
-              size="small"
-              outlined
-              severity="contrast"
-            ></Button>
-          </div>
-          </div>
-          <div class="card p-2 flex flex-col gap-2 bg-slate-50 w-full">
-            <div
-              class="w-full border p-1 rounded-lg flex items-center gap-2 font-semibold"
-            >
-              <img
-                class="w-12 h-12 object-cover rounded-full"
-                src="https://avatars.mds.yandex.net/i?id=3ff1e7144e00e1272505ba5e56adf16847c8db0a-4220229-images-thumbs&n=13"
-                alt="user image"
-              />
-              <h1>Maxmudov Olimjon</h1>
-            </div>
-            <div
-              class="flex w-full border p-1 rounded-lg items-center justify-between gap-2 font-semibold"
-            >
-              <span class="flex items-center gap-2"
-                ><i class="pi pi-phone"></i>
-                <h1>{{ number }}</h1></span
-              >
-            </div>
-            <div
-              class="w-full border cursor-pointer p-1 rounded-lg flex items-center gap-2 font-semibold"
-            >
-              <i class="pi pi-send"></i>
-              <h1>SMS</h1>
-            </div>
-          </div>
+          <Button
+            class=""
+            icon="pi pi-heart"
+            outlined
+            severity="contrast"
+            label="Favorite"
+          ></Button>
         </div>
-        <h1 class="px-2 text-sm md:text-xl font-semibold text-slate-600">
-          Mahsulot haqida
-        </h1>
-        <div class="card p-4 flex flex-wrap gap-2">
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Model:</h1>
+        <div class="mt-5">
+          <span class="text-sm text-slate-500"> Mahsulot haqida: </span>
+          <p class="text-xs md:text-sm xl:text-base mt-1 text-slate-700">
+            {{ producDescription }}
+          </p>
+          <span class="text-xs grid grid-cols-12 gap-4 text-slate-800 mt-4 ">
+            <span class="col-span-6">
+              {{
+            productTime
+          }}
+            </span>
+            <div class="col-span-12 md:text-end md:col-span-6">   
+              <span class="text-xs  text-slate-800 mt-4 ">Yuboruvchi: </span>
+                <span
+                  :href="`mailto:${product?.contactInfo?.email}`"
+                  class="text-xs  text-slate-700"
+                  target="_blank"
+                >
+                  {{ product?.contactInfo?.phone }}
+                </span>
           </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Ishlab chiqarilgan:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Rang:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Xolat:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Balandligi:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Kengligi:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Dvigatel hajmi:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Yoqilg'i turi:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Xostlar soni:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Kuzov turi:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Shift balandligi:</h1>
-          </div>
-          <div class="bg-slate-100 text-sm md:text-base p-1">
-            <h1>Yaqin atrofda:</h1>
-          </div>
-        </div>
-        <h1 class="md:text-xl text-sm font-sans text-slate-600 px-2">
-          Izoh
-        </h1>
-        <div class="bottom flex flex-col gap-2 p-4 rounded-lg bg-slate-50">
-          <div class="card border p-2">
-            <p class="text-xs md:text-sm">{{ producDescription }}</p>
-          </div>
-          <div class="flex text-sm justify-between">
-            <span>ID:123456789</span>
-            <span class="flex gap-2 items-center justify-center"
-              ><i class="pi pi-eye"></i>
-              <p>100</p></span
-            >
-            <span
-              class="flex gap-2 items-center justify-center cursor-pointer text-red-600 transition duration-100 hover:scale-[1.015]"
-              ><p class="underline">Shikoyat qilish</p>
-              <i class="pi pi-bookmark-fill"></i
-            ></span>
-          </div>
+          </span>
         </div>
       </div>
     </div>
