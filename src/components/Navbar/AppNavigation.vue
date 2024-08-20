@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, useRoute } from "vue-router";
+
 const router = useRoute();
 </script>
 
@@ -16,13 +17,13 @@ const router = useRoute();
           to="/favorites"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
-          :class="router.path == '/favorites' ? 'bg-black' : 'bg-gray-100'"
+          :class="router.path == '/favorites' ? 'bg-slate-950' : 'bg-gray-100'"
         >
           <i
             class="pi pi-heart p-[6px] rounded-[4px]"
             :class="
               router.path == '/favorites'
-                ? 'bg-black text-white'
+                ? 'bg-slate-950 text-white'
                 : 'bg-white text-gray-500'
             "
           ></i>
@@ -39,13 +40,13 @@ const router = useRoute();
           to="/chat"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
-          :class="router.path == '/chat' ? 'bg-black' : 'bg-gray-100'"
+          :class="router.path == '/chat' ? 'bg-slate-950' : 'bg-gray-100'"
         >
           <i
             class="pi pi-envelope p-[6px] rounded-[4px]"
             :class="
               router.path == '/chat'
-                ? 'bg-black text-white'
+                ? 'bg-slate-950 text-white'
                 : 'bg-white text-gray-500'
             "
           ></i>
@@ -55,17 +56,16 @@ const router = useRoute();
             >SMS</span
           >
         </RouterLink>
-        <RouterLink
-          to="/profil"
+        <div
           title="Profil"
-          class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
-          :class="router.path == '/profil' ? 'bg-black' : 'bg-gray-100'"
+          class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300 cursor-pointer select-none"
+          :class="router.path == '/profil' ? 'bg-slate-950' : 'bg-gray-100'"
         >
           <i
             class="pi pi-user p-[6px] rounded-[4px]"
             :class="
               router.path == '/profil'
-                ? 'bg-black text-white'
+                ? 'bg-slate-950 text-white'
                 : 'bg-white text-gray-500'
             "
           ></i>
@@ -74,7 +74,7 @@ const router = useRoute();
             :class="router.path == '/profil' ? 'text-white' : 'text-gray-500'"
             >Profil</span
           >
-        </RouterLink>
+        </div>
       </div>
     </div>
   </div>

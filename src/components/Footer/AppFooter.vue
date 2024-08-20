@@ -12,7 +12,7 @@ const developers = ref([
 </script>
 
 <template>
-  <div class="bg-black pt-5">
+  <div class="bg-slate-950 pt-5">
     <div class="container px-2 mx-auto grid grid-cols-12 items-center gap-5">
       <div
         class="col-span-12 sm:col-span-4 md:col-span-3 flex items-center justify-center sm:justify-start"

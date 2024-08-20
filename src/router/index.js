@@ -8,6 +8,8 @@ import NotFoundLayout from "@/layout/NotFoundLayout.vue";
 import FavoriteView from "@/views/FavoriteView.vue";
 import CategoryIdView from "@/views/CategoryIdView.vue";
 import ChatsView from "../views/ChatsView.vue";
+import LoginView from "@/views/LoginView.vue";
+import LoginLayout from "@/layout/LoginLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +52,14 @@ const router = createRouter({
       component: ChatsView,
       meta: {
         layout: ProductLayout,
+      },
+    },
+    {
+      path: "/login", // Yangi 404 yo'nalish
+      name: "login",
+      component: LoginView,
+      meta: {
+        layout: LoginLayout,
       },
     },
     {
