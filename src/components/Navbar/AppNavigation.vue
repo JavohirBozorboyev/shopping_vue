@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import Button from "primevue/button";
 import { inject } from "vue";
@@ -58,7 +59,7 @@ const auth = inject("auth");
             >SMS</span
           >
         </RouterLink>
-        <RouterLink v-if="!auth.user || !auth.token" to="/login">
+        <RouterLink v-if="!auth?.user || !auth?.token" to="/login">
           <Button
             icon="pi pi-sign-in"
             label="Login"
@@ -67,7 +68,7 @@ const auth = inject("auth");
         /></RouterLink>
         <RouterLink
           to="/profil"
-          v-if="auth.user && auth.token"
+          v-if="auth?.user && auth?.token"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300 cursor-pointer select-none"
           :class="router.path == '/profil' ? 'bg-slate-950' : 'bg-gray-100'"

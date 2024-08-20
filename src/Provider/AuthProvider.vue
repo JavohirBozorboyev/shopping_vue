@@ -6,7 +6,6 @@ import axios from "axios";
 const authStore = useAuthStore();
 
 provide("auth", authStore);
-
 </script>
 
 <template>
