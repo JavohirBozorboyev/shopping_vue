@@ -3,5 +3,5 @@ import HomeCardList from "../module/home/HomeCardList.vue";
 </script>
 
 <template>
-  <div class=""></div>
+  <div class="min-h-[50vh]"></div>
 </template>

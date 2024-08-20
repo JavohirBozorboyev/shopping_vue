@@ -2,11 +2,10 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter } from "vue-router";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    user: null,
+    user: JSON.parse(Cookies.get("user") || "null") || null,
     token: Cookies.get("authToken") || null,
   }),
   actions: {
@@ -16,6 +15,9 @@ export const useAuthStore = defineStore("auth", {
           emailOrPhone: phone,
           password,
         });
+
+        this.token = response.data.body.token;
+        this.user = response.data.body.user;
 
         Cookies.set("user", JSON.stringify(response.data.body.user), {
           expires: 7,
@@ -36,6 +38,9 @@ export const useAuthStore = defineStore("auth", {
           emailOrPhone: phone,
           password: password,
         });
+
+        this.token = response.data.body.token;
+        this.user = response.data.body.user;
 
         Cookies.set("user", JSON.stringify(response.data.body.user), {
           expires: 7,

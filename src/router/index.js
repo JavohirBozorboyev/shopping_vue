@@ -10,6 +10,8 @@ import CategoryIdView from "@/views/CategoryIdView.vue";
 import ChatsView from "../views/ChatsView.vue";
 import LoginView from "@/views/LoginView.vue";
 import LoginLayout from "@/layout/LoginLayout.vue";
+import UserProfilView from "@/views/UserProfilView.vue";
+import UserLayout from "@/layout/UserLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,7 +57,15 @@ const router = createRouter({
       },
     },
     {
-      path: "/login", // Yangi 404 yo'nalish
+      path: "/profil",
+      name: "user",
+      component: UserProfilView,
+      meta: {
+        layout: UserLayout,
+      },
+    },
+    {
+      path: "/login",
       name: "login",
       component: LoginView,
       meta: {
