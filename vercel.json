@@ -1,36 +1,32 @@
 {
   "routes": [
     {
-      "src": "/",
-      "dest": "/"
+      "src": "/category/(?<slug>[^/]+)",
+      "dest": "/index.html"
     },
     {
-      "src": "/category/:slug",
-      "dest": "/"
-    },
-    {
-      "src": "/category/:slug/:id",
-      "dest": "/"
+      "src": "/category/(?<slug>[^/]+)/(?<id>[^/]+)",
+      "dest": "/index.html"
     },
     {
       "src": "/favorites",
-      "dest": "/"
+      "dest": "/index.html"
     },
     {
       "src": "/chat",
-      "dest": "/"
+      "dest": "/index.html"
     },
     {
       "src": "/profil",
-      "dest": "/"
+      "dest": "/index.html"
     },
     {
       "src": "/login",
-      "dest": "/"
+      "dest": "/index.html"
     },
     {
       "src": "/:srcMatch(.*)*",
-      "dest": "/"
+      "dest": "/index.html"
     }
   ]
 }
