@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "src": "/category/:slug",
+      "dest": "/"
+    },
+    {
+      "src": "/category/:slug/:id",
+      "dest": "/"
+    },
+    {
+      "src": "/favorites",
+      "dest": "/"
+    },
+    {
+      "src": "/chat",
+      "dest": "/"
+    },
+    {
+      "src": "/profil",
+      "dest": "/"
+    },
+    {
+      "src": "/login",
+      "dest": "/"
+    },
+    {
+      "src": "/:srcMatch(.*)*",
+      "dest": "/"
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 import Image from "primevue/image";
 import Button from "primevue/button";
 import router from "@/router";
+import IdProduct from "../components/CategoryID/idProducts.vue"
 
 import axios from "axios";
 import { ref, onMounted } from "vue";
@@ -60,8 +61,9 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="container mx-auto p-2 grid grid-cols-1 lg:grid-cols-2 gap-5">
-    <div class="p-2 grid-cols-12 rounded-md bg-gray-50">
+  <div class="container mx-auto p-2">
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+     <div class="p-2 rounded-md bg-gray-50">
       <div
         class="rounded-lg bg-gray-50 grid grid-cols-12 gap-2"
       >
@@ -78,7 +80,7 @@ onMounted(() => {
         />
       </div>
     </div>
-    <div class="w-full bg-gray-50 p-2 sm:p-3 md:p-4 lg:p-8 rounded-md">
+    <div class="w-full grid-cols-6 bg-gray-50 p-2 sm:p-3 md:p-4 lg:p-8 rounded-md">
       <div class="flex flex-col gap-2 w-full">
         <h1
           class="font-semibold text-base md:text-2xl xl:text-3xl text-slate-900"
@@ -130,6 +132,10 @@ onMounted(() => {
           </span>
         </div>
       </div>
+    </div>
+   </div>
+    <div class="grid-cols-12 p-2">
+     <IdProduct></IdProduct>
     </div>
   </div>
 </template>

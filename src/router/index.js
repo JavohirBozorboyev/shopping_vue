@@ -13,6 +13,7 @@ import LoginLayout from "@/layout/LoginLayout.vue";
 import UserProfilView from "@/views/UserProfilView.vue";
 import UserLayout from "@/layout/UserLayout.vue";
 import CategoryIdLayout from "@/layout/CategoryIdLayout.vue";
+import ChatLayoutVue from "@/layout/ChatLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,7 +55,7 @@ const router = createRouter({
       name: "Chat",
       component: ChatsView,
       meta: {
-        layout: ProductLayout,
+        layout: ChatLayoutVue,
       },
     },
     {
