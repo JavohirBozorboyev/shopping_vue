@@ -43,7 +43,7 @@ const login = async () => {
       router.push("/");
     }, 2000);
   }
-  if (res.status == 401) {
+  if (res.status == 401 || res.status == 404) {
     phone.value = "";
     password.value = "";
     firstName.value = "";

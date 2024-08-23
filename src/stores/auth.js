@@ -58,17 +58,21 @@ export const useAuthStore = defineStore("auth", {
       this.token = null;
       this.user = null;
       Cookies.remove("authToken");
+      Cookies.remove("user");
     },
     async fetchUser() {
       if (!this.token) return;
       try {
-        const response = await axios.get("https://your-auth-api.com/user", {
-          headers: { Authorization: `Bearer ${this.token}` },
+        const response = await axios.get("/api/v1/user/get-me", {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTIyIiwiaWF0IjoxNzI0MzExNDk2LCJleHAiOjE3MjQ5MTYyOTZ9.hNh3o8QMVEu8fCjklBc2sqylKDvwEQ3u2Je1WsA-HwI`,
+          },
         });
-        this.user = response.data;
+
+        console.log(response.data);
       } catch (error) {
         console.error("Failed to fetch user:", error);
-        this.logout();
+        // this.logout();
       }
     },
   },
