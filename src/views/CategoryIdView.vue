@@ -5,8 +5,10 @@ import router from "@/router";
 import IdProduct from "../components/CategoryID/idProducts.vue"
 
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
+import Swal from 'sweetalert2';
 
+const auth =inject("auth");
 let productID = router.currentRoute.value.params.id;
 console.log(productID);
 let number = ref("");
@@ -56,6 +58,41 @@ function formatDateTime(dateTimeString) {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+function addFavorite(id) {
+  console.log(id);
+   let bodyContent = JSON.stringify({
+    emailOrPhone: auth.user.emailOrPhone,
+  });
+  axios
+    .post(`/api/v1/like/add?announcementId=${id}`,bodyContent,
+    {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTA1IiwiaWF0IjoxNzI0MDAzODI0LCJleHAiOjE3MjQ2MDg2MjR9.Hg-vLh6lKJRLkMjKdzwJxbdt_UQEQUcLzWKSxnv9Dlw`,
+      },
+    })
+    .then((response) => {
+      const Toast = Swal.mixin({
+  toast: true,
+  position: "bottom-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "success",
+  title: "Muvofaqqiyatli olib tashlandi"
+});
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error("Xatolik yuz berdi:", error);
+    });
+}
+
 onMounted(() => {
   getProduct();
 });
@@ -101,6 +138,7 @@ onMounted(() => {
           ></Button>
 
           <Button
+          @click="addFavorite(product.id)"
             class=""
             icon="pi pi-heart"
             outlined

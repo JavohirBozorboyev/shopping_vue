@@ -11,7 +11,7 @@ const route = useRoute();
 const auth = inject("auth");
 
 const { user, token } = auth;
-
+console.log(user);
 const menu = ref();
 const items = ref([
   {
@@ -154,7 +154,7 @@ const toggle = (event) => {
         <button
           class="relative overflow-hidden w-full border-0 bg-transparent flex p-2 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-none cursor-pointer transition-colors duration-200 items-center"
         >
-          <Avatar :label="user?.firstname" class="mr-2" />
+          <Avatar :image="user?.attach.originFile" class="mr-2" />
           <span class="inline-flex flex-col items-start">
             <span class="font-semibold text-sm">{{ user?.firstname }}</span>
             <span class="text-xs">{{ user?.lastname }}</span>

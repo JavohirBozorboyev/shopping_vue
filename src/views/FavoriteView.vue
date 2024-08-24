@@ -1,69 +1,79 @@
 <script setup>
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import Button from "primevue/button";
 import Badge from 'primevue/badge';
-const data = ref([
-  {
-    id: 1234456,
-    status: "active",
-    message: "Елка с эффиктом снега доставка бесплатная",
-    price: 235000,
-    location: "Ташкент, Учтепинский ра��он",
-    date: "Сегодня 10:23",
-    views: 32,
-    likes: 32,
-    comments: 32,
-    deleted: false,
-  },
-  {
-    id: 1234456,
-    status: "unactive",
-    message: "Елка с эффиктом снега доставка бесплатная",
-    price: 235000,
-    location: "Ташкент, Учтепинский ра��он",
-    date: "Сегодня 10:23",
-    views: 32,
-    likes: 32,
-    comments: 32,
-    deleted: false,
-  },
-  {
-    id: 1234456,
-    status: "active",
-    message: "Елка с эффиктом снега доставка бесплатная",
-    price: 235000,
-    location: "Ташкент, Учтепинский ра��он",
-    date: "Сегодня 10:23",
-    views: 32,
-    likes: 32,
-    comments: 32,
-    deleted: false,
-  },
-  {
-    id: 1234456,
-    status: "unactive",
-    message: "Елка с эффиктом снега доставка бесплатная",
-    price: 235000,
-    location: "Ташкент, Учтепинский ра��он",
-    date: "Сегодня 10:23",
-    views: 32,
-    likes: 32,
-    comments: 32,
-    deleted: false,
-  },
-]);
+import router from "@/router";
+import axios from "axios";
+import Swal from 'sweetalert2';
+const ID=router
+
+const auth=inject("auth")
+const data = ref();
+
+function getFavorites() {
+  axios
+    .get(`/api/v1/like/getMyLike`, {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTA1IiwiaWF0IjoxNzI0MDAzODI0LCJleHAiOjE3MjQ2MDg2MjR9.Hg-vLh6lKJRLkMjKdzwJxbdt_UQEQUcLzWKSxnv9Dlw`,
+      },
+    })
+    .then((response) => {
+      data.value = response.data.body;
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error("Xatolik yuz berdi:", error);
+    });
+}
+getFavorites()
+
+function addFavorite(id) {
+   let bodyContent = JSON.stringify({
+    emailOrPhone: auth.user.emailOrPhone,
+  });
+  axios
+    .post(`/api/v1/like/add?announcementId=${id}`,bodyContent,
+    {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTA1IiwiaWF0IjoxNzI0MDAzODI0LCJleHAiOjE3MjQ2MDg2MjR9.Hg-vLh6lKJRLkMjKdzwJxbdt_UQEQUcLzWKSxnv9Dlw`,
+      },
+    })
+    .then((response) => {
+      const Toast = Swal.mixin({
+  toast: true,
+  position: "bottom-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "success",
+  title: "Muvofaqqiyatli olib tashlandi"
+});
+getFavorites()
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error("Xatolik yuz berdi:", error);
+    });
+}
 </script>
 
 <template>
   <div class="grid grid-cols-12 gap-2 xl:gap-3">
-      <div v-for="item in data" class="col-span-6 md:col-span-3">
+      <div v-for="item in data" class="col-span-6 relative md:col-span-3">
+        <span  @click="addFavorite(item.id)" class="absolute right-0 bg-slate-50 flex items-center justify-center rounded-b-sm opacity-90 cursor-pointer w-6 h-6 transition duration-150 active:scale-95"><i class="pi pi-trash"></i></span>
              <div
       class="col-span-6 relative xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-black duration-300"
     >
           <span class="absolute bg-slate-50 h-6 w-6 text-center rounded-sm cursor-pointer transition duration-100 active:scale-95 top-1 right-1"><i class="pi pi-trash text-gray-500"></i></span>
       <div class="">
         <img
-          src="https://avatars.mds.yandex.net/i?id=00782806b70a7cd694288869be75dc857225a87a-4593530-images-thumbs&n=13"
+          :src="item.attachUrlResponses[0].originFile"
           alt=""
           class="w-full h-32 md:min-h-48 object-cover rounded-md"
         />
@@ -79,13 +89,13 @@ const data = ref([
         <h1
           class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
         >
-          Sarlavha
+          {{ item.title }}
         </h1>
         <h1
           class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
         >
           <i class="pi pi-money-bill text-gray-400"></i>
-          300 dollor
+          {{ item.priceTag.price }} {{ item.priceTag.currency.name }}
         </h1>
         <div class="mt-4 flex justify-between gap-2">
           <div class="flex gap-2">
@@ -104,7 +114,7 @@ const data = ref([
               severity="contrast"
             ></Button>
           </div>
-          <RouterLink to="/">
+          <RouterLink to="`/">
             <Button
               class=""
               icon="pi pi-arrow-right"

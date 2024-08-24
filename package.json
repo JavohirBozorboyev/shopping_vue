@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@primevue/themes": "^4.0.4",
+    "@sweetalert2/themes": "^5.0.18",
     "axios": "^1.7.4",
     "js-cookie": "^3.0.5",
     "pinia": "^2.1.7",
