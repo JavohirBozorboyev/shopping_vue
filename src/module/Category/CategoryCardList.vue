@@ -1,11 +1,14 @@
 <script setup>
-import { ref, watchEffect } from "vue";
+import { inject, ref, watchEffect } from "vue";
 import Button from "primevue/button";
 import Badge from "primevue/badge";
 import Paginator from "primevue/paginator";
 import axios from "axios";
 import { useRoute } from "vue-router";
 import CategoryLoader from "./CategoryLoader.vue";
+import Swal from 'sweetalert2';
+
+const auth=inject("auth");
 const data = ref(null);
 let loader = ref(true);
 
@@ -23,6 +26,41 @@ async function CategoryApiCall() {
     loader.value = false;
   }
 }
+
+function addFavorite(id) {
+   let bodyContent = JSON.stringify({
+    emailOrPhone: auth.user.emailOrPhone,
+  });
+  axios
+    .post(`/api/v1/like/add?announcementId=${id}`,bodyContent,
+    {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTA1IiwiaWF0IjoxNzI0MDAzODI0LCJleHAiOjE3MjQ2MDg2MjR9.Hg-vLh6lKJRLkMjKdzwJxbdt_UQEQUcLzWKSxnv9Dlw`,
+      },
+    })
+    .then((response) => {
+      const Toast = Swal.mixin({
+  toast: true,
+  position: "bottom-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "success",
+  title: "Muvofaqqiyatli qo'shildi"
+});
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error("Xatolik yuz berdi:", error);
+    });
+}
+
 
 watchEffect(() => {
   CategoryApiCall();
@@ -84,6 +122,7 @@ watchEffect(() => {
             ></Button>
 
             <Button
+            @click="addFavorite(item.id)"
               class=""
               icon="pi pi-heart"
               size="small"

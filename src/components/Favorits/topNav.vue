@@ -45,6 +45,8 @@
 import {RouterLink } from "vue-router";
 </script>
 <style scoped>
-
+::-webkit-scrollbar{
+  width: 0px;
+}
     
 </style>

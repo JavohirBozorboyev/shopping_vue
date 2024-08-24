@@ -3,7 +3,7 @@
     <div
       v-for="item in data"
       @click="Chatpush(item.id)"
-      class="card flex w-full cursor-pointer active:scale-95 font-sans transition duration-300 hover:bg-gray-100 p-2 gap-3 md:text-xl shadow text-slate-400 font-semibold rounded-sm border-b"
+      class="card flex w-full cursor-pointer active:scale-95 font-sans transition duration-300 hover:bg-gray-100 p-2 gap-3 md:text-xl  text-slate-400 font-semibold rounded-sm border-b"
     >
       <div>
         <img
