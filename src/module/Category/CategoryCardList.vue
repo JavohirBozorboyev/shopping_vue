@@ -6,14 +6,13 @@ import Paginator from "primevue/paginator";
 import axios from "axios";
 import { useRoute } from "vue-router";
 import CategoryLoader from "./CategoryLoader.vue";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
-const auth=inject("auth");
+const auth = inject("auth");
 const data = ref(null);
 let loader = ref(true);
 
 const router = useRoute();
-
 
 async function CategoryApiCall() {
   try {
@@ -29,39 +28,37 @@ async function CategoryApiCall() {
 }
 
 function addFavorite(id) {
-   let bodyContent = JSON.stringify({
+  let bodyContent = JSON.stringify({
     emailOrPhone: auth.user.emailOrPhone,
   });
   axios
-    .post(`/api/v1/like/add?announcementId=${id}`,bodyContent,
-    {
+    .post(`/api/v1/like/add?announcementId=${id}`, bodyContent, {
       headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTM3ODAyNjAzIiwiaWF0IjoxNzI0Njg5NzQ1LCJleHAiOjE3MjUyOTQ1NDV9.6WdthRtIYQ-vHhjjt0NREw2EZCxk9lyABDoPMHgInz8`,
       },
     })
     .then((response) => {
       const Toast = Swal.mixin({
-  toast: true,
-  position: "bottom-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
-});
-Toast.fire({
-  icon: "success",
-  title: "Muvofaqqiyatli qo'shildi"
-});
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Muvofaqqiyatli qo'shildi",
+      });
       console.log(response);
     })
     .catch((error) => {
       console.error("Xatolik yuz berdi:", error);
     });
 }
-
 
 watchEffect(() => {
   CategoryApiCall();
@@ -117,13 +114,13 @@ watchEffect(() => {
           <div class="flex gap-2">
             <Button
               class=""
-              icon="pi pi-shopping-cart "
+              icon="pi pi-envelope "
               size="small"
               severity="contrast"
             ></Button>
 
             <Button
-            @click="addFavorite(item.id)"
+              @click="addFavorite(item.id)"
               class=""
               icon="pi pi-heart"
               size="small"

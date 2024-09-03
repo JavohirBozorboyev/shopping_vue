@@ -22,7 +22,7 @@ export const useAuthStore = defineStore("auth", {
         Cookies.set("user", JSON.stringify(response.data.body.user), {
           expires: 7,
         });
-        Cookies.set("authToken", JSON.stringify(response.data.body.token), {
+        Cookies.set("authToken", response.data.body.token, {
           expires: 7,
         });
         return response;
@@ -45,7 +45,7 @@ export const useAuthStore = defineStore("auth", {
         Cookies.set("user", JSON.stringify(response.data.body.user), {
           expires: 7,
         });
-        Cookies.set("authToken", JSON.stringify(response.data.body.token), {
+        Cookies.set("authToken", response.data.body.token, {
           expires: 7,
         });
 
@@ -65,7 +65,7 @@ export const useAuthStore = defineStore("auth", {
       try {
         const response = await axios.get("/api/v1/user/get-me", {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTIyIiwiaWF0IjoxNzI0MzExNDk2LCJleHAiOjE3MjQ5MTYyOTZ9.hNh3o8QMVEu8fCjklBc2sqylKDvwEQ3u2Je1WsA-HwI`,
+            Authorization: `Bearer ${this.token}`,
           },
         });
 

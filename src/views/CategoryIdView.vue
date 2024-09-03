@@ -2,13 +2,13 @@
 import Image from "primevue/image";
 import Button from "primevue/button";
 import router from "@/router";
-import IdProduct from "../components/CategoryID/idProducts.vue"
+import IdProduct from "../components/CategoryID/idProducts.vue";
 
 import axios from "axios";
 import { ref, onMounted, inject } from "vue";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
-const auth =inject("auth");
+const auth = inject("auth");
 let productID = router.currentRoute.value.params.id;
 console.log(productID);
 let number = ref("");
@@ -60,32 +60,31 @@ function formatDateTime(dateTimeString) {
 
 function addFavorite(id) {
   console.log(id);
-   let bodyContent = JSON.stringify({
+  let bodyContent = JSON.stringify({
     emailOrPhone: auth.user.emailOrPhone,
   });
   axios
-    .post(`/api/v1/like/add?announcementId=${id}`,bodyContent,
-    {
+    .post(`/api/v1/like/add?announcementId=${id}`, bodyContent, {
       headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTM3ODAyNjAzIiwiaWF0IjoxNzI0Njg5NzQ1LCJleHAiOjE3MjUyOTQ1NDV9.6WdthRtIYQ-vHhjjt0NREw2EZCxk9lyABDoPMHgInz8`,
       },
     })
     .then((response) => {
       const Toast = Swal.mixin({
-  toast: true,
-  position: "bottom-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
-});
-Toast.fire({
-  icon: "success",
-  title: "Bajarildi"
-});
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Bajarildi",
+      });
       console.log(response);
     })
     .catch((error) => {
@@ -99,81 +98,80 @@ onMounted(() => {
 </script>
 <template>
   <div class="container mx-auto p-2">
-   <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-     <div class="p-2 rounded-md bg-gray-50">
-      <div
-        class="rounded-lg bg-gray-50 grid grid-cols-12 gap-2"
-      >
-        <Image  v-for="item in product?.attachUrlResponses"
-          class="w-full h-full object-cover rounded-md overflow-hidden"
-          :class="
-            product?.attachUrlResponses.length == 1
-              ? 'col-span-12'
-              : 'col-span-6'
-          "
-          :src="item?.originFile"
-          alt=""
-          preview
-        />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="p-2 rounded-md bg-gray-50">
+        <div class="rounded-lg bg-gray-50 grid grid-cols-12 gap-2">
+          <Image
+            v-for="item in product?.attachUrlResponses"
+            class="w-full h-full object-cover rounded-md overflow-hidden"
+            :class="
+              product?.attachUrlResponses.length == 1
+                ? 'col-span-12'
+                : 'col-span-6'
+            "
+            :src="item?.originFile"
+            alt=""
+            preview
+          />
+        </div>
       </div>
-    </div>
-    <div class="w-full grid-cols-6 bg-gray-50 p-2 sm:p-3 md:p-4 lg:p-8 rounded-md">
-      <div class="flex flex-col gap-2 w-full">
-        <h1
-          class="font-semibold text-base md:text-2xl xl:text-3xl text-slate-900"
-        >
-          {{ productTitle }}
-        </h1>
-        <div class="my-5 ">
-            <h1 class="md:text-2xl font-bold text-slate-800">
-            {{ productPrice.price }} {{ productValute }}
+      <div
+        class="w-full grid-cols-6 bg-gray-50 p-2 sm:p-3 md:p-4 lg:p-8 rounded-md"
+      >
+        <div class="flex flex-col gap-2 w-full">
+          <h1
+            class="font-semibold text-base md:text-2xl xl:text-3xl text-slate-900"
+          >
+            {{ productTitle }}
           </h1>
-        </div>
-        <div class="flex gap-2">
-          <Button
-            class=""
-            icon="pi pi-shopping-cart "
-            severity="contrast"
-            label="Add to cart"
-          ></Button>
+          <div class="my-5">
+            <h1 class="md:text-2xl font-bold text-slate-800">
+              {{ productPrice.price }} {{ productValute }}
+            </h1>
+          </div>
+          <div class="flex gap-2">
+            <Button
+              class=""
+              icon="pi pi-envelope "
+              severity="contrast"
+              label="Add to cart"
+            ></Button>
 
-          <Button
-          @click="addFavorite(product.id)"
-            class=""
-            icon="pi pi-heart"
-            outlined
-            severity="contrast"
-            label="Favorite"
-          ></Button>
-        </div>
-        <div class="mt-5">
-          <span class="text-sm text-slate-500"> Mahsulot haqida: </span>
-          <p class="text-xs md:text-sm xl:text-base mt-1 text-slate-700">
-            {{ producDescription }}
-          </p>
-          <span class="text-xs grid grid-cols-12 gap-4 text-slate-800 mt-4 ">
-            <span class="col-span-6">
-              {{
-            productTime
-          }}
-            </span>
-            <div class="col-span-12 md:text-end md:col-span-6">   
-              <span class="text-xs  text-slate-800 mt-4 ">Yuboruvchi: </span>
+            <Button
+              @click="addFavorite(product.id)"
+              class=""
+              icon="pi pi-heart"
+              outlined
+              severity="contrast"
+              label="Favorite"
+            ></Button>
+          </div>
+          <div class="mt-5">
+            <span class="text-sm text-slate-500"> Mahsulot haqida: </span>
+            <p class="text-xs md:text-sm xl:text-base mt-1 text-slate-700">
+              {{ producDescription }}
+            </p>
+            <span class="text-xs grid grid-cols-12 gap-4 text-slate-800 mt-4">
+              <span class="col-span-6">
+                {{ productTime }}
+              </span>
+              <div class="col-span-12 md:text-end md:col-span-6">
+                <span class="text-xs text-slate-800 mt-4">Yuboruvchi: </span>
                 <span
                   :href="`mailto:${product?.contactInfo?.email}`"
-                  class="text-xs  text-slate-700"
+                  class="text-xs text-slate-700"
                   target="_blank"
                 >
                   {{ product?.contactInfo?.phone }}
                 </span>
+              </div>
+            </span>
           </div>
-          </span>
         </div>
       </div>
     </div>
-   </div>
     <div class="grid-cols-12 p-2">
-     <IdProduct></IdProduct>
+      <IdProduct></IdProduct>
     </div>
   </div>
 </template>

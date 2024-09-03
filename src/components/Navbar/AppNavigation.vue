@@ -149,17 +149,20 @@ const toggle = (event) => {
           <span class="text-sm text-slate-700">{{ item.label }}</span>
         </div>
       </template>
-      <template #end>
+      <!-- <template #end>
         <button
-          class="relative overflow-hidden w-full border-0 bg-transparent flex p-2 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-none cursor-pointer transition-colors duration-200 items-center"
+          class="relative overflow-hidden w-full border-0 bg-transparent flex p-2 rounded-none cursor-pointer transition-colors duration-200 items-center"
         >
-          <Avatar :image="user?.attach.originFile" class="mr-2" />
+          <Avatar
+            :image="user?.attach.originFile"
+            class="mr-2 rounded-md object-cover"
+          />
           <span class="inline-flex flex-col items-start">
             <span class="font-semibold text-sm">{{ user?.firstname }}</span>
             <span class="text-xs">{{ user?.lastname }}</span>
           </span>
         </button>
-      </template>
+      </template> -->
     </Menu>
   </div>
 </template>

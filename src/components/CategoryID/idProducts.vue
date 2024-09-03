@@ -1,6 +1,6 @@
-<template >
-    <div class="grid grid-cols-12 gap-2 xl:gap-3">
-          <div
+<template>
+  <div class="grid grid-cols-12 gap-2 xl:gap-3">
+    <div
       class="col-span-6 xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-black duration-300"
     >
       <div class="">
@@ -33,7 +33,7 @@
           <div class="flex gap-2">
             <Button
               class=""
-              icon="pi pi-shopping-cart "
+              icon="pi pi-envelope "
               size="small"
               severity="contrast"
             ></Button>
@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-        <div
+    <div
       class="col-span-6 xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-black duration-300"
     >
       <div class="">
@@ -90,7 +90,7 @@
           <div class="flex gap-2">
             <Button
               class=""
-              icon="pi pi-shopping-cart "
+              icon="pi pi-envelope "
               size="small"
               severity="contrast"
             ></Button>
@@ -114,11 +114,11 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 <script setup>
 import Button from "primevue/button";
-import Badge from 'primevue/badge';
+import Badge from "primevue/badge";
 import { ref, onMounted } from "vue";
 
 // const data=ref([
@@ -132,9 +132,7 @@ import { ref, onMounted } from "vue";
 //         name: "Spark 2",
 //         price: 200
 //     },
-    
+
 // ])
 </script>
-<style scoped>
-    
-</style>
+<style scoped></style>
