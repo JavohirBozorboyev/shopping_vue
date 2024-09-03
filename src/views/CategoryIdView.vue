@@ -25,7 +25,7 @@ function getProduct() {
   axios
     .get(`/api/v1/announcement/get/${productID}`, {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTA1IiwiaWF0IjoxNzI0MDAzODI0LCJleHAiOjE3MjQ2MDg2MjR9.Hg-vLh6lKJRLkMjKdzwJxbdt_UQEQUcLzWKSxnv9Dlw`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTM3ODAyNjAzIiwiaWF0IjoxNzI0Njg5NzQ1LCJleHAiOjE3MjUyOTQ1NDV9.6WdthRtIYQ-vHhjjt0NREw2EZCxk9lyABDoPMHgInz8`,
       },
     })
     .then((response) => {
@@ -67,7 +67,7 @@ function addFavorite(id) {
     .post(`/api/v1/like/add?announcementId=${id}`,bodyContent,
     {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTA1IiwiaWF0IjoxNzI0MDAzODI0LCJleHAiOjE3MjQ2MDg2MjR9.Hg-vLh6lKJRLkMjKdzwJxbdt_UQEQUcLzWKSxnv9Dlw`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTM3ODAyNjAzIiwiaWF0IjoxNzI0Njg5NzQ1LCJleHAiOjE3MjUyOTQ1NDV9.6WdthRtIYQ-vHhjjt0NREw2EZCxk9lyABDoPMHgInz8`,
       },
     })
     .then((response) => {
@@ -84,7 +84,7 @@ function addFavorite(id) {
 });
 Toast.fire({
   icon: "success",
-  title: "Muvofaqqiyatli olib tashlandi"
+  title: "Bajarildi"
 });
       console.log(response);
     })
