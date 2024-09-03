@@ -11,7 +11,6 @@ const route = useRoute();
 const auth = inject("auth");
 
 const { user, token } = auth;
-console.log(user);
 const menu = ref();
 const items = ref([
   {
@@ -104,7 +103,7 @@ const toggle = (event) => {
             icon="pi pi-sign-in"
             label="Login"
             size="small"
-            severity="secondary"
+            severity="contrast"
         /></RouterLink>
         <div
           @click="toggle"

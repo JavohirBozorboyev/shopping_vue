@@ -7,7 +7,7 @@ import AuthProvider from "./Provider/AuthProvider.vue";
 axios.defaults.baseURL = "https://tez-sotish-api.uz";
 axios.defaults.headers.common[
   "Authorization"
-] = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTkzOTEyNTIyIiwiaWF0IjoxNzI0MzExNDk2LCJleHAiOjE3MjQ5MTYyOTZ9.hNh3o8QMVEu8fCjklBc2sqylKDvwEQ3u2Je1WsA-HwI`;
+] = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrOTk4OTM3ODAyNjAzIiwiaWF0IjoxNzI0Njg5NzQ1LCJleHAiOjE3MjUyOTQ1NDV9.6WdthRtIYQ-vHhjjt0NREw2EZCxk9lyABDoPMHgInz8`;
 const route = useRoute();
 </script>
 

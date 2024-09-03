@@ -2,17 +2,8 @@
   <section class="">
     <div class="container px-2 mx-auto grid grid-cols-12">
       <div :class="menu ? 'col-span-12 md:col-span-4' : 'hidden md:block md:col-span-4'">
-        <ScrollPanel class="w-full" style="height: 90vh">
-          <span class="flex justify-between items-center">
-            <h1 class="py-2 uppercase font-bold text-slate-900">SMS</h1>
-           <span class="md:hidden">
-             <i
-              @click="toggleMenu"
-              class="block md:hidden pi pi-times p-2 bg-slate-50"
-            ></i>
-           </span>
-          </span>
-          <message @toggle-menu="handleToggleMenu" @id="handleId"></message>
+        <ScrollPanel class="w-full flex flex-col" style="height: 90vh">
+          <message @toggle-menu="handleToggleMenu" @id="handleId" @close-toogle="handleToggleMenu"></message>
         </ScrollPanel>
       </div>
       <div
@@ -25,15 +16,32 @@
         <span class="md:hidden">
           <i @click="toggleMenu" class="pi pi-bars block md:hidden"></i>
         </span>
-        <ScrollPanel class="w-full" style="height: 90vh">
-           <div class="p-2 flex flex-col h-full rounded-md gap-2 bg-slate-200/50">
+        <div class="flex border-b bg-slate-200/50 flex-col gap-2">
+              <div
+      class="card flex w-full font-sans p-2 gap-3 md:text-xl text-slate-400 font-semibold"
+    >
+      <div>
+        <img
+          class="w-11 h-11 md:h-10 md:w-10 rounded-full"
+          src="https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13"
+          alt=""
+        />
+      </div>
+      <div>
+        <h2 class="text-xs md:text-sm">Javohir Bozorboyev</h2>
+        <h3 class="text-xs md:text-sm">Last seen {{Id}} hours ago</h3>
+      </div>
+    </div>
+        </div>
+        <ScrollPanel class="w-full" style="height: 83vh">
+           <div class="p-2 flex flex-col h-full gap-2 bg-slate-200/50">
     <div :class="Id ? 'flex flex-col overflow-y-auto h-full py-3 gap-2' : 'hidden'">
       <div
        
         :class="Id == 1 ? 'flex flex-row-reverse gap-2' : 'flex  gap-2'"
       >
         <div class="h-auto">
-          <img class="w-14 h-14 rounded-full" src="https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13" alt="" />
+          <img class="w-12 h-12 rounded-full" src="https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13" alt="" />
         </div>
         <div
           :class="
@@ -90,7 +98,6 @@
 import { ref } from "vue";
 import message from "../module/messages/message.vue";
 import Button from "primevue/button";
-
 import ScrollPanel from "primevue/scrollpanel";
 
 let menu = ref(true);

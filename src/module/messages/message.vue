@@ -1,5 +1,20 @@
 <template>
   <div class="h-[95%] overflow-y-auto py-4 flex flex-col gap-3">
+       <span class="flex justify-between md:justify-center items-center">
+            <!-- <h1 class="py-2 uppercase font-bold text-slate-900">SMS</h1> -->
+            <span class="w-[95%]">
+              <InputGroup>
+                <Button icon="pi pi-search" severity="contrast" />
+    <InputText placeholder="Keyword" />
+</InputGroup>
+            </span>
+           <span class="md:hidden">
+             <i
+              @click="closeToogle"
+              class="block md:hidden pi pi-times p-2 bg-slate-50"
+            ></i>
+           </span>
+          </span>
     <div
       v-for="item in data"
       @click="Chatpush(item.id)"
@@ -21,10 +36,16 @@
 </template>
 <script setup>
 import { ref, defineEmits } from "vue";
+import InputGroup from 'primevue/inputgroup';
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
 import router from "@/router";
 
 const emit = defineEmits(["toggle-menu", "id"]);
 
+function closeToogle(){
+  emit("close-toogle", false);
+}
 function Chatpush(id) {
   emit("toggle-menu", false);
   emit("id", id);

@@ -9,7 +9,6 @@ const ApiCall = async () => {
       "https://tez-sotish-api.uz/api/v1/category/tree/top/ancestors?childId=1"
     );
     let data = await res.json();
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -22,7 +21,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="container mx-auto px-2 bg-gray-50 rounded-md p-2 grid grid-cols-12"
+    class="container mx-auto px-2 bg-gray-50 rounded-md p-2 grid grid-cols-12 gap-2"
   >
     <HomeCard />
     <div class="col-span-12 mt-2 border rounded-md overflow-hidden">
