@@ -68,8 +68,9 @@ getFavorites()
       <div v-for="item in data" class="col-span-6 relative md:col-span-3">
         <span  @click="addFavorite(item.id)" class="absolute right-0 bg-slate-50 flex items-center justify-center rounded-b-sm opacity-90 cursor-pointer w-6 h-6 transition duration-150 active:scale-95"><i class="pi pi-trash"></i></span>
              <div
-      class="col-span-6 xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-black duration-300"
+      class="col-span-6 relative xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-black duration-300"
     >
+          <span class="absolute bg-slate-50 h-6 w-6 text-center rounded-sm cursor-pointer transition duration-100 active:scale-95 top-1 right-1"><i class="pi pi-trash text-gray-500"></i></span>
       <div class="">
         <img
           :src="item.attachUrlResponses[0].originFile"
