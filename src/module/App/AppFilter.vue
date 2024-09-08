@@ -85,7 +85,7 @@ onMounted(() => {
               class="capitalize mt-1 text-xs"
               :class="!router.params.slug ? ' text-white' : 'text-gray-700'"
             >
-              Asosiy sahifa
+              Асосий Саҳифа
             </p>
           </RouterLink>
           <RouterLink

@@ -75,7 +75,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/:pathMatch(.*)*", // Yangi 404 yo'nalish
+      path: "/:pathMatch(.*)*", // Янги 404 yo'nalish
       name: "NotFound",
       component: NotFoundView,
       meta: {

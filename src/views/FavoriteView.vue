@@ -68,39 +68,31 @@ function addFavorite(id) {
   <div v-if="loader" class="grid grid-cols-12 gap-2 xl:gap-3">
     <Skeleton
       v-for="item in [1, 2, 3, 4, 5, 6, 7, 8]"
-      class="col-span-6 relative md:col-span-3 h-44"
+      class="col-span-12 sm:col-span-6 relative md:col-span-3 h-44"
       height="10rem"
     ></Skeleton>
   </div>
 
-  <div v-if="!loader" class="grid grid-cols-12 gap-2 xl:gap-3">
-    <div v-for="item in data" class="col-span-6 relative md:col-span-3">
-      <span
-        @click="addFavorite(item.id)"
-        class="absolute right-0 bg-slate-50 flex items-center justify-center rounded-b-sm opacity-90 cursor-pointer w-6 h-6 transition duration-150 active:scale-95"
-        ><i class="pi pi-trash"></i
-      ></span>
+  <div v-if="!loader">
+    <div class="grid grid-cols-12 gap-2 xl:gap-3">
       <div
-        class="col-span-6 relative xl:col-span-4 2xl:col-span-3 p-2 xl:p-3 rounded-md border hover:border-black duration-300"
+        v-for="item in data"
+        class="col-span-12 sm:col-span-6 relative lg:col-span-4 2xl:col-span-3 rounded-md border hover:bg-slate-50 duration-300 overflow-hidden"
       >
-        <span
-          class="absolute bg-slate-50 h-6 w-6 text-center rounded-sm cursor-pointer transition duration-100 active:scale-95 top-1 right-1"
-          ><i class="pi pi-trash text-gray-500"></i
-        ></span>
         <div class="">
           <img
             :src="item.attachUrlResponses[0].originFile"
             alt=""
-            class="w-full h-32 md:min-h-48 object-cover rounded-md"
+            class="w-full h-48 object-cover rounded-t-sm"
           />
         </div>
-        <div class="mt-2">
+        <div class="p-2 xl:p-3">
           <div class="flex justify-between items-center">
             <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
               Namangan Viloyati
             </p>
 
-            <Badge value="Yangi" size="small" severity="secondary"></Badge>
+            <Badge value="Янги" size="small" severity="secondary"></Badge>
           </div>
           <h1
             class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
@@ -124,7 +116,7 @@ function addFavorite(id) {
 
               <Button
                 class=""
-                icon="pi pi-heart"
+                icon="pi pi-trash"
                 size="small"
                 severity="contrast"
               ></Button>

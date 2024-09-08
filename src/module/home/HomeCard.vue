@@ -1,31 +1,11 @@
 <script setup>
-import axios from "axios";
-import { ref, inject } from "vue";
-import router from "@/router";
-import Button from "primevue/button";
+import { inject } from "vue";
+const { data } = defineProps(["data"]);
 import Swal from "sweetalert2";
+import Button from "primevue/button";
 
 const auth = inject("auth");
 const { user, token } = auth;
-
-const data = ref([]);
-
-console.log(data);
-function getProduct() {
-  axios
-    .get(`/api/v1/announcement/home?page=1&size=10`, {
-      headers: {
-        Authorization: `Bearer` + auth.token,
-      },
-    })
-    .then((response) => {
-      data.value = response.data.body.rows;
-      // console.log(data.value);
-    })
-    .catch((error) => {
-      console.error("Xatolik yuz berdi:", error);
-    });
-}
 
 function addFavorite(id) {
   console.log(id);
@@ -59,16 +39,14 @@ function addFavorite(id) {
       console.error("Xatolik yuz berdi:", error);
     });
 }
-getProduct();
 </script>
 <template>
   <div
-    v-for="(item, index) in data"
     class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80"
   >
     <div class="">
       <img
-        :src="item.attachUrlResponses.originFile"
+        :src="data.attachUrlResponses.originFile"
         alt=""
         class="w-full h-32 md:min-h-48 object-cover rounded-t-md duration-300"
       />
@@ -76,22 +54,20 @@ getProduct();
     <div class="flex flex-col justify-between p-2 xl:p-3">
       <div class="flex justify-between items-center">
         <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
-          {{ item.address }}
+          {{ data.address }}
         </p>
-
-        <Badge value="Yangi" size="small" severity="secondary"></Badge>
       </div>
       <div>
         <h1
           class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
         >
-          {{ item.title }}
+          {{ data.title }}
         </h1>
         <h1
           class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
         >
           <i class="pi pi-money-bill text-gray-400"></i>
-          {{ item.price }} {{ item.currencyCode }}
+          {{ data.price }} {{ data.currencyCode }}
         </h1>
       </div>
       <div class="mt-4 flex justify-between gap-2">
@@ -104,7 +80,7 @@ getProduct();
           ></Button>
 
           <Button
-            @click="addFavorite(item.id)"
+            @click="addFavorite(data.id)"
             class=""
             icon="pi pi-heart"
             size="small"
