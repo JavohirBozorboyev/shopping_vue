@@ -16,7 +16,7 @@
             Namangan Viloyati
           </p>
 
-          <Badge value="Yangi" size="small" severity="secondary"></Badge>
+          <Badge value="Янги" size="small" severity="secondary"></Badge>
         </div>
         <h1
           class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
@@ -73,7 +73,7 @@
             Namangan Viloyati
           </p>
 
-          <Badge value="Yangi" size="small" severity="secondary"></Badge>
+          <Badge value="Янги" size="small" severity="secondary"></Badge>
         </div>
         <h1
           class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
