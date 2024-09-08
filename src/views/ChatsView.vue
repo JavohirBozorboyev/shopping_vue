@@ -1,6 +1,6 @@
 <template>
   <section class="">
-    <div class="container px-2 mx-auto grid grid-cols-12">
+    <div class="container mx-auto grid grid-cols-12">
       <div :class="menu ? 'col-span-12 md:col-span-4' : 'hidden md:block md:col-span-4'">
         <ScrollPanel class="w-full flex flex-col" style="height: 90vh">
           <message @toggle-menu="handleToggleMenu" @id="handleId" @close-toogle="handleToggleMenu"></message>
@@ -13,23 +13,23 @@
             : 'col-span-12 md:col-span-8'
         "
       >
-        <span class="md:hidden">
-          <i @click="toggleMenu" class="pi pi-bars block md:hidden"></i>
-        </span>
         <div class="flex border-b bg-slate-200/50 flex-col gap-2">
               <div
       class="card flex w-full font-sans p-2 gap-3 md:text-xl text-slate-400 font-semibold"
     >
-      <div>
+      <div class="flex items-center justify-center gap-1">
+        <span class="md:hidden p-2 px-3 rounded-lg active:bg-slate-200">
+          <i @click="toggleMenu" class="pi pi-arrow-left  block md:hidden"></i>
+        </span>
         <img
           class="w-11 h-11 md:h-10 md:w-10 rounded-full"
           src="https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13"
           alt=""
         />
       </div>
-      <div>
-        <h2 class="text-xs md:text-sm">Javohir Bozorboyev</h2>
-        <h3 class="text-xs md:text-sm">Last seen {{Id}} hours ago</h3>
+      <div class="flex flex-col justify-center">
+        <h2 class="text-sm md:text-sm">Жaвохир Бозорбойэв</h2>
+        <h3 class="text-xs ">Охирги мaртa {{ Id }} соaт олдин кирилгaн</h3>
       </div>
     </div>
         </div>
@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div class="w-[96.5%] absolute bottom-6 left-auto right-auto p-3 rounded-lg bg-white">
+    <div class="w-[98.5%] absolute  bottom-5 left-0 right-auto p-3 rounded-lg bg-white">
       <form class="w-full flex gap-1">
         <div>
           <button
@@ -116,4 +116,5 @@ function handleId(id) {
   Id.value = id;
 }
 </script>
-<style scoped></style>
+<style scoped>
+</style>
