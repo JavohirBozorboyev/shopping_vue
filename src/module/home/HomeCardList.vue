@@ -41,7 +41,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-2 rounded-md p-2 grid grid-cols-12 gap-2">
+  <div class="container mx-auto rounded-md grid grid-cols-12 gap-2">
     <CategoryLoader v-if="loader" v-for="_ in [1, 1, 1, 1, 1, 1]" />
     <div
       v-if="data?.rows?.length == 0"
@@ -53,7 +53,7 @@ watchEffect(() => {
       ></i>
       <h1 class="text-xl uppercase text-slate-700">Махсулот Топилмади!</h1>
     </div>
-    <div v-if="!loader" class="grid grid-cols-12 gap-2 col-span-12">
+    <div v-if="!loader" class="grid grid-cols-12 gap-1 col-span-12">
       <HomeCard v-for="item in data?.rows" :data="item" />
     </div>
 

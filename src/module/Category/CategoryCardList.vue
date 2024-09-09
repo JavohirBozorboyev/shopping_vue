@@ -80,7 +80,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-12 gap-2 xl:gap-3">
+  <div class="grid grid-cols-12 gap-1">
     <CategoryLoader v-if="loader" v-for="_ in [1, 1, 1, 1, 1, 1]" />
 
     <div
@@ -96,7 +96,7 @@ watchEffect(() => {
     <div
       v-if="!loader"
       v-for="(item, index) in data?.rows"
-      class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border overflow-hidden hover:bg-slate-50 duration-300"
+      class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border overflow-hidden hover:bg-slate-50 duration-300 flex flex-col justify-between"
     >
       <div class="">
         <img
@@ -105,7 +105,7 @@ watchEffect(() => {
           class="w-full h-32 md:min-h-48 object-cover rounded-t-sm"
         />
       </div>
-      <div class="p-2 xl:p-3">
+      <div class="px-2 pt-2 xl:px-3 xl:pt-3 flex flex-col justify-between">
         <div class="flex justify-between items-center">
           <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
             {{ item.address }}
@@ -124,33 +124,33 @@ watchEffect(() => {
           <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
           {{ item.price }} {{ item.currencyCode }}
         </h1>
-        <div class="mt-4 flex justify-between gap-2">
-          <div class="flex gap-2">
-            <Button
-              class=""
-              icon="pi pi-envelope "
-              size="small"
-              severity="contrast"
-            ></Button>
+      </div>
+      <div class="flex justify-between gap-2 p-2 xl:p-3">
+        <div class="flex gap-2">
+          <Button
+            class=""
+            icon="pi pi-envelope "
+            size="small"
+            severity="contrast"
+          ></Button>
 
-            <Button
-              @click="addFavorite(item.id)"
-              class=""
-              icon="pi pi-heart"
-              size="small"
-              outlined
-              severity="contrast"
-            ></Button>
-          </div>
-          <RouterLink :to="`/category/${route.params.slug}/${item.id}`">
-            <Button
-              class=""
-              icon="pi pi-arrow-right"
-              size="small"
-              severity="secondary"
-            ></Button>
-          </RouterLink>
+          <Button
+            @click="addFavorite(item.id)"
+            class=""
+            icon="pi pi-heart"
+            size="small"
+            outlined
+            severity="contrast"
+          ></Button>
         </div>
+        <RouterLink :to="`/category/${route.params.slug}/${item.id}`">
+          <Button
+            class=""
+            icon="pi pi-arrow-right"
+            size="small"
+            severity="secondary"
+          ></Button>
+        </RouterLink>
       </div>
     </div>
 

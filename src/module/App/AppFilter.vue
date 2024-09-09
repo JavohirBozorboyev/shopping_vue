@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 import InputText from "primevue/inputtext";
 import MultiSelect from "primevue/multiselect";
 import Button from "primevue/button";
@@ -7,6 +7,9 @@ import Skeleton from "primevue/skeleton";
 import { RouterLink, useRoute } from "vue-router";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
+import { useSearchStore } from "@/stores/searchStore";
+
+const searchStore = useSearchStore();
 
 const value = ref(null);
 let ApiCategoryData = ref(null);
@@ -32,6 +35,16 @@ const ApiCall = async () => {
   }
 };
 
+const SearchFunc = () => {
+  searchStore.setSearch(searchStore.search);
+  searchStore.setCity(JSON.parse(JSON.stringify(selectedCities.value)));
+};
+
+watchEffect(() => {
+  searchStore;
+  // console.log(searchStore.city, "filter");
+});
+
 onMounted(() => {
   ApiCall();
 });
@@ -43,7 +56,11 @@ onMounted(() => {
       <div class="grid grid-cols-12 items-center gap-2">
         <IconField class="col-span-12 md:col-span-6 lg:col-span-7">
           <InputIcon class="pi pi-search" />
-          <InputText placeholder="Элонларни қидриш" class="w-full" />
+          <InputText
+            v-model="searchStore.search"
+            placeholder="Элонларни қидриш"
+            class="w-full"
+          />
         </IconField>
         <MultiSelect
           v-model="selectedCities"
@@ -52,10 +69,11 @@ onMounted(() => {
           filter
           :loading
           placeholder="Шаҳар танлаш"
-          :maxSelectedLabels="3"
+          :maxSelectedLabels="4"
           class="w-full col-span-8 md:col-span-4 lg:col-span-3"
         />
         <Button
+          @click="SearchFunc"
           label="Қидриш"
           class="col-span-4 md:col-span-2"
           severity="contrast"

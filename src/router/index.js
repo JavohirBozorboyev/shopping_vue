@@ -14,6 +14,8 @@ import UserProfilView from "@/views/UserProfilView.vue";
 import UserLayout from "@/layout/UserLayout.vue";
 import CategoryIdLayout from "@/layout/CategoryIdLayout.vue";
 import ChatLayoutVue from "@/layout/ChatLayout.vue";
+import SearchView from "@/views/SearchView.vue";
+import SearchLayout from "@/layout/SearchLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +26,14 @@ const router = createRouter({
       component: HomeView,
       meta: {
         layout: AppLayout,
+      },
+    },
+    {
+      path: "/search",
+      name: "search",
+      component: SearchView,
+      meta: {
+        layout: SearchLayout,
       },
     },
     {

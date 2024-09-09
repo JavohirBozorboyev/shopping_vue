@@ -3,7 +3,7 @@ import Image from "primevue/image";
 import Button from "primevue/button";
 import router from "@/router";
 import IdProduct from "../components/CategoryID/idProducts.vue";
-import Loader from "../components/CategoryID/Loader.vue"
+import Loader from "../components/CategoryID/Loader.vue";
 
 import axios from "axios";
 import { ref, onMounted, inject } from "vue";
@@ -21,7 +21,7 @@ let productImg = ref();
 let productPrice = ref("");
 let productValute = ref("");
 let productTime = ref();
-let loader =ref(true)
+let loader = ref(true);
 
 const product = ref();
 
@@ -104,9 +104,9 @@ onMounted(() => {
 </script>
 <template>
   <div class="container mx-auto p-2">
-        <div v-if="loader">
-          <Loader></Loader>
-        </div>
+    <div v-if="loader">
+      <Loader></Loader>
+    </div>
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div class="p-2 rounded-md bg-gray-50">
         <div class="rounded-lg bg-gray-50 grid grid-cols-12 gap-2">
@@ -180,9 +180,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-    </div>
-    <div :class="loader ? 'hidden' : 'grid-cols-12 p-2'">
-      <IdProduct></IdProduct>
     </div>
   </div>
 </template>

@@ -39,11 +39,10 @@ function addFavorite(id) {
       console.error("Xatolik yuz berdi:", error);
     });
 }
-
 </script>
 <template>
   <div
-    class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80"
+    class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
   >
     <div class="">
       <img
@@ -52,7 +51,7 @@ function addFavorite(id) {
         class="w-full h-32 md:min-h-48 object-cover rounded-t-md duration-300"
       />
     </div>
-    <div class="flex flex-col justify-between p-2 xl:p-3">
+    <div class="flex flex-col justify-between px-2 pt-2 xl:px-3 xl:pt-3">
       <div class="flex justify-between items-center">
         <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
           {{ data.address }}
@@ -71,33 +70,33 @@ function addFavorite(id) {
           {{ data.price }} {{ data.currencyCode }}
         </h1>
       </div>
-      <div class="mt-4 flex justify-between gap-2">
-        <div class="flex gap-2">
-          <Button
-            class=""
-            icon="pi pi-envelope "
-            size="small"
-            severity="contrast"
-          ></Button>
+    </div>
+    <div class="flex justify-between gap-2 p-2 xl:p-3">
+      <div class="flex gap-2">
+        <Button
+          class=""
+          icon="pi pi-envelope "
+          size="small"
+          severity="contrast"
+        ></Button>
 
-          <Button
-            @click="addFavorite(data.id)"
-            class=""
-            icon="pi pi-heart"
-            size="small"
-            outlined
-            severity="contrast"
-          ></Button>
-        </div>
-        <RouterLink to="/">
-          <Button
-            class=""
-            icon="pi pi-arrow-right"
-            size="small"
-            severity="secondary"
-          ></Button>
-        </RouterLink>
+        <Button
+          @click="addFavorite(data.id)"
+          class=""
+          icon="pi pi-heart"
+          size="small"
+          outlined
+          severity="contrast"
+        ></Button>
       </div>
+      <RouterLink :to="`/category/${data.categoryId}/${data.id}`">
+        <Button
+          class=""
+          icon="pi pi-arrow-right"
+          size="small"
+          severity="secondary"
+        ></Button>
+      </RouterLink>
     </div>
   </div>
 </template>
