@@ -8,7 +8,7 @@ import { useRoute } from "vue-router";
 import CategoryLoader from "./CategoryLoader.vue";
 import Swal from "sweetalert2";
 
-const router = useRoute();
+const route = useRoute();
 const auth = inject("auth");
 const data = ref(null);
 let loader = ref(true);
@@ -17,10 +17,17 @@ let paginationSize = ref(10);
 
 async function CategoryApiCall() {
   loader.value = true;
+  let bodyContent = JSON.stringify({
+    page: paginationPage.value,
+    size: paginationSize.value,
+  });
+  let reqOptions = {
+    url: `/api/v1/announcement/get/list/${route.params.slug}`,
+    method: "GET",
+    data: bodyContent,
+  };
   try {
-    const res = await axios.get(
-      `/api/v1/announcement/get/list/${router.params.slug}?page=${paginationPage.value}&size=${paginationSize.value}`
-    );
+    const res = await axios.request(reqOptions);
     data.value = res.data.body;
   } catch (error) {
     console.log(error);
@@ -135,7 +142,7 @@ watchEffect(() => {
               severity="contrast"
             ></Button>
           </div>
-          <RouterLink :to="`/category/${router.params.slug}/${item.id}`">
+          <RouterLink :to="`/category/${route.params.slug}/${item.id}`">
             <Button
               class=""
               icon="pi pi-arrow-right"

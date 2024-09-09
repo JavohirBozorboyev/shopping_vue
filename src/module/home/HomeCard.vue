@@ -39,6 +39,7 @@ function addFavorite(id) {
       console.error("Xatolik yuz berdi:", error);
     });
 }
+
 </script>
 <template>
   <div
@@ -66,7 +67,7 @@ function addFavorite(id) {
         <h1
           class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
         >
-          <i class="pi pi-money-bill text-gray-400"></i>
+          <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
           {{ data.price }} {{ data.currencyCode }}
         </h1>
       </div>

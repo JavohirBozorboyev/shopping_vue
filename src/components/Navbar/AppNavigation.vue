@@ -14,23 +14,18 @@ const { user, token } = auth;
 const menu = ref();
 const items = ref([
   {
-    label: "Profile Links",
+    label: "Профиле Линкс",
     items: [
       {
-        label: "Profil page",
+        label: "Профил паге",
         icon: "pi pi-user",
         fun: () => {
           router.push("/profil");
         },
       },
-      {
-        label: "Settings",
-        icon: "pi pi-cog",
-        fun: () => {},
-      },
 
       {
-        label: "Logout",
+        label: "Тизимдан чиқиш",
         icon: "pi pi-sign-out",
         fun: () => {
           auth.logout();
@@ -39,9 +34,9 @@ const items = ref([
       },
     ],
   },
-  {
-    separator: true,
-  },
+  // {
+  //   separator: true,
+  // },
 ]);
 const toggle = (event) => {
   menu.value.toggle(event);
@@ -72,9 +67,9 @@ const toggle = (event) => {
             "
           ></i>
           <span
-            class="text-sm uppercase hidden md:block"
+            class="text-sm capitalize hidden md:block"
             :class="route.path == '/favorites' ? 'text-white' : 'text-gray-500'"
-            >favorites</span
+            >Севимли</span
           >
         </RouterLink>
 
@@ -93,9 +88,9 @@ const toggle = (event) => {
             "
           ></i>
           <span
-            class="text-sm uppercase hidden md:block"
+            class="text-sm capitalize hidden md:block"
             :class="route.path == '/chat' ? 'text-white' : 'text-gray-500'"
-            >SMS</span
+            >СМС</span
           >
         </RouterLink>
         <RouterLink v-if="!auth?.user || !auth?.token" to="/login">
@@ -123,9 +118,9 @@ const toggle = (event) => {
             "
           ></i>
           <span
-            class="text-sm uppercase hidden md:block"
+            class="text-sm capitalize hidden md:block"
             :class="route.path == '/profil' ? 'text-white' : 'text-gray-500'"
-            >Profil</span
+            >Профил</span
           >
         </div>
       </div>

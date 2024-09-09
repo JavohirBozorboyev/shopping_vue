@@ -1,7 +1,6 @@
 <script setup>
 import { inject, ref } from "vue";
 import Button from "primevue/button";
-import Badge from "primevue/badge";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Skeleton from "primevue/skeleton";
@@ -91,8 +90,6 @@ function addFavorite(id) {
             <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
               Namangan Viloyati
             </p>
-
-            <Badge value="Янги" size="small" severity="secondary"></Badge>
           </div>
           <h1
             class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
@@ -102,7 +99,7 @@ function addFavorite(id) {
           <h1
             class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
           >
-            <i class="pi pi-money-bill text-gray-400"></i>
+            <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
             {{ item.priceTag.price }} {{ item.priceTag.currency.name }}
           </h1>
           <div class="mt-4 flex justify-between gap-2">
