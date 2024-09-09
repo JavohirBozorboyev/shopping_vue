@@ -1,19 +1,14 @@
 <template>
-  <div class="h-[95%] overflow-y-auto py-4 flex flex-col gap-3">
+  <div class="h-[100%] overflow-y-auto py-4 flex flex-col gap-3">
+    
        <span class="flex justify-between md:justify-center items-center">
             <!-- <h1 class="py-2 uppercase font-bold text-slate-900">SMS</h1> -->
-            <span class="w-[95%]">
+            <span class="w-[98%]">
               <InputGroup>
                 <Button icon="pi pi-search" severity="contrast" />
-    <InputText placeholder="Keyword" />
+    <InputText placeholder="Қидирув" />
 </InputGroup>
             </span>
-           <span class="md:hidden">
-             <i
-              @click="closeToogle"
-              class="block md:hidden pi pi-times p-2 bg-slate-50"
-            ></i>
-           </span>
           </span>
     <div
       v-for="item in data"
@@ -29,7 +24,7 @@
       </div>
       <div>
         <h2 class="text-xs md:text-sm">{{ item.name }}</h2>
-        <h3 class="text-xs md:text-sm">ID: {{ item.id }}</h3>
+        <h3 class="text-xs md:text-sm">ИД: {{ item.id }}</h3>
       </div>
     </div>
   </div>
@@ -54,55 +49,55 @@ function Chatpush(id) {
 const data = ref([
   {
     id: 1,
-    name: "Javohir Bozorboyev",
+    name: "Жaвохир Бозорбойэв",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 2,
-    name: "Mahmoud Mahmoud",
+    name: "Мaхмоуд Мaхмоуд",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 3,
-    name: "Rashid Rashid",
+    name: "Рaшид Рaшид",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 4,
-    name: "Rashid Rashid",
+    name: "Рaшид Рaшид",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 5,
-    name: "Rashid Rashid",
+    name: "Рaшид Рaшид",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 6,
-    name: "Rashid Rashid",
+    name: "Рaшид Рaшид",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 7,
-    name: "Rashid Rashid",
+    name: "Рaшид Рaшид",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 8,
-    name: "Rashid Rashid",
+    name: "Рaшид Рaшид",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   },
   {
     id: 9,
-    name: "Rashid Rashid",
+    name: "Рaшид Рaшид",
     image:
       "https://avatars.mds.yandex.net/i?id=9f5947399d43b18bbc0cee78662bf69faa30fa8f-5162789-images-thumbs&n=13",
   }

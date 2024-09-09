@@ -119,20 +119,26 @@
 <script setup>
 import Button from "primevue/button";
 import Badge from "primevue/badge";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
+import axios from "axios";
+const data=ref([])
+// const auth = inject("auth");
+// const { token } = auth;
 
-// const data=ref([
-//     {
-//         img:"https://avatars.mds.yandex.net/i?id=00782806b70a7cd694288869be75dc857225a87a-4593530-images-thumbs&n=13"
-//         name: "Spark",
-//         price: 100
-//     },
-//     {
-//         img:"https://avatars.mds.yandex.net/i?id=00782806b70a7cd694288869be75dc857225a87a-4593530-images-thumbs&n=13",
-//         name: "Spark 2",
-//         price: 200
-//     },
-
-// ])
+// function getProductByCategory() {
+//   axios
+//     .get(`http://tez-sotish-api.uz/api/v1/announcement/get/by-category/2`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     })
+//     .then((res) => {
+//       console.log(res);
+//     })
+//     .catch((error) => {
+//       console.error("Xatolik yuz berdi:", error);
+//     });
+// }
+// getProductByCategory()
 </script>
 <style scoped></style>
