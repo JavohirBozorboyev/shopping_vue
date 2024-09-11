@@ -43,7 +43,7 @@ function addFavorite(id) {
         toast: true,
         position: "bottom-end",
         showConfirmButton: false,
-        timer: 3000,
+        timer: 2000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
@@ -51,11 +51,9 @@ function addFavorite(id) {
         },
       });
       Toast.fire({
-        icon: "success",
-        title: "Muvofaqqiyatli olib tashlandi",
+        title: "Севимлидан ўчирилди",
       });
       getFavorites();
-      console.log(response);
     })
     .catch((error) => {
       console.error("Xatolik yuz berdi:", error);
@@ -88,20 +86,22 @@ function addFavorite(id) {
         <div class="p-2 xl:p-3">
           <div class="flex justify-between items-center">
             <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
-              Namangan Viloyati
+              {{ item?.contactInfo?.address }}
             </p>
           </div>
-          <h1
-            class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
-          >
-            {{ item.title }}
-          </h1>
-          <h1
-            class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
-          >
-            <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
-            {{ item.priceTag.price }} {{ item.priceTag.currency.name }}
-          </h1>
+          <div>
+            <h1
+              class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
+            >
+              {{ item.title }}
+            </h1>
+            <h1
+              class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
+            >
+              <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
+              {{ item.priceTag.price }} {{ item.priceTag.currency.name }}
+            </h1>
+          </div>
           <div class="mt-4 flex justify-between gap-2">
             <div class="flex gap-2">
               <Button
@@ -112,13 +112,14 @@ function addFavorite(id) {
               ></Button>
 
               <Button
+                @click="addFavorite(item.id)"
                 class=""
                 icon="pi pi-trash"
                 size="small"
                 severity="contrast"
               ></Button>
             </div>
-            <RouterLink to="`/">
+            <RouterLink :to="`/category/${item.categoryId}/${item.id}`">
               <Button
                 class=""
                 icon="pi pi-arrow-right"

@@ -1,14 +1,14 @@
 <script setup>
-import { inject } from "vue";
-const { data } = defineProps(["data"]);
+import { inject, defineEmits } from "vue";
+const { data, favoriteData } = defineProps(["data", "favoriteData"]);
 import Swal from "sweetalert2";
 import Button from "primevue/button";
-
+import axios from "axios";
 const auth = inject("auth");
-const { user, token } = auth;
+const emit = defineEmits();
+const { token } = auth;
 
 function addFavorite(id) {
-  console.log(id);
   let bodyContent = JSON.stringify({
     emailOrPhone: auth.user.emailOrPhone,
   });
@@ -19,11 +19,12 @@ function addFavorite(id) {
       },
     })
     .then((response) => {
+      emit("update", "Updated message from child");
       const Toast = Swal.mixin({
         toast: true,
         position: "bottom-end",
         showConfirmButton: false,
-        timer: 3000,
+        timer: 2000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
@@ -31,8 +32,7 @@ function addFavorite(id) {
         },
       });
       Toast.fire({
-        icon: "success",
-        title: "Muvofaqqiyatli olib tashlandi",
+        title: "Севимлига қўшилди",
       });
     })
     .catch((error) => {
@@ -85,6 +85,7 @@ function addFavorite(id) {
           class=""
           icon="pi pi-heart"
           size="small"
+          v-if="!favoriteData"
           outlined
           severity="contrast"
         ></Button>

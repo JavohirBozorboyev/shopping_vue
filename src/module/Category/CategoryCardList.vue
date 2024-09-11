@@ -10,13 +10,14 @@ import Swal from "sweetalert2";
 
 const route = useRoute();
 const auth = inject("auth");
+const { token } = auth;
 const data = ref(null);
+const favoriteData = ref(null);
 let loader = ref(true);
 let paginationPage = ref(1);
 let paginationSize = ref(10);
 
 async function CategoryApiCall() {
-  loader.value = true;
   let bodyContent = JSON.stringify({
     page: paginationPage.value,
     size: paginationSize.value,
@@ -28,7 +29,10 @@ async function CategoryApiCall() {
   };
   try {
     const res = await axios.request(reqOptions);
+    const favorite = await axios.get(`/api/v1/like/getMyLike`);
+    const favoriteRes = await favorite.data;
     data.value = res.data.body;
+    favoriteData.value = favoriteRes.body;
   } catch (error) {
     console.log(error);
   } finally {
@@ -43,26 +47,27 @@ function addFavorite(id) {
   axios
     .post(`/api/v1/like/add?announcementId=${id}`, bodyContent, {
       headers: {
-        Authorization: `Bearer ${auth.token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
     .then((response) => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        icon: "success",
-        title: "Muvofaqqiyatli qo'shildi",
-      });
-      console.log(response);
+      if (response.status == 200) {
+        CategoryApiCall();
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "bottom-end",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          title: "Севимлига қўшилди",
+        });
+      }
     })
     .catch((error) => {
       console.error("Xatolik yuz berdi:", error);
@@ -75,6 +80,7 @@ function onPageChange(e) {
   CategoryApiCall();
 }
 watchEffect(() => {
+  loader.value = true;
   CategoryApiCall();
 });
 </script>
@@ -125,22 +131,22 @@ watchEffect(() => {
           {{ item.price }} {{ item.currencyCode }}
         </h1>
       </div>
-      <div class="flex justify-between gap-2 p-2 xl:p-3">
+      <div class="flex justify-between gap-2 p-1 mt-2 border-t">
         <div class="flex gap-2">
           <Button
             class=""
             icon="pi pi-envelope "
             size="small"
-            severity="contrast"
+            severity="secondary"
           ></Button>
 
           <Button
+            v-if="!(favoriteData.find((fin) => fin.id == item.id) ?? 0)"
             @click="addFavorite(item.id)"
             class=""
             icon="pi pi-heart"
             size="small"
-            outlined
-            severity="contrast"
+            severity="secondary"
           ></Button>
         </div>
         <RouterLink :to="`/category/${route.params.slug}/${item.id}`">

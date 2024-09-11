@@ -10,23 +10,27 @@ const auth = inject("auth");
 const { user, token } = auth;
 
 const data = ref(null);
+const favoriteData = ref(null);
 let loader = ref(true);
 let paginationPage = ref(1);
 let paginationSize = ref(10);
 
-function getProduct() {
-  loader.value = true;
-  axios
-    .get(
+async function getProduct() {
+  // loader.value = true;
+  try {
+    const res = await axios.get(
       `/api/v1/announcement/home?page=${paginationPage.value}&size=${paginationSize.value}`
-    )
-    .then((response) => {
-      data.value = response.data.body;
-      loader.value = false;
-    })
-    .catch((error) => {
-      console.error("Xatolik yuz berdi:", error);
-    });
+    );
+    const favorite = await axios.get(`/api/v1/like/getMyLike`);
+    const dataRes = await res.data;
+    const favoriteRes = await favorite.data;
+    data.value = dataRes.body;
+    favoriteData.value = favoriteRes.body;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loader.value = false;
+  }
 }
 
 function onPageChange(e) {
@@ -34,8 +38,12 @@ function onPageChange(e) {
   paginationSize.value = e.rows;
   getProduct();
 }
+const handleUpdate = () => {
+  getProduct();
+};
 
 watchEffect(() => {
+  loader.value = true;
   getProduct();
 });
 </script>
@@ -54,7 +62,12 @@ watchEffect(() => {
       <h1 class="text-xl uppercase text-slate-700">Махсулот Топилмади!</h1>
     </div>
     <div v-if="!loader" class="grid grid-cols-12 gap-1 col-span-12">
-      <HomeCard v-for="item in data?.rows" :data="item" />
+      <HomeCard
+        @update="handleUpdate"
+        v-for="item in data?.rows"
+        :data="item"
+        :favoriteData="favoriteData.find((fin) => fin.id == item.id) ?? 0"
+      />
     </div>
 
     <div class="col-span-12 mt-2 border rounded-md overflow-hidden">
