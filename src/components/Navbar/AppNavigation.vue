@@ -52,26 +52,54 @@ const toggle = (event) => {
         </RouterLink>
       </div>
       <div class="flex items-center gap-4">
-        <RouterLink
-          to="/favorites"
-          title="Profil"
-          class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
-          :class="route.path == '/favorites' ? 'bg-slate-950' : 'bg-gray-100'"
-        >
-          <i
-            class="pi pi-heart p-[6px] rounded-[4px]"
-            :class="
-              route.path == '/favorites'
-                ? 'bg-slate-950 text-white'
-                : 'bg-white text-gray-500'
-            "
-          ></i>
-          <span
-            class="text-sm capitalize hidden md:block"
-            :class="route.path == '/favorites' ? 'text-white' : 'text-gray-500'"
-            >Севимли</span
+        <div v-if="token">
+          <RouterLink
+            to="/favorites"
+            title="Profil"
+            class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
+            :class="route.path == '/favorites' ? 'bg-slate-950' : 'bg-gray-100'"
           >
-        </RouterLink>
+            <i
+              class="pi pi-heart p-[6px] rounded-[4px]"
+              :class="
+                route.path == '/favorites'
+                  ? 'bg-slate-950 text-white'
+                  : 'bg-white text-gray-500'
+              "
+            ></i>
+            <span
+              class="text-sm capitalize hidden md:block"
+              :class="
+                route.path == '/favorites' ? 'text-white' : 'text-gray-500'
+              "
+              >Севимли</span
+            >
+          </RouterLink>
+        </div>
+        <div v-if="!token">
+          <RouterLink
+            to="/login"
+            title="Profil"
+            class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
+            :class="route.path == '/favorites' ? 'bg-slate-950' : 'bg-gray-100'"
+          >
+            <i
+              class="pi pi-heart p-[6px] rounded-[4px]"
+              :class="
+                route.path == '/favorites'
+                  ? 'bg-slate-950 text-white'
+                  : 'bg-white text-gray-500'
+              "
+            ></i>
+            <span
+              class="text-sm capitalize hidden md:block"
+              :class="
+                route.path == '/favorites' ? 'text-white' : 'text-gray-500'
+              "
+              >Севимли</span
+            >
+          </RouterLink>
+        </div>
 
         <RouterLink
           to="/chat"

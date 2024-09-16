@@ -1,20 +1,17 @@
-<template>
-  <div class="min-h-screen">
-    <h1 class="text-xl">{{ searchStore.search }}</h1>
-    <!-- <h1 v-for="item in city" class="text-xl">{{ item.name }}</h1> -->
-  </div>
-</template>
 <script setup>
 import { watchEffect } from "vue";
 import { useSearchStore } from "@/stores/searchStore";
-
+import axios from "axios";
+import SearchCardList from "@/module/search/SearchCardList.vue";
 const searchStore = useSearchStore();
 
-let { search, city } = searchStore;
-
-watchEffect(() => {
-  searchStore.search;
-  searchStore.city;
-  //   console.log(searchStore.search, "search page");
-});
+// watchEffect(() => {
+//   console.log(searchStore?.city?.id);
+// });
 </script>
+
+<template>
+  <div class="min-h-screen">
+    <SearchCardList />
+  </div>
+</template>

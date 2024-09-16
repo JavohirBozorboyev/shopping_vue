@@ -29,10 +29,22 @@ async function CategoryApiCall() {
   };
   try {
     const res = await axios.request(reqOptions);
+    data.value = res.data.body;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loader.value = false;
+  }
+}
+async function getFavorite() {
+  if (!token) {
+    return;
+  }
+  try {
     const favorite = await axios.get(`/api/v1/like/getMyLike`);
     const favoriteRes = await favorite.data;
-    data.value = res.data.body;
     favoriteData.value = favoriteRes.body;
+    console.log(favoriteRes.body);
   } catch (error) {
     console.log(error);
   } finally {
@@ -78,10 +90,12 @@ function onPageChange(e) {
   paginationPage.value = e.page + 1;
   paginationSize.value = e.rows;
   CategoryApiCall();
+  getFavorite();
 }
 watchEffect(() => {
   loader.value = true;
   CategoryApiCall();
+  getFavorite();
 });
 </script>
 
@@ -141,7 +155,7 @@ watchEffect(() => {
           ></Button>
 
           <Button
-            v-if="!(favoriteData.find((fin) => fin.id == item.id) ?? 0)"
+            v-if="!(favoriteData?.find((fin) => fin.id == item.id) ?? 0)"
             @click="addFavorite(item.id)"
             class=""
             icon="pi pi-heart"

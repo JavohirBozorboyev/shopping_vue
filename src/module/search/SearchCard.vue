@@ -4,16 +4,11 @@ const { data, favoriteData } = defineProps(["data", "favoriteData"]);
 import Swal from "sweetalert2";
 import Button from "primevue/button";
 import axios from "axios";
-import { useRouter } from "vue-router";
 const auth = inject("auth");
-const router = useRouter();
 const emit = defineEmits();
 const { token } = auth;
 
 function addFavorite(id) {
-  if (!token) {
-    return router.push("/login");
-  }
   let bodyContent = JSON.stringify({
     emailOrPhone: auth.user.emailOrPhone,
   });

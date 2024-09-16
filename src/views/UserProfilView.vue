@@ -9,7 +9,7 @@ const { user } = auth;
   <div class="container mx-auto px-2 py-5 min-h-screen grid grid-cols-12 gap-5">
     <div class="col-span-12 lg:col-span-4 bg-gray-50 h-full rounded-md p-4">
       <article class="flex items-center gap-4">
-        <Avatar :label="user?.firstname" class="mr-2" size="xlarge" />
+        <Avatar :label="user?.firstname[0]" class="mr-2" size="xlarge" />
         <div>
           <h1 class="text-xl font-bold text-slate-900">Alisher</h1>
           <h1 class="text-slate-600">Bahramov</h1>

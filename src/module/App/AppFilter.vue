@@ -1,24 +1,23 @@
 <script setup>
 import { ref, onMounted, watchEffect } from "vue";
 import InputText from "primevue/inputtext";
-import MultiSelect from "primevue/multiselect";
 import Button from "primevue/button";
 import Skeleton from "primevue/skeleton";
 import { RouterLink, useRoute } from "vue-router";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import { useSearchStore } from "@/stores/searchStore";
+import { useRouter } from "vue-router";
+import Select from "primevue/select";
 
 const searchStore = useSearchStore();
 
-const value = ref(null);
 let ApiCategoryData = ref(null);
 let ApiRegionData = ref(null);
 let loading = ref(true);
 
-const router = useRoute();
-
-const selectedCities = ref();
+const route = useRoute();
+const router = useRouter();
 
 const ApiCall = async () => {
   try {
@@ -37,7 +36,8 @@ const ApiCall = async () => {
 
 const SearchFunc = () => {
   searchStore.setSearch(searchStore.search);
-  searchStore.setCity(JSON.parse(JSON.stringify(selectedCities.value)));
+  searchStore.setCity(searchStore.city);
+  router.push("/search");
 };
 
 watchEffect(() => {
@@ -53,34 +53,8 @@ onMounted(() => {
 <template>
   <div class="bg-gray-50 py-4">
     <div class="container mx-auto px-2 p-2 rounded-md">
-      <div class="grid grid-cols-12 items-center gap-2">
-        <IconField class="col-span-12 md:col-span-6 lg:col-span-7">
-          <InputIcon class="pi pi-search" />
-          <InputText
-            v-model="searchStore.search"
-            placeholder="Элонларни қидриш"
-            class="w-full"
-          />
-        </IconField>
-        <MultiSelect
-          v-model="selectedCities"
-          :options="ApiRegionData"
-          optionLabel="name"
-          filter
-          :loading
-          placeholder="Шаҳар танлаш"
-          :maxSelectedLabels="4"
-          class="w-full col-span-8 md:col-span-4 lg:col-span-3"
-        />
-        <Button
-          @click="SearchFunc"
-          label="Қидриш"
-          class="col-span-4 md:col-span-2"
-          severity="contrast"
-        />
-      </div>
       <div class="overflow-x-auto">
-        <div class="mt-5 flex items-center gap-2 md:gap-3 min-w-[1200px]">
+        <div class="flex items-center gap-2 md:gap-3 min-w-[1200px]">
           <div v-if="loading" v-for="_ in [1, 1, 1, 1, 1, 1]">
             <Skeleton size="5rem" class="min-w-32"></Skeleton>
             <Skeleton size="1rem" class="min-w-28 mt-1 mx-auto"></Skeleton>
@@ -89,19 +63,17 @@ onMounted(() => {
             to="/"
             v-if="!loading"
             class="flex flex-col items-center justify-center p-2 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
-            :class="
-              !router.params.slug ? 'bg-slate-950 text-white' : 'bg-white'
-            "
+            :class="!route.params.slug ? 'bg-slate-950 text-white' : 'bg-white'"
           >
             <span
               class="object-cover w-full h-20 rounded-md bg-slate-950 flex items-center justify-center"
-              :class="!router.params.slug ? '' : null"
+              :class="!route.params.slug ? '' : null"
             >
               <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
             </span>
             <p
               class="capitalize mt-1 text-xs"
-              :class="!router.params.slug ? ' text-white' : 'text-gray-700'"
+              :class="!route.params.slug ? ' text-white' : 'text-gray-700'"
             >
               Асосий Саҳифа
             </p>
@@ -111,9 +83,7 @@ onMounted(() => {
             v-if="!loading"
             v-for="item of ApiCategoryData"
             class="flex flex-col items-center justify-center p-1 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
-            :class="
-              router.params.slug == item.id ? 'bg-slate-950 ' : 'bg-white'
-            "
+            :class="route.params.slug == item.id ? 'bg-slate-950 ' : 'bg-white'"
           >
             <img
               :src="item.attach.originFile"
@@ -123,13 +93,54 @@ onMounted(() => {
             <p
               class="capitalize mt-1 text-xs text-nowrap p-1"
               :class="
-                router.params.slug == item.id ? ' text-white' : 'text-gray-700'
+                route.params.slug == item.id ? ' text-white' : 'text-gray-700'
               "
             >
               {{ item.name }}
             </p>
           </RouterLink>
         </div>
+      </div>
+      <div class="grid grid-cols-12 items-center gap-2 mt-6">
+        <IconField class="col-span-12 md:col-span-6 lg:col-span-7">
+          <InputIcon class="pi pi-search" />
+          <InputText
+            v-model="searchStore.search"
+            placeholder="Элонларни қидриш"
+            class="w-full"
+          />
+        </IconField>
+        <Select
+          v-model="searchStore.city"
+          :options="ApiRegionData"
+          filter
+          :loading="loading"
+          showClear
+          optionLabel="name"
+          placeholder="Шаҳар танлаш"
+          class="w-full col-span-8 md:col-span-4 lg:col-span-3"
+        >
+          <template #value="slotProps">
+            <div v-if="slotProps.value" class="flex items-center">
+              <div>{{ slotProps.value.name }}</div>
+            </div>
+            <span v-else>
+              {{ slotProps.placeholder }}
+            </span>
+          </template>
+          <template #option="slotProps">
+            <div class="flex items-center">
+              <div>{{ slotProps.option.name }}</div>
+            </div>
+          </template>
+        </Select>
+
+        <Button
+          @click="SearchFunc"
+          label="Қидриш"
+          class="col-span-4 md:col-span-2"
+          severity="contrast"
+        />
       </div>
     </div>
   </div>
