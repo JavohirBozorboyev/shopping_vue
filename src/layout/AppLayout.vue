@@ -8,10 +8,7 @@ import AppFilter from "@/module/App/AppFilter.vue";
     <AppFilter />
     <div class="container mx-auto mt-2">
       <div class="grid grid-cols-12">
-        <div
-          class="hidden lg:block lg:col-span-3 min-h-screen bg-gray-50 rounded-md"
-        ></div>
-        <div class="col-span-12 lg:col-span-9 px-2"><RouterView /></div>
+        <div class="col-span-12 px-2"><RouterView /></div>
       </div>
     </div>
   </div>

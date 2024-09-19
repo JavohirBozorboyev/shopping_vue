@@ -40,7 +40,6 @@ async function getFavorite() {
     const favorite = await axios.get(`/api/v1/like/getMyLike`);
     const favoriteRes = await favorite.data;
     favoriteData.value = favoriteRes.body;
-    console.log(favoriteRes.body);
   } catch (error) {
     console.log(error);
   } finally {

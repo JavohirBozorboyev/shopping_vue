@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AppLayout from "@/layout/AppLayout.vue";
-import ProductLayout from "@/layout/ProductLayout.vue";
 import CategoryView from "@/views/CategoryView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import NotFoundLayout from "@/layout/NotFoundLayout.vue";
@@ -57,7 +56,7 @@ const router = createRouter({
       name: "favorites",
       component: FavoriteView,
       meta: {
-        layout: ProductLayout,
+        layout: UserLayout,
       },
     },
     {

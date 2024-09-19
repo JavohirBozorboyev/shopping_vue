@@ -44,7 +44,6 @@ async function getFavorite() {
     const favorite = await axios.get(`/api/v1/like/getMyLike`);
     const favoriteRes = await favorite.data;
     favoriteData.value = favoriteRes.body;
-    console.log(favoriteRes.body);
   } catch (error) {
     console.log(error);
   } finally {
@@ -105,7 +104,7 @@ watchEffect(() => {
 
     <div
       v-if="data?.rows?.length == 0"
-      class="col-span-12 bg-gray-50 rounded-md p-5 min-h-60 flex flex-col gap-5 justify-center items-center"
+      class="col-span-12 bg-gray-50 rounded-md p-5 min-h-[60vh] flex flex-col gap-5 justify-center items-center"
     >
       <i
         class="pi pi-exclamation-circle text-black"
