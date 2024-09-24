@@ -20,7 +20,7 @@ let navLinkData = ref([
   },
   {
     name: "Постларим",
-    url: "/",
+    url: "/profil/product",
     icon: "pi-plus",
   },
 ]);

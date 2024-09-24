@@ -15,6 +15,8 @@ import CategoryIdLayout from "@/layout/CategoryIdLayout.vue";
 import ChatLayoutVue from "@/layout/ChatLayout.vue";
 import SearchView from "@/views/SearchView.vue";
 import SearchLayout from "@/layout/SearchLayout.vue";
+import MyProduct from "@/views/MyProduct.vue";
+import MyProductAdd from "@/views/MyProductAdd.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +73,22 @@ const router = createRouter({
       path: "/profil",
       name: "user",
       component: UserProfilView,
+      meta: {
+        layout: UserLayout,
+      },
+    },
+    {
+      path: "/profil/product",
+      name: "Myproduct",
+      component: MyProduct,
+      meta: {
+        layout: UserLayout,
+      },
+    },
+    {
+      path: "/profil/product/add",
+      name: "MyproductAdd",
+      component: MyProductAdd,
       meta: {
         layout: UserLayout,
       },

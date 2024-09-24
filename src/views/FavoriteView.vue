@@ -64,8 +64,8 @@ function addFavorite(id) {
 
 <template>
   <div class="pb-4">
-    <h1 class="text-lg md:text-xl lg:text-2xl xl:text-3xl uppercase">
-      Sevimli Maxsulotlar
+    <h1 class="text-lg md:text-xl lg:text-2xl xl:text-3xl">
+      Севимли Махсулотлар
     </h1>
   </div>
   <div v-if="loader" class="grid grid-cols-12 gap-2 xl:gap-3">
