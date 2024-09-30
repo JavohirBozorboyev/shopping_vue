@@ -78,6 +78,8 @@ function addFavorite(id) {
         Toast.fire({
           title: "Севимлига қўшилди",
         });
+        CategoryApiCall();
+        getFavorite();
       }
     })
     .catch((error) => {
@@ -115,7 +117,7 @@ watchEffect(() => {
     <div
       v-if="!loader"
       v-for="(item, index) in data?.rows"
-      class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border overflow-hidden hover:bg-slate-50 duration-300 flex flex-col justify-between"
+      class="col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border overflow-hidden hover:bg-slate-50 duration-300 flex flex-col justify-between"
     >
       <div class="">
         <img

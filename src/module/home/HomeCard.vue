@@ -47,7 +47,7 @@ function addFavorite(id) {
 </script>
 <template>
   <div
-    class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
+    class="col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
   >
     <div class="">
       <img
