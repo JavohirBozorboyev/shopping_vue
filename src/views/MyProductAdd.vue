@@ -14,6 +14,8 @@ const router = useRouter();
 const { user, token } = auth;
 const selectedCity = ref();
 const ApiCategoryData = ref();
+let ApiRegionData = ref(null);
+
 let loading = ref(true);
 let PostLoading = ref(false);
 // input v-model refs
@@ -50,6 +52,8 @@ let countriesMoneyTypeSellected = ref({
 const ApiCall = async () => {
   try {
     let res = await axios("/api/v1/category/get/all-for-front");
+    let region = await fetch("https://tez-sotish-api.uz/api/v1/region/get/all");
+    ApiRegionData.value = (await region.json()).body;
     ApiCategoryData.value = res.data.body.map((item) => {
       return { name: item.name, id: item.id };
     });
@@ -112,39 +116,41 @@ async function addNewPost() {
     contactInfo: {
       phone: user?.emailOrPhone,
       address: addres.value,
+      regionId: addres?.value?.id,
     },
   };
 
-  try {
-    const response = await axios.post("/api/v1/announcement/add", itemData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (response.status === 200) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        title: "Янги Элон Жойланди",
-      });
-      PostLoading.value = false;
 
-      setTimeout(() => {
-        router.push("/profil/product");
-      }, 2000);
-    }
-  } catch (error) {
-    console.error("Xatolik yuz berdi:", error);
-  }
+  // try {
+  //   const response = await axios.post("/api/v1/announcement/add", itemData, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  //   if (response.status === 200) {
+  //     const Toast = Swal.mixin({
+  //       toast: true,
+  //       position: "bottom-end",
+  //       showConfirmButton: false,
+  //       timer: 2000,
+  //       timerProgressBar: true,
+  //       didOpen: (toast) => {
+  //         toast.onmouseenter = Swal.stopTimer;
+  //         toast.onmouseleave = Swal.resumeTimer;
+  //       },
+  //     });
+  //     Toast.fire({
+  //       title: "Янги Элон Жойланди",
+  //     });
+  //     PostLoading.value = false;
+
+  //     setTimeout(() => {
+  //       router.push("/profil/product");
+  //     }, 2000);
+  //   }
+  // } catch (error) {
+  //   console.error("Xatolik yuz berdi:", error);
+  // }
 }
 
 onMounted(() => {
@@ -202,12 +208,30 @@ onMounted(() => {
 
         <article class="col-span-12 md:col-span-8">
           <p v-if="errors.address" class="text-red-500">{{ errors.address }}</p>
-          <InputText
+          <Select
             v-model="addres"
-            placeholder="Манзил"
-            type="text"
+            :options="ApiRegionData"
+            filter
+            :loading="loading"
+            showClear
+            optionLabel="name"
+            placeholder="Шаҳар танлаш"
             class="w-full"
-          />
+          >
+            <template #value="slotProps">
+              <div v-if="slotProps.value" class="flex items-center">
+                <div>{{ slotProps.value.name }}</div>
+              </div>
+              <span v-else>
+                {{ slotProps.placeholder }}
+              </span>
+            </template>
+            <template #option="slotProps">
+              <div class="flex items-center">
+                <div>{{ slotProps.option.name }}</div>
+              </div>
+            </template>
+          </Select>
         </article>
         <Divider class="col-span-12" />
         <p v-if="errors.miqdor" class="text-red-500 col-span-12">

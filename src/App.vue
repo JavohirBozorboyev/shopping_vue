@@ -4,6 +4,7 @@ import AppNavigation from "./components/Navbar/AppNavigation.vue";
 import AppFooter from "./components/Footer/AppFooter.vue";
 import axios from "axios";
 import AuthProvider from "./Provider/AuthProvider.vue";
+import BottomNavigation from "./components/Navbar/BottomNavigation.vue";
 axios.defaults.baseURL = "https://tez-sotish-api.uz";
 
 const route = useRoute();
@@ -22,8 +23,9 @@ const route = useRoute();
       </component>
     </main>
 
-    <footer>
-      <AppFooter />
+    <footer class="pb-14">
+      <BottomNavigation />
+      <!-- <AppFooter /> -->
     </footer>
   </AuthProvider>
 </template>
