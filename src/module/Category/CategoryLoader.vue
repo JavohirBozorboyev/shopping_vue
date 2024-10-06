@@ -3,9 +3,7 @@ import Skeleton from "primevue/skeleton";
 </script>
 
 <template>
-  <div
-    class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border min-h-80"
-  >
+  <div class="col-span-6 xl:col-span-3 rounded-md border min-h-80">
     <Skeleton class="mb-2 h-40" height="12rem"></Skeleton>
 
     <div class="p-2">

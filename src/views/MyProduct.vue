@@ -1,11 +1,12 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import Button from "primevue/button";
+import MyProductList from "@/module/MyProduct/MyProductList.vue";
 </script>
 
 <template>
   <div>
-    <div class="flex justify-between items-center bg-slate-100 p-2 rounded-md">
+    <div class="flex justify-between items-center rounded-md px-2">
       <h1 class="text-lg md:text-xl lg:text-2xl xl:text-3xl">
         Менинг Элонларим
       </h1>
@@ -19,5 +20,8 @@ import Button from "primevue/button";
         />
       </RouterLink>
     </div>
+    <main class="my-5">
+      <MyProductList />
+    </main>
   </div>
 </template>
