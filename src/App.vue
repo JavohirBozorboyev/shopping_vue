@@ -16,16 +16,16 @@ const route = useRoute();
       <AppNavigation />
     </header>
 
-    <main class="pt-[55px]">
+    <main class="pt-[55px] pb-4">
       <component :is="$route.meta.layout"> </component>
       <component v-if="!$route.meta.layout">
         <RouterView />
       </component>
     </main>
 
-    <footer class="pb-14">
+    <footer class="pb-14 sm:pb-0">
       <BottomNavigation />
-      <!-- <AppFooter /> -->
+      <AppFooter />
     </footer>
   </AuthProvider>
 </template>

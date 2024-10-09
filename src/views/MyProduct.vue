@@ -7,15 +7,13 @@ import MyProductList from "@/module/MyProduct/MyProductList.vue";
 <template>
   <div>
     <div class="flex justify-between items-center rounded-md px-2">
-      <h1 class="text-lg md:text-xl lg:text-2xl xl:text-3xl">
-        Менинг Элонларим
-      </h1>
+      <h1 class="text-lg md:text-xl lg:text-2xl xl:text-3xl">Элонларим</h1>
       <RouterLink to="/profil/product/add">
         <Button
           icon="pi pi-plus"
           aria-label="Save"
           severity="contrast"
-          label="Махсулот қўшиш"
+          label="Элон қўшиш"
           size="small"
         />
       </RouterLink>

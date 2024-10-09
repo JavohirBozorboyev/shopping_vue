@@ -59,7 +59,7 @@ const toggle = (event) => {
 </script>
 
 <template>
-  <div class="bg-white border-b fixed w-full top-0 z-[10000]">
+  <div class="bg-white border-b fixed w-full top-0 z-50">
     <div class="container mx-auto px-2 py-2 flex justify-between items-center">
       <div class="flex items-center">
         <RouterLink to="/">

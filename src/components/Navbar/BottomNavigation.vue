@@ -13,13 +13,13 @@ const route = useRoute();
 
 <template>
   <div
-    class="fixed bottom-0 w-full flex justify-center bg-white sm:hidden border-t"
+    class="fixed z-50 bottom-0 w-full flex justify-center bg-white sm:hidden border-t"
   >
     <div class="grid grid-cols-4 w-full py-2">
       <RouterLink
         class="flex justify-center items-center"
         v-for="tab in items"
-        :key="tab.label"
+        :key="tab.route"
         :to="tab.route"
         :class="route.path == tab.route ? 'text-slate-950' : 'text-slate-400'"
       >
