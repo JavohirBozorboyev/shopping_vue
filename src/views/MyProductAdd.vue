@@ -120,37 +120,36 @@ async function addNewPost() {
     },
   };
 
+  try {
+    const response = await axios.post("/api/v1/announcement/add", itemData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.status === 200) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        title: "Янги Элон Жойланди",
+      });
+      PostLoading.value = false;
 
-  // try {
-  //   const response = await axios.post("/api/v1/announcement/add", itemData, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  //   if (response.status === 200) {
-  //     const Toast = Swal.mixin({
-  //       toast: true,
-  //       position: "bottom-end",
-  //       showConfirmButton: false,
-  //       timer: 2000,
-  //       timerProgressBar: true,
-  //       didOpen: (toast) => {
-  //         toast.onmouseenter = Swal.stopTimer;
-  //         toast.onmouseleave = Swal.resumeTimer;
-  //       },
-  //     });
-  //     Toast.fire({
-  //       title: "Янги Элон Жойланди",
-  //     });
-  //     PostLoading.value = false;
-
-  //     setTimeout(() => {
-  //       router.push("/profil/product");
-  //     }, 2000);
-  //   }
-  // } catch (error) {
-  //   console.error("Xatolik yuz berdi:", error);
-  // }
+      setTimeout(() => {
+        router.push("/profil/product");
+      }, 2000);
+    }
+  } catch (error) {
+    console.error("Xatolik yuz berdi:", error);
+  }
 }
 
 onMounted(() => {

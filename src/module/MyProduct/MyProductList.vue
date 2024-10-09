@@ -1,16 +1,15 @@
 <script setup>
 import { ref, onMounted, watchEffect } from "vue";
-import Paginator from "primevue/paginator";
 import axios from "axios";
 import { inject } from "vue";
 import CategoryLoader from "../Category/CategoryLoader.vue";
 import MyProductCard from "./MyProductCard.vue";
 
 const auth = inject("auth");
-const { user, token } = auth;
+const { token } = auth;
 
 const data = ref(null);
-const favoriteData = ref(null);
+
 let loader = ref(true);
 
 async function getProduct() {

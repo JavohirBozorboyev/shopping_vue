@@ -1,11 +1,10 @@
 <script setup>
 import { inject, defineEmits } from "vue";
-const { data, favoriteData } = defineProps(["data", "favoriteData"]);
+const { data } = defineProps(["data", "favoriteData"]);
 import Image from "primevue/image";
-import Swal from "sweetalert2";
 import Button from "primevue/button";
-import axios from "axios";
 import { useRouter } from "vue-router";
+import { FormatCurrency } from "@/utils/FormatCurrency";
 const auth = inject("auth");
 const router = useRouter();
 const emit = defineEmits();
@@ -48,7 +47,7 @@ const { token } = auth;
           class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
         >
           <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
-          {{ data.price }} {{ data.currencyCode }}
+          {{ FormatCurrency(data.price, data.currencyCode) }}
         </h1>
       </div>
     </div>

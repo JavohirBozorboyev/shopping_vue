@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRoute } from "vue-router";
 import CategoryLoader from "./CategoryLoader.vue";
 import Swal from "sweetalert2";
+import { FormatCurrency } from "@/utils/FormatCurrency";
 
 const route = useRoute();
 const auth = inject("auth");
@@ -143,7 +144,7 @@ watchEffect(() => {
           class="text-slate-700 font-semibold text-sm xl:text-base mt-2 flex items-center gap-2"
         >
           <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
-          {{ item.price }} {{ item.currencyCode }}
+          {{ FormatCurrency(item.price, item.currencyCode) }}
         </h1>
       </div>
       <div class="flex justify-between gap-2 p-1 mt-2 border-t">
