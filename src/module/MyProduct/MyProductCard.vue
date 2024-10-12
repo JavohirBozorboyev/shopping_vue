@@ -5,10 +5,27 @@ import Image from "primevue/image";
 import Button from "primevue/button";
 import { useRouter } from "vue-router";
 import { FormatCurrency } from "@/utils/FormatCurrency";
+import { useToast } from "primevue/usetoast";
+import { ref } from "vue";
+import Dialog from "primevue/dialog";
+import FileUpload from "primevue/fileupload";
+
+const visible = ref(false);
+const toast = useToast();
 const auth = inject("auth");
 const router = useRouter();
 const emit = defineEmits();
 const { token } = auth;
+const onAdvancedUpload = (e) => {
+  console.log(e);
+
+  toast.add({
+    severity: "info",
+    summary: "Success",
+    detail: "File Uploaded",
+    life: 3000,
+  });
+};
 </script>
 <template>
   <div
@@ -24,6 +41,7 @@ const { token } = auth;
       />
 
       <Button
+        @click="visible = true"
         class="absolute float-right -mt-7 mr-2"
         icon="pi pi-images "
         size="large"
@@ -76,6 +94,67 @@ const { token } = auth;
           severity="secondary"
         ></Button>
       </RouterLink>
+    </div>
+    <div>
+      <Dialog
+        v-model:visible="visible"
+        maximizable
+        modal
+        :header="data.title"
+        class="p-0"
+        :style="{ width: '50rem' }"
+        :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+      >
+        <Toast />
+        <FileUpload
+          name="demo[]"
+          url="/api/upload"
+          @upload="onAdvancedUpload($event)"
+          :multiple="true"
+          accept="image/*"
+          :maxFileSize="1000000"
+        >
+          <template
+            #header="{ chooseCallback, uploadCallback, clearCallback, files }"
+          >
+            <div
+              class="flex flex-wrap justify-between items-center flex-1 gap-4"
+            >
+              <div class="flex gap-2 justify-between items-center w-full">
+                <article class="flex gap-2">
+                  <Button
+                    @click="chooseCallback()"
+                    icon="pi pi-images"
+                    rounded
+                    outlined
+                    severity="secondary"
+                  ></Button>
+
+                  <Button
+                    @click="clearCallback()"
+                    icon="pi pi-times"
+                    rounded
+                    outlined
+                    severity="danger"
+                    :disabled="!files || files.length === 0"
+                  ></Button>
+                </article>
+                <Button
+                  @click="uploadEvent(uploadCallback)"
+                  icon="pi pi-cloud-upload"
+                  rounded
+                  outlined
+                  severity="success"
+                  :disabled="!files || files.length === 0"
+                ></Button>
+              </div>
+            </div>
+          </template>
+          <template #empty>
+            <span>Расимлар юкланг</span>
+          </template>
+        </FileUpload>
+      </Dialog>
     </div>
   </div>
 </template>

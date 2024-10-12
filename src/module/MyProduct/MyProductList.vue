@@ -25,7 +25,7 @@ async function getProduct() {
   } catch (error) {
     console.log(error);
   } finally {
-    loader.value = false;
+    loader.value = false; 
   }
 }
 
