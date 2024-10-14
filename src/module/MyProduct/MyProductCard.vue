@@ -1,37 +1,73 @@
 <script setup>
 import { inject, defineEmits } from "vue";
-const { data } = defineProps(["data", "favoriteData"]);
+const { data } = defineProps(["data"]);
 import Image from "primevue/image";
 import Button from "primevue/button";
-import { useRouter } from "vue-router";
 import { FormatCurrency } from "@/utils/FormatCurrency";
-import { useToast } from "primevue/usetoast";
 import { ref } from "vue";
 import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
-
+import axios from "axios";
 const visible = ref(false);
-const toast = useToast();
 const auth = inject("auth");
-const router = useRouter();
 const emit = defineEmits();
 const { token } = auth;
-const onAdvancedUpload = (e) => {
-  console.log(e);
+const files = ref([]); // Fayllarni ro'yxatga olish uchun massiv
+const src = ref([]); // Fayllarning Base64 yoki URL versiyasi
 
-  toast.add({
-    severity: "info",
-    summary: "Success",
-    detail: "File Uploaded",
-    life: 3000,
-  });
-};
+function onFileSelect(event) {
+  const item = event.files;
+  src.value = [];
+
+  for (let i = 0; i < item.length; i++) {
+    const file = item[i];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      src.value.push(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  files.value = item;
+}
+
+async function uploadCallback() {
+  try {
+    const formData = new FormData();
+
+    for (let i = 0; i < files.value.length; i++) {
+      formData.append("images", files.value[i]);
+    }
+    formData.append("announceId", data?.id);
+
+    const response = await axios.post(
+      "/api/v1/announcement/save/images",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    visible.value = false;
+    if (response.status == 200) {
+      emit("update");
+    }
+    console.log(response.data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 </script>
+
 <template>
   <div
     class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
   >
-    <div class="h-48 md:min-h-48 relative">
+    <div class="h-56 md:min-h-62 relative">
       <Image
         :src="data.attachUrlResponses.originFile"
         :alt="data?.title"
@@ -108,15 +144,13 @@ const onAdvancedUpload = (e) => {
         <Toast />
         <FileUpload
           name="demo[]"
-          url="/api/upload"
           @upload="onAdvancedUpload($event)"
           :multiple="true"
           accept="image/*"
+          @select="onFileSelect"
           :maxFileSize="1000000"
         >
-          <template
-            #header="{ chooseCallback, uploadCallback, clearCallback, files }"
-          >
+          <template #header="{ chooseCallback, clearCallback, files }">
             <div
               class="flex flex-wrap justify-between items-center flex-1 gap-4"
             >
@@ -140,7 +174,7 @@ const onAdvancedUpload = (e) => {
                   ></Button>
                 </article>
                 <Button
-                  @click="uploadEvent(uploadCallback)"
+                  @click="uploadCallback()"
                   icon="pi pi-cloud-upload"
                   rounded
                   outlined
