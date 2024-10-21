@@ -68,7 +68,7 @@ function addFavorite(id) {
       Севимли Махсулотлар
     </h1>
   </div>
-  <div v-if="loader" class="grid grid-cols-12 gap-2 xl:gap-3">
+  <div v-if="loader" class="grid grid-cols-12 gap-2 xl:gap-3 min-h-[80vh]">
     <Skeleton
       v-for="item in [1, 2, 3, 4, 5, 6, 7, 8]"
       class="col-span-12 sm:col-span-6 relative md:col-span-3 h-44"
@@ -76,7 +76,7 @@ function addFavorite(id) {
     ></Skeleton>
   </div>
 
-  <div v-if="!loader">
+  <div v-if="!loader" class="min-h-[80vh]">
     <div class="grid grid-cols-12 gap-2 xl:gap-3 pb-4">
       <div
         v-for="item in data"

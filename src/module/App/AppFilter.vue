@@ -51,7 +51,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-gray-50 py-4">
+  <div class="bg-gray-50 md:py-2">
     <div class="container mx-auto px-2 p-2 rounded-md">
       <div class="overflow-x-auto">
         <div class="flex items-center gap-2 md:gap-3 min-w-[1200px]">
@@ -59,25 +59,7 @@ onMounted(() => {
             <Skeleton size="5rem" class="min-w-32"></Skeleton>
             <Skeleton size="1rem" class="min-w-28 mt-1 mx-auto"></Skeleton>
           </div>
-          <RouterLink
-            to="/"
-            v-if="!loading"
-            class="flex flex-col items-center justify-center p-2 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
-            :class="!route.params.slug ? 'bg-slate-950 text-white' : 'bg-white'"
-          >
-            <span
-              class="object-cover w-full h-20 rounded-md bg-slate-950 flex items-center justify-center"
-              :class="!route.params.slug ? '' : null"
-            >
-              <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
-            </span>
-            <p
-              class="capitalize mt-1 text-xs"
-              :class="!route.params.slug ? ' text-white' : 'text-gray-700'"
-            >
-              Асосий Саҳифа
-            </p>
-          </RouterLink>
+
           <RouterLink
             :to="`/category/${item.id}`"
             v-if="!loading"
@@ -159,3 +141,23 @@ onMounted(() => {
   border-radius: 2px;
 }
 </style>
+
+<!-- <RouterLink
+            to="/"
+            v-if="!loading"
+            class="flex flex-col items-center justify-center p-2 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
+            :class="!route.params.slug ? 'bg-slate-950 text-white' : 'bg-white'"
+          >
+            <span
+              class="object-cover w-full h-20 rounded-md bg-slate-950 flex items-center justify-center"
+              :class="!route.params.slug ? '' : null"
+            >
+              <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
+            </span>
+            <p
+              class="capitalize mt-1 text-xs"
+              :class="!route.params.slug ? ' text-white' : 'text-gray-700'"
+            >
+              Асосий Саҳифа
+            </p>
+          </RouterLink> -->

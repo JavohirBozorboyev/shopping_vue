@@ -102,87 +102,89 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-12 gap-1">
-    <CategoryLoader v-if="loader" v-for="_ in [1, 1, 1, 1, 1, 1]" />
+  <section class="min-h-[80vh]">
+    <div class="grid grid-cols-12 gap-1">
+      <CategoryLoader v-if="loader" v-for="_ in [1, 1, 1, 1, 1, 1]" />
 
-    <div
-      v-if="data?.rows?.length == 0"
-      class="col-span-12 bg-gray-50 rounded-md p-5 min-h-[60vh] flex flex-col gap-5 justify-center items-center"
-    >
-      <i
-        class="pi pi-exclamation-circle text-black"
-        style="font-size: 3rem"
-      ></i>
-      <h1 class="text-xl uppercase text-slate-700">Махсулот Топилмади!</h1>
-    </div>
-    <div
-      v-if="!loader"
-      v-for="(item, index) in data?.rows"
-      class="col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border overflow-hidden hover:bg-slate-50 duration-300 flex flex-col justify-between"
-    >
-      <div class="">
-        <img
-          :src="item.attachUrlResponses.originFile"
-          alt=""
-          class="w-full h-32 md:min-h-48 object-cover rounded-t-sm"
-        />
+      <div
+        v-if="data?.rows?.length == 0"
+        class="col-span-12 bg-gray-50 rounded-md p-5 min-h-[80vh] flex flex-col gap-5 justify-center items-center"
+      >
+        <i
+          class="pi pi-exclamation-circle text-black"
+          style="font-size: 3rem"
+        ></i>
+        <h1 class="text-xl uppercase text-slate-700">Махсулот Топилмади!</h1>
       </div>
-      <div class="px-2 pt-2 xl:px-3 xl:pt-3 flex flex-col justify-between">
-        <div class="flex justify-between items-center">
-          <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
-            {{ item.address }}
-          </p>
-
-          <!-- <Badge value="Янги" size="small" severity="secondary"></Badge> -->
+      <div
+        v-if="!loader"
+        v-for="(item, index) in data?.rows"
+        class="col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border overflow-hidden hover:bg-slate-50 duration-300 flex flex-col justify-between"
+      >
+        <div class="">
+          <img
+            :src="item.attachUrlResponses.originFile"
+            alt=""
+            class="w-full h-32 md:min-h-48 object-cover rounded-t-sm"
+          />
         </div>
-        <h1
-          class="text-xs lg:text-sm mt-2 text-slate-500 font-semibold line-clamp-2"
-        >
-          {{ item.title }}
-        </h1>
-        <h1
-          class="text-slate-700 font-semibold text-sm xl:text-base mt-2 flex items-center gap-2"
-        >
-          <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
-          {{ FormatCurrency(item.price, item.currencyCode) }}
-        </h1>
-      </div>
-      <div class="flex justify-between gap-2 p-1 mt-2 border-t">
-        <div class="flex gap-2">
-          <Button
-            class=""
-            icon="pi pi-envelope "
-            size="small"
-            severity="secondary"
-          ></Button>
+        <div class="px-2 pt-2 xl:px-3 xl:pt-3 flex flex-col justify-between">
+          <div class="flex justify-between items-center">
+            <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
+              {{ item.address }}
+            </p>
 
-          <Button
-            v-if="!(favoriteData?.find((fin) => fin.id == item.id) ?? 0)"
-            @click="addFavorite(item.id)"
-            class=""
-            icon="pi pi-heart"
-            size="small"
-            severity="secondary"
-          ></Button>
+            <!-- <Badge value="Янги" size="small" severity="secondary"></Badge> -->
+          </div>
+          <h1
+            class="text-xs lg:text-sm mt-2 text-slate-500 font-semibold line-clamp-2"
+          >
+            {{ item.title }}
+          </h1>
+          <h1
+            class="text-slate-700 font-semibold text-sm xl:text-base mt-2 flex items-center gap-2"
+          >
+            <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
+            {{ FormatCurrency(item.price, item.currencyCode) }}
+          </h1>
         </div>
-        <RouterLink :to="`/category/${route.params.slug}/${item.id}`">
-          <Button
-            class=""
-            icon="pi pi-arrow-right"
-            size="small"
-            severity="secondary"
-          ></Button>
-        </RouterLink>
-      </div>
-    </div>
+        <div class="flex justify-between gap-2 p-1 mt-2 border-t">
+          <div class="flex gap-2">
+            <Button
+              class=""
+              icon="pi pi-envelope "
+              size="small"
+              severity="secondary"
+            ></Button>
 
-    <Paginator
-      v-if="data?.rows?.length != 0"
-      :rows="paginationSize"
-      :totalRecords="data?.total"
-      :rowsPerPageOptions="[5, 10, 20, 30]"
-      @page="onPageChange"
-      class="col-span-12 mt-5"
-    ></Paginator>
-  </div>
+            <Button
+              v-if="!(favoriteData?.find((fin) => fin.id == item.id) ?? 0)"
+              @click="addFavorite(item.id)"
+              class=""
+              icon="pi pi-heart"
+              size="small"
+              severity="secondary"
+            ></Button>
+          </div>
+          <RouterLink :to="`/category/${route.params.slug}/${item.id}`">
+            <Button
+              class=""
+              icon="pi pi-arrow-right"
+              size="small"
+              severity="secondary"
+            ></Button>
+          </RouterLink>
+        </div>
+      </div>
+
+      <Paginator
+        v-if="data?.rows?.length != 0"
+        :rows="paginationSize"
+        :totalRecords="data?.total"
+        :rowsPerPageOptions="[5, 10, 20, 30]"
+        @page="onPageChange"
+        class="col-span-12 mt-5"
+      ></Paginator>
+    </div>
+  </section>
 </template>
