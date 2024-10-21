@@ -1,20 +1,73 @@
 <script setup>
 import { inject, defineEmits } from "vue";
-const { data } = defineProps(["data", "favoriteData"]);
+const { data } = defineProps(["data"]);
 import Image from "primevue/image";
 import Button from "primevue/button";
-import { useRouter } from "vue-router";
 import { FormatCurrency } from "@/utils/FormatCurrency";
+import { ref } from "vue";
+import Dialog from "primevue/dialog";
+import FileUpload from "primevue/fileupload";
+import axios from "axios";
+const visible = ref(false);
 const auth = inject("auth");
-const router = useRouter();
 const emit = defineEmits();
 const { token } = auth;
+const files = ref([]); // Fayllarni ro'yxatga olish uchun massiv
+const src = ref([]); // Fayllarning Base64 yoki URL versiyasi
+
+function onFileSelect(event) {
+  const item = event.files;
+  src.value = [];
+
+  for (let i = 0; i < item.length; i++) {
+    const file = item[i];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      src.value.push(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  files.value = item;
+}
+
+async function uploadCallback() {
+  try {
+    const formData = new FormData();
+
+    for (let i = 0; i < files.value.length; i++) {
+      formData.append("images", files.value[i]);
+    }
+    formData.append("announceId", data?.id);
+
+    const response = await axios.post(
+      "/api/v1/announcement/save/images",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    visible.value = false;
+    if (response.status == 200) {
+      emit("update");
+    }
+    console.log(response.data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 </script>
+
 <template>
   <div
     class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
   >
-    <div class="h-48 md:min-h-48 relative">
+    <div class="h-56 md:min-h-62 relative">
       <Image
         :src="data.attachUrlResponses.originFile"
         :alt="data?.title"
@@ -24,6 +77,7 @@ const { token } = auth;
       />
 
       <Button
+        @click="visible = true"
         class="absolute float-right -mt-7 mr-2"
         icon="pi pi-images "
         size="large"
@@ -76,6 +130,65 @@ const { token } = auth;
           severity="secondary"
         ></Button>
       </RouterLink>
+    </div>
+    <div>
+      <Dialog
+        v-model:visible="visible"
+        maximizable
+        modal
+        :header="data.title"
+        class="p-0"
+        :style="{ width: '50rem' }"
+        :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+      >
+        <Toast />
+        <FileUpload
+          name="demo[]"
+          @upload="onAdvancedUpload($event)"
+          :multiple="true"
+          accept="image/*"
+          @select="onFileSelect"
+          :maxFileSize="1000000"
+        >
+          <template #header="{ chooseCallback, clearCallback, files }">
+            <div
+              class="flex flex-wrap justify-between items-center flex-1 gap-4"
+            >
+              <div class="flex gap-2 justify-between items-center w-full">
+                <article class="flex gap-2">
+                  <Button
+                    @click="chooseCallback()"
+                    icon="pi pi-images"
+                    rounded
+                    outlined
+                    severity="secondary"
+                  ></Button>
+
+                  <Button
+                    @click="clearCallback()"
+                    icon="pi pi-times"
+                    rounded
+                    outlined
+                    severity="danger"
+                    :disabled="!files || files.length === 0"
+                  ></Button>
+                </article>
+                <Button
+                  @click="uploadCallback()"
+                  icon="pi pi-cloud-upload"
+                  rounded
+                  outlined
+                  severity="success"
+                  :disabled="!files || files.length === 0"
+                ></Button>
+              </div>
+            </div>
+          </template>
+          <template #empty>
+            <span>Расимлар юкланг</span>
+          </template>
+        </FileUpload>
+      </Dialog>
     </div>
   </div>
 </template>

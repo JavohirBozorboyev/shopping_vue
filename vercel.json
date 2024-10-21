@@ -24,6 +24,14 @@
       "src": "/login",
       "dest": "/index.html"
     },
+     {
+      "src": "/profil/product",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/profil/product/add",
+      "dest": "/index.html"
+    },
     {
       "src": "/:srcMatch(.*)*",
       "dest": "/index.html"

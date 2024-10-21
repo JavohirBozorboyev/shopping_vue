@@ -49,7 +49,7 @@ watchEffect(() => {
       <h1 class="text-xl uppercase text-slate-700">Махсулот Топилмади!</h1>
     </div>
     <div v-if="!loader" class="grid grid-cols-12 gap-1 col-span-12">
-      <MyProductCard v-for="item in data" :data="item" />
+      <MyProductCard v-for="item in data" :data="item" @update="getProduct" />
     </div>
   </div>
 </template>
