@@ -56,7 +56,6 @@ async function uploadCallback() {
     if (response.status == 200) {
       emit("update");
     }
-    console.log(response.data);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -141,10 +140,8 @@ async function uploadCallback() {
         :style="{ width: '50rem' }"
         :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
       >
-        <Toast />
         <FileUpload
           name="demo[]"
-          @upload="onAdvancedUpload($event)"
           :multiple="true"
           accept="image/*"
           @select="onFileSelect"
