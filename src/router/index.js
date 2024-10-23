@@ -34,7 +34,7 @@ const router = createRouter({
       name: "search",
       component: SearchView,
       meta: {
-        layout: SearchLayout,
+        layout: AppLayout,
       },
     },
     {
@@ -69,14 +69,7 @@ const router = createRouter({
         layout: ChatLayoutVue,
       },
     },
-    {
-      path: "/profil",
-      name: "user",
-      component: UserProfilView,
-      meta: {
-        layout: UserLayout,
-      },
-    },
+
     {
       path: "/profil/product",
       name: "Myproduct",

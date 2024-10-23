@@ -51,7 +51,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-gray-50 md:py-2">
+  <div class="bg-slate-100 md:py-2">
     <div class="container mx-auto px-2 p-2 rounded-md">
       <div class="overflow-x-auto">
         <div class="flex items-center gap-2 md:gap-3 min-w-[1200px]">

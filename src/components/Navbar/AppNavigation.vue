@@ -33,9 +33,7 @@ const items = ref([
       {
         label: "Профил паге",
         icon: "pi pi-user",
-        fun: () => {
-          router.push("/profil");
-        },
+        fun: () => {},
       },
 
       {
@@ -111,7 +109,7 @@ const toggle = (event) => {
         <RouterLink v-if="!auth?.user || !auth?.token" to="/login">
           <Button
             icon="pi pi-sign-in"
-            label="Login"
+            label="Тизимга Кириш"
             size="small"
             severity="contrast"
         /></RouterLink>

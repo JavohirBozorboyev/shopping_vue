@@ -54,7 +54,7 @@ function addFavorite(id) {
       <img
         :src="data.attachUrlResponses.originFile"
         alt=""
-        class="w-full h-32 md:min-h-48 object-cover rounded-t-md duration-300"
+        class="w-full h-32 md:min-h-48 2xl:h-60 object-cover rounded-t-md duration-300"
       />
     </div>
     <div class="flex flex-col justify-between px-2 pt-2 xl:px-3 xl:pt-3">
@@ -70,7 +70,7 @@ function addFavorite(id) {
           {{ data.title }}
         </h1>
         <h1
-          class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
+          class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2 "
         >
           <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
           {{ FormatCurrency(data.price, data.currencyCode) }}

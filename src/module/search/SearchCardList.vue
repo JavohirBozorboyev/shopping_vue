@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, inject } from "vue";
 
 import Paginator from "primevue/paginator";
 import axios from "axios";
@@ -8,8 +8,11 @@ import SearchCard from "./SearchCard.vue";
 import { useSearchStore } from "@/stores/searchStore";
 
 const searchStore = useSearchStore();
+const auth = inject("auth");
+const { token } = auth;
 
 const data = ref(null);
+const favoriteData = ref(null);
 
 let loader = ref(true);
 let paginationPage = ref(1);
@@ -35,19 +38,36 @@ async function getProduct() {
   }
 }
 
+async function getFavorite() {
+  if (!token) {
+    return;
+  }
+  try {
+    const favorite = await axios.get(`/api/v1/like/getMyLike`);
+    const favoriteRes = await favorite.data;
+    favoriteData.value = favoriteRes.body;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loader.value = false;
+  }
+}
+
 function onPageChange(e) {
   paginationPage.value = e.page + 1;
   paginationSize.value = e.rows;
   getProduct();
-  
 }
 const handleUpdate = () => {
   getProduct();
+  getFavorite();
 };
 
 watchEffect(() => {
   loader.value = true;
   getProduct();
+  getFavorite();
+  handleUpdate();
 });
 </script>
 
@@ -69,6 +89,7 @@ watchEffect(() => {
         @update="handleUpdate"
         v-for="item in data?.rows"
         :data="item"
+        :favoriteData="favoriteData?.find((fin) => fin.id == item.id) ?? 0"
       />
     </div>
 

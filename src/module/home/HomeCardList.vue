@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 import HomeCard from "./HomeCard.vue";
 import Paginator from "primevue/paginator";
 import axios from "axios";
@@ -31,8 +31,6 @@ async function getProduct() {
 }
 
 async function getFavorite() {
-  // loader.value = true;
-
   if (!token) {
     return;
   }
@@ -65,7 +63,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="container mx-auto rounded-md grid grid-cols-12 gap-2 ">
+  <div class="container mx-auto rounded-md grid grid-cols-12 gap-2">
     <CategoryLoader v-if="loader" v-for="_ in [1, 1, 1, 1, 1, 1]" />
     <div
       v-if="data?.rows?.length == 0"
@@ -98,4 +96,3 @@ watchEffect(() => {
   </div>
 </template>
 
-<!-- {process.env.Api_URl}/api/v1/category/tree/top/ancestors -->

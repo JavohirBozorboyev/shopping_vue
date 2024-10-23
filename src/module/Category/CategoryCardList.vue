@@ -125,7 +125,7 @@ watchEffect(() => {
           <img
             :src="item.attachUrlResponses.originFile"
             alt=""
-            class="w-full h-32 md:min-h-48 object-cover rounded-t-sm"
+            class="w-full h-32 md:min-h-48 2xl:h-60 object-cover rounded-t-sm"
           />
         </div>
         <div class="px-2 pt-2 xl:px-3 xl:pt-3 flex flex-col justify-between">
