@@ -63,9 +63,12 @@ onMounted(() => {
     <div v-if="product.loading">
       <Loader></Loader>
     </div>
-    <article class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10">
+    <article
+      v-if="!product.loading"
+      class="grid grid-cols-1 lg:grid-cols-2 gap-5"
+    >
       <div
-        class="grid gap-2"
+        class="grid gap-1 -m-2 sm:m-0"
         :class="
           product?.data?.attachUrlResponses.length == 1
             ? 'grid-cols-1'
@@ -89,15 +92,15 @@ onMounted(() => {
           class="w-full object-cover"
         />
       </div>
-      <div>
-        <p class="mb-2 text-gray-500">
+      <div class="bg-slate-100 p-4 md:p-6 rounded">
+        <p class="mb-2 text-gray-500 text-xs">
           <span>Сана:</span>
           {{ formatDateTime(product?.data?.createDateTime) }}
         </p>
-        <h1 class="text-2xl md:text-3xl xl:text-4xl font-bold">
+        <h1 class="text-xl md:text-2xl xl:text-4xl font-bold">
           {{ product?.data?.title }}
         </h1>
-        <h2 class="mt-5 text-xl md:text-2xl xl:text-3xl">
+        <h2 class="mt-5 text-base md:text-lg xl:text-2xl">
           {{
             FormatCurrency(
               product?.data?.priceTag?.price,
@@ -105,7 +108,7 @@ onMounted(() => {
             )
           }}
         </h2>
-        <p class="mt-5 text-gray-500">
+        <p class="mt-5 text-gray-500 text-sm">
           {{ product?.data?.description }}
         </p>
         <div class="flex items-center gap-5 mt-5">

@@ -15,6 +15,7 @@ const { token } = auth;
 const files = ref([]); // Fayllarni ro'yxatga olish uchun massiv
 const src = ref([]); // Fayllarning Base64 yoki URL versiyasi
 
+const moadal = ref(false);
 function onFileSelect(event) {
   const item = event.files;
   src.value = [];
@@ -60,13 +61,30 @@ async function uploadCallback() {
     console.error("Error:", error);
   }
 }
+async function deleteProduct(id) {
+  try {
+    const response = await axios.delete(`/api/v1/announcement/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.status == 200) {
+      console.log(response.data);
+
+      moadal.value = false;
+      emit("update");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 </script>
 
 <template>
   <div
-    class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
+    class="col-span-6 sm:col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
   >
-    <div class="h-56 md:min-h-62 relative">
+    <div class="h-40 md:h-64 xl:h-64 relative">
       <Image
         :src="data.attachUrlResponses.originFile"
         :alt="data?.title"
@@ -111,6 +129,7 @@ async function uploadCallback() {
           icon="pi pi-trash "
           size="small"
           severity="danger"
+          @click="moadal = true"
           text
         ></Button>
         <Button
@@ -188,4 +207,60 @@ async function uploadCallback() {
       </Dialog>
     </div>
   </div>
+  <Dialog
+    v-model:visible="moadal"
+    modal
+    header="Элонни Ўчириш"
+    :style="{ width: '25rem' }"
+    :breakpoints="{ '1199px': '75vw', '575px': '90vw', '400px': '90vw' }"
+  >
+    <div
+      class="rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
+    >
+      <div class="relative">
+        <Image
+          :src="data.attachUrlResponses.originFile"
+          :alt="data?.title"
+          class="w-full h-full object-cover rounded-t-md duration-300"
+          width="100%"
+        />
+      </div>
+      <div class="flex flex-col justify-between p-2">
+        <div class="flex justify-between items-center">
+          <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
+            {{ data.address }}
+          </p>
+        </div>
+        <div>
+          <h1
+            class="text-xs lg:text-sm mt-2 text-slate-700 font-semibold line-clamp-2"
+          >
+            {{ data.title }}
+          </h1>
+          <h1
+            class="text-slate-700 font-semibold text-sm mt-2 flex items-center gap-2"
+          >
+            <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
+            {{ FormatCurrency(data.price, data.currencyCode) }}
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 mt-4">
+      <Button
+        type="button"
+        label="Бекор Қилиш"
+        severity="secondary"
+        size="small"
+        @click="moadal = false"
+      ></Button>
+      <Button
+        size="small"
+        type="button"
+        label="Элонни Ўчириш"
+        severity="danger"
+        @click="deleteProduct(data.id)"
+      ></Button>
+    </div>
+  </Dialog>
 </template>
