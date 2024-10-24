@@ -76,7 +76,7 @@ function addFavorite(id) {
     ></Skeleton>
   </div>
 
-  <div v-if="!loader" class="min-h-[80vh]">
+  <div v-if="!loader">
     <div class="grid grid-cols-12 gap-2 xl:gap-3 pb-4">
       <div
         v-for="item in data"
@@ -137,6 +137,16 @@ function addFavorite(id) {
         </div>
       </div>
     </div>
+  </div>
+  <div
+    v-if="data?.length == 0"
+    class="col-span-12 h-[80vh] -mt-4 bg-slate-100 p-4 rounded flex items-center justify-center flex-col gap-5"
+  >
+    <i
+      class="pi pi-exclamation-circle text-slate-500"
+      style="font-size: 3rem"
+    ></i>
+    <p class="text-slate-500 text-xl">Севимли элонлар мавжуд эмас</p>
   </div>
 </template>
 

@@ -5,6 +5,8 @@ import { inject } from "vue";
 import MyProductCard from "./MyProductCard.vue";
 import Skeleton from "primevue/skeleton";
 const auth = inject("auth");
+import Button from "primevue/button";
+import { RouterLink } from "vue-router";
 const { token } = auth;
 
 const data = ref(null);
@@ -58,6 +60,25 @@ watchEffect(() => {
     </div>
     <div v-if="!loader" class="grid grid-cols-12 gap-1 col-span-12">
       <MyProductCard v-for="item in data" :data="item" @update="getProduct" />
+    </div>
+    <div
+      v-if="data?.length == 0"
+      class="col-span-12 h-[80vh] -mt-4 bg-slate-100 p-4 rounded flex items-center justify-center flex-col gap-5"
+    >
+      <i
+        class="pi pi-exclamation-circle text-slate-500"
+        style="font-size: 3rem"
+      ></i>
+      <p class="text-slate-500 text-xl">Элонлар Мавжуд Эмас</p>
+      <RouterLink to="/profil/product/add">
+        <Button
+          icon="pi pi-plus"
+          aria-label="Save"
+          severity="contrast"
+          label="Элон қўшиш"
+          size="small"
+        />
+      </RouterLink>
     </div>
   </div>
 </template>

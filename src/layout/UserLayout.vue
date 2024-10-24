@@ -15,6 +15,8 @@ onBeforeMount(() => {
 
 <template>
   <div class="container mx-auto mt-2">
-    <RouterView />
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 px-2"><RouterView /></div>
+    </div>
   </div>
 </template>

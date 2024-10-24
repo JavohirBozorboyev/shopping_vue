@@ -126,7 +126,7 @@ const register = async () => {
                 : 'bg-white text-slate-900 '
             "
           >
-            Login
+            Тизимга кириш
           </div>
           <div
             @click="changeSection"
@@ -137,17 +137,19 @@ const register = async () => {
                 : 'bg-white text-slate-900 '
             "
           >
-            Sign Up
+            Рўйҳатдан ўтиш
           </div>
         </div>
 
         <!-- Login -->
         <div v-if="activeSection" class="mt-10 flex flex-col gap-4">
           <div>
-            <h1 class="text-3xl text-slate-900 font-bold">Login</h1>
+            <h1 class="text-3xl text-slate-900 font-bold">Тизимга кириш</h1>
           </div>
           <div class="flex-auto">
-            <label for="phone" class="block mb-1 text-slate-400">Phone</label>
+            <label for="phone" class="block mb-1 text-slate-400"
+              >Телефон Рақам</label
+            >
             <InputMask
               id="phone"
               v-model="phone"
@@ -158,11 +160,9 @@ const register = async () => {
             />
           </div>
           <div class="flex-auto">
-            <label for="phone" class="block mb-1 text-slate-400"
-              >Password</label
-            >
+            <label for="phone" class="block mb-1 text-slate-400">Парол</label>
             <Password
-              placeholder="password"
+              placeholder="Парол"
               toggleMask
               :feedback="false"
               class=""
@@ -175,7 +175,7 @@ const register = async () => {
           </div>
 
           <Button
-            label="Login"
+            label="Кириш"
             @click="login"
             severity="contrast"
             class="mt-5"
@@ -183,11 +183,11 @@ const register = async () => {
           />
           <div class="mt-1">
             <p class="text-gray-400">
-              Don't have an account?
+              Ҳисобингиз йўқми
               <span
                 @click="changeSection"
                 class="text-black font-semibold cursor-pointer ml-1"
-                >Sign Up here</span
+                >Рўйҳатдан ўтиш</span
               >
             </p>
           </div>
@@ -195,34 +195,36 @@ const register = async () => {
         <!-- Sign Up -->
         <div v-if="!activeSection" class="mt-10 flex flex-col gap-4">
           <div>
-            <h1 class="text-3xl text-slate-900 font-bold">Sign Up</h1>
+            <h1 class="text-3xl text-slate-900 font-bold">Рўйҳатдан ўтиш</h1>
           </div>
           <div class="flex-auto">
             <label for="phone" class="block mb-1 text-slate-400"
-              >First Name</label
+              >Исмингиз</label
             >
             <InputText
               type="text"
               v-model="firstName"
-              placeholder="First Name"
+              placeholder="Исмингиз"
               fluid
               :invalid="error"
             />
           </div>
           <div class="flex-auto">
             <label for="phone" class="block mb-1 text-slate-400"
-              >Last Name</label
+              >Фамилиянгиз</label
             >
             <InputText
               type="text"
               v-model="lastName"
-              placeholder="Last Name"
+              placeholder="Фамилиянгиз"
               fluid
               :invalid="error"
             />
           </div>
           <div class="flex-auto">
-            <label for="phone" class="block mb-1 text-slate-400">Phone</label>
+            <label for="phone" class="block mb-1 text-slate-400"
+              >Телефон Рақамингиз</label
+            >
             <InputMask
               id="phone"
               mask="+999 99-999-99-99"
@@ -234,9 +236,7 @@ const register = async () => {
             />
           </div>
           <div class="flex-auto">
-            <label for="phone" class="block mb-1 text-slate-400"
-              >Password</label
-            >
+            <label for="phone" class="block mb-1 text-slate-400">Парол</label>
             <Password
               placeholder="password"
               toggleMask
@@ -251,18 +251,18 @@ const register = async () => {
           </div>
 
           <Button
-            label="Sign Up"
+            label="Рўйҳатдан Ўтиш"
             severity="contrast"
             class="mt-5"
             @click="register"
           />
           <div class="mt-1">
             <p class="text-gray-400">
-              Already have an account?
+              Ҳисобингиз борми?
               <span
                 @click="changeSection"
                 class="text-black font-semibold cursor-pointer ml-1"
-                >Login here</span
+                >Тизимга кириш</span
               >
             </p>
           </div>
