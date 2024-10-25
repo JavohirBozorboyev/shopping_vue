@@ -84,7 +84,7 @@ async function deleteProduct(id) {
   <div
     class="col-span-6 sm:col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
   >
-    <div class="h-40 md:h-64 xl:h-64 relative">
+    <div class="h-36 md:h-64 xl:h-64 relative">
       <Image
         :src="data.attachUrlResponses.originFile"
         :alt="data?.title"
@@ -92,15 +92,6 @@ async function deleteProduct(id) {
         preview
         width="100%"
       />
-
-      <Button
-        @click="visible = true"
-        class="absolute float-right -mt-7 mr-2"
-        icon="pi pi-images "
-        size="large"
-        severity="contrast"
-        rounded
-      ></Button>
     </div>
     <div class="flex flex-col justify-between px-2 pt-2 xl:px-3 xl:pt-3">
       <div class="flex justify-between items-center">
@@ -134,7 +125,8 @@ async function deleteProduct(id) {
         ></Button>
         <Button
           class=""
-          icon="pi pi-pencil "
+          @click="visible = true"
+          icon="pi pi-images "
           size="small"
           severity="secondary"
           text

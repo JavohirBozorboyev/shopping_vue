@@ -9,6 +9,15 @@ export const useAuthStore = defineStore("auth", {
     token: Cookies.get("authToken") || null,
   }),
   actions: {
+    initialize() {
+      const savedUser = Cookies.get("user");
+      const savedToken = Cookies.get("authToken");
+
+      if (savedUser && savedToken) {
+        this.user = JSON.parse(savedUser);
+        this.token = savedToken;
+      }
+    },
     async login(phone, password) {
       try {
         const response = await axios.post("/api/v1/auth/login", {

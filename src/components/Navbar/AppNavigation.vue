@@ -1,17 +1,19 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import Button from "primevue/button";
 import Menu from "primevue/menu";
 import Avatar from "primevue/avatar";
-
+import Drawer from "primevue/drawer";
 import { inject } from "vue";
+
 const router = useRouter();
 const route = useRoute();
 const auth = inject("auth");
 
-const { user, token } = auth;
+const { user } = auth;
 const menu = ref();
+const visible = ref(false);
 const items = ref([
   {
     label: "Профиле Линкс",
@@ -31,14 +33,19 @@ const items = ref([
         },
       },
       {
-        label: "Профил паге",
-        icon: "pi pi-user",
-        fun: () => {},
+        separator: true,
       },
-
+      {
+        label: "Профил",
+        icon: "pi pi-user",
+        fun: () => {
+          visible.value = true;
+        },
+      },
       {
         label: "Тизимдан чиқиш",
         icon: "pi pi-sign-out",
+        color: "red",
         fun: () => {
           auth.logout();
           router.go();
@@ -46,11 +53,8 @@ const items = ref([
       },
     ],
   },
-
-  // {
-  //   separator: true,
-  // },
 ]);
+
 const toggle = (event) => {
   menu.value.toggle(event);
 };
@@ -144,7 +148,8 @@ const toggle = (event) => {
       </template>
       <template #item="{ item }">
         <div
-          class="flex items-center p-2 gap-2 cursor-pointer"
+          class="flex items-center p-2 gap-2 cursor-pointer text-slate-700"
+          :class="item?.color ? `text-${item?.color}-400` : ''"
           @click="
             () => {
               if (item.fun) {
@@ -154,23 +159,49 @@ const toggle = (event) => {
           "
         >
           <span :class="item.icon" />
-          <span class="text-sm text-slate-700">{{ item.label }}</span>
+          <span class="text-sm">{{ item.label }}</span>
         </div>
       </template>
-      <!-- <template #end>
-        <button
-          class="relative overflow-hidden w-full border-0 bg-transparent flex p-2 rounded-none cursor-pointer transition-colors duration-200 items-center"
-        >
-          <Avatar
-            :image="user?.attach.originFile"
-            class="mr-2 rounded-md object-cover"
-          />
-          <span class="inline-flex flex-col items-start">
-            <span class="font-semibold text-sm">{{ user?.firstname }}</span>
-            <span class="text-xs">{{ user?.lastname }}</span>
-          </span>
-        </button>
-      </template> -->
     </Menu>
+    <Drawer v-model:visible="visible" position="right">
+      <template #header> </template>
+      <article class="bg-slate-100 p-4 rounded-md">
+        <div class="flex flex-col gap-3 justify-center items-center">
+          <Avatar
+            :image="user?.attach?.originFile"
+            shape="circle"
+            size="xlarge"
+          />
+          <span class="font-bold"
+            >{{ user?.firstname }} {{ user?.lastname }}</span
+          >
+        </div>
+      </article>
+      <article class="mt-4">
+        <div
+          class="bg-slate-100 p-2 rounded-md text-slate-700 flex items-center gap-2"
+        >
+          <p class="text-[10px] uppercase">Телефон :</p>
+          <p>{{ user?.emailOrPhone }}</p>
+        </div>
+      </article>
+
+      <template #footer>
+        <div class="flex items-center gap-2">
+          <Button
+            label="Logout"
+            icon="pi pi-sign-out"
+            class="flex-auto"
+            severity="danger"
+            @click="
+              () => {
+                auth.logout();
+                router.go();
+              }
+            "
+          ></Button>
+        </div>
+      </template>
+    </Drawer>
   </div>
 </template>

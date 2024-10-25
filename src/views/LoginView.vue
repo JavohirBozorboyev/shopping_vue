@@ -37,11 +37,11 @@ const login = async () => {
       life: 3000,
     });
     errorLogin.value = false;
-
+    router.push("/");
     setTimeout(() => {
       loadinLogin.value = false;
-      router.push("/");
-    }, 2000);
+      window.location.reload();
+    }, 1000);
   }
   if (res.status == 401 || res.status == 404) {
     phone.value = "";
@@ -74,10 +74,11 @@ const register = async () => {
     });
     error.value = false;
 
+    router.push("/");
     setTimeout(() => {
       loadinLogin.value = false;
-      router.push("/");
-    }, 2000);
+      window.location.reload();
+    }, 1000);
   }
   if (res.status == 400) {
     phone.value = "";
