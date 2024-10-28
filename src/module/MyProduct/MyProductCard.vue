@@ -8,14 +8,19 @@ import { ref } from "vue";
 import Dialog from "primevue/dialog";
 import FileUpload from "primevue/fileupload";
 import axios from "axios";
+import { useToast } from "primevue/usetoast";
+import Toast from "primevue/toast";
+
 const visible = ref(false);
 const auth = inject("auth");
 const emit = defineEmits();
 const { token } = auth;
-const files = ref([]); // Fayllarni ro'yxatga olish uchun massiv
-const src = ref([]); // Fayllarning Base64 yoki URL versiyasi
+const files = ref([]);
+const src = ref([]);
+const toast = useToast();
 
 const moadal = ref(false);
+let uploadImageLoader = ref(false);
 function onFileSelect(event) {
   const item = event.files;
   src.value = [];
@@ -35,6 +40,7 @@ function onFileSelect(event) {
 }
 
 async function uploadCallback() {
+  uploadImageLoader.value = true;
   try {
     const formData = new FormData();
 
@@ -55,10 +61,23 @@ async function uploadCallback() {
     );
     visible.value = false;
     if (response.status == 200) {
+      toast.add({
+        severity: "success",
+        summary: "Бажарилди",
+        detail: "Расимлар ўзгартирилди",
+        life: 2000,
+      });
+      uploadImageLoader.value = false;
+
       emit("update");
     }
   } catch (error) {
-    console.error("Error:", error);
+    toast.add({
+      severity: "error",
+      summary: "Хатолик",
+      detail: "Расимлар юкланмади",
+      life: 2000,
+    });
   }
 }
 async function deleteProduct(id) {
@@ -156,7 +175,7 @@ async function deleteProduct(id) {
           :multiple="true"
           accept="image/*"
           @select="onFileSelect"
-          :maxFileSize="1000000"
+          :maxFileSize="10000000"
         >
           <template #header="{ chooseCallback, clearCallback, files }">
             <div
@@ -182,12 +201,13 @@ async function deleteProduct(id) {
                   ></Button>
                 </article>
                 <Button
+                  :loading="uploadImageLoader"
                   @click="uploadCallback()"
                   icon="pi pi-cloud-upload"
                   rounded
                   outlined
                   severity="success"
-                  :disabled="!files || files.length === 0"
+                  :disabled="!files || files.length === 0 || uploadImageLoader"
                 ></Button>
               </div>
             </div>
@@ -199,6 +219,8 @@ async function deleteProduct(id) {
       </Dialog>
     </div>
   </div>
+  <Toast position="bottom-center" />
+
   <Dialog
     v-model:visible="moadal"
     modal
