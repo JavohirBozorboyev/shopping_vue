@@ -77,7 +77,7 @@ onMounted(() => {
       >
         <Image
           :src="product?.data?.attachUrlResponses[0].originFile"
-          alt="Image"
+          :alt="product?.data?.title"
           preview
           class="w-full object-cover col-span-2"
         />
@@ -86,8 +86,8 @@ onMounted(() => {
             1,
             product?.data?.attachUrlResponses.length
           )"
-          :src="item.originFile"
-          alt="Image"
+          :src="item.originFile" 
+          :alt="product?.data?.title"
           preview
           class="w-full object-cover"
         />

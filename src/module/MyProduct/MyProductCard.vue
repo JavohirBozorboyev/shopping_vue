@@ -59,8 +59,9 @@ async function uploadCallback() {
         },
       }
     );
-    visible.value = false;
+
     if (response.status == 200) {
+      visible.value = false;
       toast.add({
         severity: "success",
         summary: "Бажарилди",
@@ -78,6 +79,8 @@ async function uploadCallback() {
       detail: "Расимлар юкланмади",
       life: 2000,
     });
+    uploadImageLoader.value = false;
+    visible.value = false;
   }
 }
 async function deleteProduct(id) {

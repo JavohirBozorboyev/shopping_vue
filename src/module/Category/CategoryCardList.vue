@@ -124,7 +124,7 @@ watchEffect(() => {
         <div class="">
           <img
             :src="item.attachUrlResponses.originFile"
-            alt=""
+            :alt="item.title"
             class="w-full h-32 md:min-h-48 2xl:h-60 object-cover rounded-t-sm"
           />
         </div>
