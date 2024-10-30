@@ -6,12 +6,16 @@ import InputText from "primevue/inputtext";
 import Divider from "primevue/divider";
 import Textarea from "primevue/textarea";
 import InputNumber from "primevue/inputnumber";
-import { ref, onMounted, watchEffect, inject } from "vue";
+import { ref, onMounted, inject } from "vue";
 import { useRouter } from "vue-router";
-import Swal from "sweetalert2";
+import FileUpload from "primevue/fileupload";
+
+import Toast from "primevue/toast";
+import { useToast } from "primevue/usetoast";
 const auth = inject("auth");
 const router = useRouter();
 const { user, token } = auth;
+const toast = useToast();
 const selectedCity = ref();
 const ApiCategoryData = ref();
 let ApiRegionData = ref(null);
@@ -24,7 +28,8 @@ const description = ref(null);
 const addres = ref(null);
 const miqdor = ref(null);
 const contact = ref(user?.emailOrPhone ?? "");
-
+const files = ref([]);
+const src = ref([]);
 // input v-model error
 const errors = ref({
   title: "",
@@ -127,28 +132,69 @@ async function addNewPost() {
       },
     });
     if (response.status === 200) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        title: "Янги Элон Жойланди",
-      });
-      PostLoading.value = false;
+      uploadCallback(response.data.body.id);
+    }
+  } catch (error) {
+    console.error("Xatolik yuz berdi:", error);
+  }
+}
 
+function onFileSelect(event) {
+  const item = event.files;
+  src.value = [];
+
+  for (let i = 0; i < item.length; i++) {
+    const file = item[i];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      src.value.push(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  files.value = item;
+}
+
+async function uploadCallback(id) {
+  try {
+    const formData = new FormData();
+
+    for (let i = 0; i < files.value.length; i++) {
+      formData.append("images", files.value[i]);
+    }
+    formData.append("announceId", id);
+
+    const response = await axios.post(
+      "/api/v1/announcement/save/images",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    if (response.status == 200) {
+      PostLoading.value = false;
+      toast.add({
+        severity: "success",
+        summary: "Муофақиятли",
+        detail: "Янги элон жойланди",
+        life: 2000,
+      });
       setTimeout(() => {
         router.push("/profil/product");
       }, 2000);
     }
   } catch (error) {
-    console.error("Xatolik yuz berdi:", error);
+    toast.add({
+      severity: "error",
+      summary: "Хато",
+      detail: "Элон жойланмади",
+      life: 2000,
+    });
   }
 }
 
@@ -168,10 +214,50 @@ onMounted(() => {
     </div>
     <main class="mt-2 bg-gray-50 rounded-md p-2 min-h-screen pb-10">
       <div class="grid grid-cols-12 gap-3">
+        <div class="col-span-12">
+          <FileUpload
+            name="demo[]"
+            :multiple="true"
+            accept="image/*"
+            @select="onFileSelect"
+            :maxFileSize="10000000"
+          >
+            <template #header="{ chooseCallback, clearCallback, files }">
+              <div
+                class="flex flex-wrap justify-between items-center flex-1 gap-4"
+              >
+                <div class="flex gap-2 justify-between items-center w-full">
+                  <article class="flex gap-2">
+                    <Button
+                      @click="chooseCallback()"
+                      icon="pi pi-images"
+                      rounded
+                      outlined
+                      severity="secondary"
+                    ></Button>
+
+                    <Button
+                      @click="clearCallback()"
+                      icon="pi pi-times"
+                      rounded
+                      outlined
+                      severity="danger"
+                      :disabled="!files || files.length === 0"
+                    ></Button>
+                  </article>
+                </div>
+              </div>
+            </template>
+            <template #empty>
+              <span>Расимлар юкланг</span>
+            </template>
+          </FileUpload>
+        </div>
         <h1 class="text-lg lg:text-xl col-span-12">Малумотлар</h1>
         <p v-if="errors.title" class="text-red-500 col-span-12">
           {{ errors.title }}
         </p>
+
         <InputText
           placeholder="Пост сарлавҳаси"
           type="text"
@@ -274,5 +360,6 @@ onMounted(() => {
         </article>
       </div>
     </main>
+    <Toast position="bottom-right" group="br" />
   </div>
 </template>

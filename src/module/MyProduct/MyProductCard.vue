@@ -103,11 +103,11 @@ async function deleteProduct(id) {
   <div
     class="col-span-6 sm:col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
   >
-    <div class="h-36 md:h-64 xl:h-64 relative">
+    <div class="relative">
       <Image
         :src="data.attachUrlResponses.originFile"
         :alt="data?.title"
-        class="w-full h-full object-cover rounded-t-md duration-300"
+        class="w-full h-32 md:min-h-48 2xl:h-60 object-cover rounded-t-md duration-300"
         preview
         width="100%"
       />

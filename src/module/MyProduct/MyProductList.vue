@@ -58,9 +58,11 @@ watchEffect(() => {
       ></i>
       <h1 class="text-xl uppercase text-slate-700">Махсулот Топилмади!</h1>
     </div>
-    <div v-if="!loader" class="grid grid-cols-12 gap-1 col-span-12">
-      <MyProductCard v-for="item in data" :data="item" @update="getProduct" />
-    </div>
+    <article class="min-h-[90vh] col-span-12">
+      <div v-if="!loader" class="grid grid-cols-12 gap-1 col-span-12">
+        <MyProductCard v-for="item in data" :data="item" @update="getProduct" />
+      </div>
+    </article>
     <div
       v-if="data?.length == 0"
       class="col-span-12 h-[80vh] -mt-4 bg-slate-100 p-4 rounded flex items-center justify-center flex-col gap-5"

@@ -150,8 +150,8 @@ const toggle = (event) => {
       </template>
       <template #item="{ item }">
         <div
-          class="flex items-center p-2 gap-2 cursor-pointer text-slate-700"
-          :class="item?.color ? `text-${item?.color}-400 text-red-500` : ''"
+          class="flex items-center p-2 gap-2 cursor-pointer"
+          :class="item?.color ? `text-${item?.color}-400` : 'text-slate-700'"
           @click="
             () => {
               if (item.fun) {
