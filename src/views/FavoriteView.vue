@@ -86,10 +86,7 @@ function addFavorite(id) {
           <img
             :src="item?.attachUrlResponses[0].originFile"
             :alt="item.title"
-<<<<<<< HEAD
             loading="lazy"
-=======
->>>>>>> a46cf0bcef1087e70cea433d2c7efd94ba9e2d30
             class="w-full h-32 md:min-h-48 object-cover rounded-t-md duration-300"
           />
         </div>
@@ -120,6 +117,7 @@ function addFavorite(id) {
               icon="pi pi-envelope "
               size="small"
               severity="secondary"
+              aria-label="SMS"
             ></Button>
 
             <Button
@@ -128,6 +126,7 @@ function addFavorite(id) {
               icon="pi pi-trash"
               size="small"
               severity="secondary"
+              aria-label="dislike"
             ></Button>
           </div>
           <RouterLink :to="`/category/${item.categoryId}/${item.id}`">
