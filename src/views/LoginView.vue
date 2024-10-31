@@ -5,8 +5,6 @@ import InputMask from "primevue/inputmask";
 import Button from "primevue/button";
 import { useAuthStore } from "@/stores/auth";
 import InputText from "primevue/inputtext";
-import Toast from "primevue/toast";
-import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
 const activeSection = ref(true);
 
@@ -16,7 +14,7 @@ const password = ref("");
 const firstName = ref("");
 const lastName = ref("");
 const authStore = useAuthStore();
-const toast = useToast();
+
 let error = ref(false);
 let errorLogin = ref(false);
 let loadinLogin = ref(false);
@@ -30,12 +28,7 @@ const login = async () => {
   const res = await authStore.login(phone.value, password.value);
   if (res.status == 200) {
     activeSection.value = true;
-    toast.add({
-      severity: "contrast",
-      summary: "Tabriklaymiz",
-      detail: "Tizimga Kirdingiz",
-      life: 3000,
-    });
+
     errorLogin.value = false;
     router.push("/");
     setTimeout(() => {
@@ -48,12 +41,7 @@ const login = async () => {
     password.value = "";
     firstName.value = "";
     lastName.value = "";
-    toast.add({
-      severity: "error",
-      summary: "Kechirasiz",
-      detail: "Ro'yhatdan o'tmagan",
-      life: 3000,
-    });
+
     errorLogin.value = true;
     loadinLogin.value = false;
   }
@@ -66,12 +54,6 @@ const register = async () => {
     password.value
   );
   if (res.status == 200) {
-    toast.add({
-      severity: "contrast",
-      summary: "Tabriklaymiz",
-      detail: "Muofaqiyatli ro'yhatdan o'tdingiz",
-      life: 3000,
-    });
     error.value = false;
 
     router.push("/");
@@ -85,12 +67,7 @@ const register = async () => {
     password.value = "";
     firstName.value = "";
     lastName.value = "";
-    toast.add({
-      severity: "error",
-      summary: "Xatolik",
-      detail: "Malumotlarni tekshirib qayta ro'yhatdan o'ting!",
-      life: 3000,
-    });
+
     error.value = true;
     loadinLogin.value = false;
   }
@@ -99,12 +76,7 @@ const register = async () => {
     password.value = "";
     firstName.value = "";
     lastName.value = "";
-    toast.add({
-      severity: "error",
-      summary: "Xatolik",
-      detail: "Avvalroq bunday malumotlar bilan ro'yhatdan o'tilgan.",
-      life: 3000,
-    });
+
     error.value = true;
     loadinLogin.value = false;
   }
@@ -270,6 +242,5 @@ const register = async () => {
         </div>
       </div>
     </article>
-    <Toast />
   </div>
 </template>

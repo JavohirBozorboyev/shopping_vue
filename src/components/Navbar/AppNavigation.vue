@@ -3,9 +3,9 @@ import { ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import Button from "primevue/button";
 import Menu from "primevue/menu";
-import Avatar from "primevue/avatar";
-import Drawer from "primevue/drawer";
+
 import { inject } from "vue";
+import UserNavigation from "./UserNavigation.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -13,7 +13,7 @@ const auth = inject("auth");
 
 const { user } = auth;
 const menu = ref();
-const visible = ref(false);
+const childRef = ref(null);
 const items = ref([
   {
     label: "Профиле Линкс",
@@ -39,7 +39,9 @@ const items = ref([
         label: "Профил",
         icon: "pi pi-user",
         fun: () => {
-          visible.value = true;
+          if (childRef.value) {
+            childRef.value.visible = true;
+          }
         },
       },
       {
@@ -151,8 +153,8 @@ const toggle = (event) => {
       </template>
       <template #item="{ item }">
         <div
-          class="flex items-center p-2 gap-2 cursor-pointer text-slate-700"
-          :class="item?.color ? `text-${item?.color}-400` : ''"
+          class="flex items-center p-2 gap-2 cursor-pointer"
+          :class="item?.color ? `text-${item?.color}-400` : 'text-slate-700'"
           @click="
             () => {
               if (item.fun) {
@@ -166,45 +168,6 @@ const toggle = (event) => {
         </div>
       </template>
     </Menu>
-    <Drawer v-model:visible="visible" position="right">
-      <template #header> </template>
-      <article class="bg-slate-100 p-4 rounded-md">
-        <div class="flex flex-col gap-3 justify-center items-center">
-          <Avatar
-            :image="user?.attach?.originFile"
-            shape="circle"
-            size="xlarge"
-          />
-          <span class="font-bold"
-            >{{ user?.firstname }} {{ user?.lastname }}</span
-          >
-        </div>
-      </article>
-      <article class="mt-4">
-        <div
-          class="bg-slate-100 p-2 rounded-md text-slate-700 flex items-center gap-2"
-        >
-          <p class="text-[10px] uppercase">Телефон :</p>
-          <p>{{ user?.emailOrPhone }}</p>
-        </div>
-      </article>
-
-      <template #footer>
-        <div class="flex items-center gap-2">
-          <Button
-            label="Logout"
-            icon="pi pi-sign-out"
-            class="flex-auto"
-            severity="danger"
-            @click="
-              () => {
-                auth.logout();
-                router.go();
-              }
-            "
-          ></Button>
-        </div>
-      </template>
-    </Drawer>
+    <UserNavigation ref="childRef" />
   </div>
 </template>

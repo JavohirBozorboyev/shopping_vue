@@ -76,17 +76,20 @@ function addFavorite(id) {
     ></Skeleton>
   </div>
 
-  <div v-if="!loader">
+  <div v-if="!loader" class="min-h-[90vh]">
     <div class="grid grid-cols-12 gap-2 xl:gap-3 pb-4">
       <div
         v-for="item in data"
-        class="col-span-6 xl:col-span-4 2xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
+        class="col-span-6 lg:col-span-4 xl:col-span-3 rounded-md border duration-300 overflow-hidden hover:bg-slate-100/80 flex flex-col justify-between"
       >
         <div class="">
           <img
             :src="item?.attachUrlResponses[0].originFile"
             :alt="item.title"
+<<<<<<< HEAD
             loading="lazy"
+=======
+>>>>>>> a46cf0bcef1087e70cea433d2c7efd94ba9e2d30
             class="w-full h-32 md:min-h-48 object-cover rounded-t-md duration-300"
           />
         </div>
