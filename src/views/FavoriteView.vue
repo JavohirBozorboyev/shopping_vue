@@ -85,7 +85,8 @@ function addFavorite(id) {
         <div class="">
           <img
             :src="item?.attachUrlResponses[0].originFile"
-            alt=""
+            :alt="item.title"
+            loading="lazy"
             class="w-full h-32 md:min-h-48 object-cover rounded-t-md duration-300"
           />
         </div>

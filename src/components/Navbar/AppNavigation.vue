@@ -64,12 +64,13 @@ const toggle = (event) => {
   <div class="bg-white border-b fixed w-full top-0 z-50">
     <div class="container mx-auto px-2 py-2 flex justify-between items-center">
       <div class="flex items-center">
-        <RouterLink to="/">
+        <RouterLink to="/" aria-label="Асосий Саҳифа">
           <i class="pi pi-crown text-black" style="font-size: 2rem"></i>
         </RouterLink>
       </div>
       <div class="flex items-center gap-4">
         <RouterLink
+          aria-label="Севимли"
           to="/favorites"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
@@ -95,6 +96,7 @@ const toggle = (event) => {
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
           :class="route.path == '/chat' ? 'bg-slate-950' : 'bg-gray-100'"
+          aria-label="СМС"
         >
           <i
             class="pi pi-envelope p-[6px] rounded-[4px]"
@@ -116,6 +118,7 @@ const toggle = (event) => {
             label="Тизимга Кириш"
             size="small"
             severity="contrast"
+            aria-label="Тизимга Кириш"
         /></RouterLink>
         <div
           @click="toggle"
