@@ -89,8 +89,8 @@ const toggle = (event) => {
           <span
             class="text-sm capitalize hidden md:block"
             :class="route.path == '/favorites' ? 'text-white' : 'text-gray-500'"
-            >Севимли</span
-          >
+            >Севимли
+          </span>
         </RouterLink>
 
         <RouterLink
@@ -166,6 +166,7 @@ const toggle = (event) => {
           <span :class="item.icon" />
           <span class="text-sm">{{ item.label }}</span>
         </div>
+        
       </template>
     </Menu>
     <UserNavigation ref="childRef" />
