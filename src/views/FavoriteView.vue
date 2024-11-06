@@ -1,5 +1,5 @@
 <script setup>
-import { inject, ref } from "vue";
+import { inject, ref, watchEffect } from "vue";
 import Button from "primevue/button";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -27,7 +27,6 @@ function getFavorites() {
       console.error("Xatolik yuz berdi:", error);
     });
 }
-getFavorites();
 
 function addFavorite(id) {
   let bodyContent = JSON.stringify({
@@ -60,6 +59,10 @@ function addFavorite(id) {
       console.error("Xatolik yuz berdi:", error);
     });
 }
+
+watchEffect(() => {
+  getFavorites();
+});
 </script>
 
 <template>

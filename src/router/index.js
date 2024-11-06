@@ -9,15 +9,13 @@ import CategoryIdView from "@/views/CategoryIdView.vue";
 import ChatsView from "../views/ChatsView.vue";
 import LoginView from "@/views/LoginView.vue";
 import LoginLayout from "@/layout/LoginLayout.vue";
-import UserProfilView from "@/views/UserProfilView.vue";
 import UserLayout from "@/layout/UserLayout.vue";
 import CategoryIdLayout from "@/layout/CategoryIdLayout.vue";
 import ChatLayoutVue from "@/layout/ChatLayout.vue";
 import SearchView from "@/views/SearchView.vue";
-import SearchLayout from "@/layout/SearchLayout.vue";
 import MyProduct from "@/views/MyProduct.vue";
 import MyProductAdd from "@/views/MyProductAdd.vue";
-
+import ChatIdView from "@/views/ChatIdView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -65,6 +63,14 @@ const router = createRouter({
       path: "/chat",
       name: "Chat",
       component: ChatsView,
+      meta: {
+        layout: ChatLayoutVue,
+      },
+    },
+    {
+      path: "/chat/:id",
+      name: "Chat-id",
+      component: ChatIdView,
       meta: {
         layout: ChatLayoutVue,
       },

@@ -142,22 +142,3 @@ onMounted(() => {
 }
 </style>
 
-<!-- <RouterLink
-            to="/"
-            v-if="!loading"
-            class="flex flex-col items-center justify-center p-2 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
-            :class="!route.params.slug ? 'bg-slate-950 text-white' : 'bg-white'"
-          >
-            <span
-              class="object-cover w-full h-20 rounded-md bg-slate-950 flex items-center justify-center"
-              :class="!route.params.slug ? '' : null"
-            >
-              <i class="pi pi-crown text-white" style="font-size: 2rem"></i>
-            </span>
-            <p
-              class="capitalize mt-1 text-xs"
-              :class="!route.params.slug ? ' text-white' : 'text-gray-700'"
-            >
-              Асосий Саҳифа
-            </p>
-          </RouterLink> -->

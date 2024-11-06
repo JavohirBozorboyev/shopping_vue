@@ -67,7 +67,7 @@ const toggle = (event) => {
     <div class="container mx-auto px-2 py-2 flex justify-between items-center">
       <div class="flex items-center">
         <RouterLink to="/">
-          <i class="pi pi-crown text-black" style="font-size: 2rem"></i>
+          <i class="pi pi-crown text-slate-900" style="font-size: 2rem"></i>
         </RouterLink>
       </div>
       <div class="flex items-center gap-4">
@@ -75,19 +75,19 @@ const toggle = (event) => {
           to="/favorites"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
-          :class="route.path == '/favorites' ? 'bg-slate-950' : 'bg-gray-100'"
+          :class="route.path == '/favorites' ? 'bg-slate-950' : 'bg-slate-100'"
         >
           <i
             class="pi pi-heart p-[6px] rounded-[4px]"
             :class="
               route.path == '/favorites'
                 ? 'bg-slate-950 text-white'
-                : 'bg-white text-gray-500'
+                : 'bg-white text-slate-500'
             "
           ></i>
           <span
             class="text-sm capitalize hidden md:block"
-            :class="route.path == '/favorites' ? 'text-white' : 'text-gray-500'"
+            :class="route.path == '/favorites' ? 'text-white' : 'text-slate-500'"
             >Севимли</span
           >
         </RouterLink>
@@ -96,19 +96,19 @@ const toggle = (event) => {
           to="/chat"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
-          :class="route.path == '/chat' ? 'bg-slate-950' : 'bg-gray-100'"
+          :class="route.path == '/chat' ? 'bg-slate-950' : 'bg-slate-100'"
         >
           <i
             class="pi pi-envelope p-[6px] rounded-[4px]"
             :class="
               route.path == '/chat'
                 ? 'bg-slate-950 text-white'
-                : 'bg-white text-gray-500'
+                : 'bg-white text-slate-500'
             "
           ></i>
           <span
             class="text-sm capitalize hidden md:block"
-            :class="route.path == '/chat' ? 'text-white' : 'text-gray-500'"
+            :class="route.path == '/chat' ? 'text-white' : 'text-slate-500'"
             >СМС</span
           >
         </RouterLink>
@@ -126,19 +126,19 @@ const toggle = (event) => {
           v-if="auth?.user && auth?.token"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300 cursor-pointer select-none"
-          :class="route.path == '/profil' ? 'bg-slate-950' : 'bg-gray-100'"
+          :class="route.path == '/profil' ? 'bg-slate-950' : 'bg-slate-100'"
         >
           <i
             class="pi pi-user p-[6px] rounded-[4px]"
             :class="
               route.path == '/profil'
                 ? 'bg-slate-950 text-white'
-                : 'bg-white text-gray-500'
+                : 'bg-white text-slate-500'
             "
           ></i>
           <span
             class="text-sm capitalize hidden md:block"
-            :class="route.path == '/profil' ? 'text-white' : 'text-gray-500'"
+            :class="route.path == '/profil' ? 'text-white' : 'text-slate-500'"
             >Профил</span
           >
         </div>
