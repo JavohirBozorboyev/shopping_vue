@@ -1,12 +1,9 @@
 <script setup>
 import Image from "primevue/image";
 import Button from "primevue/button";
-
 import Loader from "../components/CategoryID/Loader.vue";
-
 import axios from "axios";
 import { ref, onMounted, inject, reactive } from "vue";
-import Swal from "sweetalert2";
 import { FormatCurrency } from "@/utils/FormatCurrency";
 import { useRoute, useRouter } from "vue-router";
 
@@ -77,8 +74,9 @@ onMounted(() => {
       >
         <Image
           :src="product?.data?.attachUrlResponses[0].originFile"
-          alt="Image"
+          :alt="product?.data?.title"
           preview
+          loading="lazy"
           class="w-full object-cover col-span-2"
         />
         <Image
@@ -87,7 +85,8 @@ onMounted(() => {
             product?.data?.attachUrlResponses.length
           )"
           :src="item.originFile"
-          alt="Image"
+          :alt="product?.data?.title"
+          loading="lazy"
           preview
           class="w-full object-cover"
         />

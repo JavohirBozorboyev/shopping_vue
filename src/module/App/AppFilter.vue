@@ -61,6 +61,7 @@ onMounted(() => {
           </div>
 
           <RouterLink
+            :aria-label="item.name"
             :to="`/category/${item.id}`"
             v-if="!loading"
             v-for="item of ApiCategoryData"
@@ -71,6 +72,7 @@ onMounted(() => {
               :src="item.attach.originFile"
               :alt="item.name"
               class="w-full h-20 object-cover rounded-md"
+              loading="lazy"
             />
             <p
               class="capitalize mt-1 text-xs text-nowrap p-1"
@@ -90,6 +92,7 @@ onMounted(() => {
             v-model="searchStore.search"
             placeholder="Элонларни қидриш"
             class="w-full"
+            alt="search"
           />
         </IconField>
         <Select
@@ -101,6 +104,7 @@ onMounted(() => {
           optionLabel="name"
           placeholder="Шаҳар танлаш"
           class="w-full col-span-8 md:col-span-4 lg:col-span-3"
+          aria-label="Region"
         >
           <template #value="slotProps">
             <div v-if="slotProps.value" class="flex items-center">
@@ -122,6 +126,7 @@ onMounted(() => {
           label="Қидриш"
           class="col-span-4 md:col-span-2"
           severity="contrast"
+          aria-label="Search"
         />
       </div>
     </div>

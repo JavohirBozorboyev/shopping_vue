@@ -72,6 +72,7 @@ const toggle = (event) => {
       </div>
       <div class="flex items-center gap-4">
         <RouterLink
+          aria-label="Севимли"
           to="/favorites"
           title="Profil"
           class="rounded-md p-1 flex items-center gap-2 md:pr-3 active:scale-95 duration-300"
@@ -118,6 +119,7 @@ const toggle = (event) => {
             label="Тизимга Кириш"
             size="small"
             severity="contrast"
+            aria-label="Тизимга Кириш"
         /></RouterLink>
         <div
           @click="toggle"
@@ -163,6 +165,7 @@ const toggle = (event) => {
           <span :class="item.icon" />
           <span class="text-sm">{{ item.label }}</span>
         </div>
+        
       </template>
     </Menu>
     <UserNavigation ref="childRef" />

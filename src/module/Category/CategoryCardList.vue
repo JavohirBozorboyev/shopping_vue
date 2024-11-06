@@ -123,34 +123,36 @@ watchEffect(() => {
       >
         <div class="">
           <img
+            loading="lazy"
             :src="item.attachUrlResponses.originFile"
-            alt=""
+            :alt="item.title"
             class="w-full h-32 md:min-h-48 2xl:h-60 object-cover rounded-t-sm"
           />
         </div>
         <div class="px-2 pt-2 xl:px-3 xl:pt-3 flex flex-col justify-between">
           <div class="flex justify-between items-center">
-            <p class="text-[10px] lg:text-xs text-gray-400 line-clamp-1">
+            <p class="text-[10px] lg:text-xs text-slate-500 line-clamp-1">
               {{ item.address }}
             </p>
 
             <!-- <Badge value="Янги" size="small" severity="secondary"></Badge> -->
           </div>
           <h1
-            class="text-xs lg:text-sm mt-2 text-slate-500 font-semibold line-clamp-2"
+            class="text-xs lg:text-sm mt-2 text-slate-800 font-semibold line-clamp-2"
           >
             {{ item.title }}
           </h1>
           <h1
             class="text-slate-700 font-semibold text-sm xl:text-base mt-2 flex items-center gap-2"
           >
-            <p class="text-xs text-gray-400 font-medium">Нарҳ :</p>
+            <p class="text-xs text-slate-500 font-medium">Нарҳ :</p>
             {{ FormatCurrency(item.price, item.currencyCode) }}
           </h1>
         </div>
         <div class="flex justify-between gap-2 p-1 mt-2 border-t">
           <div class="flex gap-2">
             <Button
+              aria-label="SMS"
               class=""
               icon="pi pi-envelope "
               size="small"
@@ -164,6 +166,7 @@ watchEffect(() => {
               icon="pi pi-heart"
               size="small"
               severity="secondary"
+              aria-label="Like"
             ></Button>
           </div>
           <RouterLink :to="`/category/${route.params.slug}/${item.id}`">
@@ -172,6 +175,7 @@ watchEffect(() => {
               icon="pi pi-arrow-right"
               size="small"
               severity="secondary"
+              aria-label="Read More"
             ></Button>
           </RouterLink>
         </div>

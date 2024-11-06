@@ -89,6 +89,7 @@ watchEffect(() => {
           <img
             :src="item?.attachUrlResponses[0].originFile"
             :alt="item.title"
+            loading="lazy"
             class="w-full h-32 md:min-h-48 object-cover rounded-t-md duration-300"
           />
         </div>
@@ -119,6 +120,7 @@ watchEffect(() => {
               icon="pi pi-envelope "
               size="small"
               severity="secondary"
+              aria-label="SMS"
             ></Button>
 
             <Button
@@ -127,6 +129,7 @@ watchEffect(() => {
               icon="pi pi-trash"
               size="small"
               severity="secondary"
+              aria-label="dislike"
             ></Button>
           </div>
           <RouterLink :to="`/category/${item.categoryId}/${item.id}`">
