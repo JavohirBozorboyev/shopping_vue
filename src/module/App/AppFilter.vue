@@ -9,7 +9,6 @@ import InputIcon from "primevue/inputicon";
 import { useSearchStore } from "@/stores/searchStore";
 import { useRouter } from "vue-router";
 import Select from "primevue/select";
-
 const searchStore = useSearchStore();
 
 let ApiCategoryData = ref(null);
@@ -24,9 +23,12 @@ const ApiCall = async () => {
     let res = await fetch(
       "https://tez-sotish-api.uz/api/v1/category/get/all-for-front"
     );
-    let region = await fetch("https://tez-sotish-api.uz/api/v1/region/get/all");
+    let region = await fetch(
+      "https://tez-sotish-api.uz/api/v1/region/get/all-tree"
+    );
     ApiCategoryData.value = (await res.json()).body;
     ApiRegionData.value = (await region.json()).body;
+
   } catch (error) {
     console.log(error, "err");
   } finally {
@@ -65,13 +67,13 @@ onMounted(() => {
             :to="`/category/${item.id}`"
             v-if="!loading"
             v-for="item of ApiCategoryData"
-            class="flex flex-col items-center justify-center p-1 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
+            class="w-60 overflow-hidden flex flex-col items-center justify-center p-1 rounded-md min-w-32 cursor-pointer select-none active:scale-[0.98] duration-300"
             :class="route.params.slug == item.id ? 'bg-slate-950 ' : 'bg-white'"
           >
             <img
               :src="item.attach.originFile"
               :alt="item.name"
-              class="w-full h-20 object-cover rounded-md"
+              class="w-full h-20 lg:h-24 object-cover rounded-md"
               loading="lazy"
             />
             <p
@@ -90,7 +92,7 @@ onMounted(() => {
           <InputIcon class="pi pi-search" />
           <InputText
             v-model="searchStore.search"
-            placeholder="Элонларни қидриш"
+            placeholder="Элонларни қидириш"
             class="w-full"
             alt="search"
           />
@@ -146,4 +148,3 @@ onMounted(() => {
   border-radius: 2px;
 }
 </style>
-
