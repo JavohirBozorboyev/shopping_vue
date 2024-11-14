@@ -11,6 +11,8 @@ import { useRouter } from "vue-router";
 import Select from "primevue/select";
 const searchStore = useSearchStore();
 
+import CascadeSelect from "primevue/cascadeselect";
+
 let ApiCategoryData = ref(null);
 let ApiRegionData = ref(null);
 let loading = ref(true);
@@ -28,7 +30,6 @@ const ApiCall = async () => {
     );
     ApiCategoryData.value = (await res.json()).body;
     ApiRegionData.value = (await region.json()).body;
-
   } catch (error) {
     console.log(error, "err");
   } finally {
@@ -125,7 +126,7 @@ onMounted(() => {
 
         <Button
           @click="SearchFunc"
-          label="Қидриш"
+          label="Қидириш"
           class="col-span-4 md:col-span-2"
           severity="contrast"
           aria-label="Search"
