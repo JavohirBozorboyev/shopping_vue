@@ -5,7 +5,7 @@ import AppFooter from "./components/Footer/AppFooter.vue";
 import axios from "axios";
 import AuthProvider from "./Provider/AuthProvider.vue";
 import BottomNavigation from "./components/Navbar/BottomNavigation.vue";
-axios.defaults.baseURL = "https://tez-sotish-api.uz";
+axios.defaults.baseURL = "http://45.138.158.149:9090";
 
 const route = useRoute();
 </script>

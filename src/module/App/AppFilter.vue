@@ -22,12 +22,8 @@ const router = useRouter();
 
 const ApiCall = async () => {
   try {
-    let res = await fetch(
-      "https://tez-sotish-api.uz/api/v1/category/get/all-for-front"
-    );
-    let region = await fetch(
-      "https://tez-sotish-api.uz/api/v1/region/get/all-tree"
-    );
+    let res = await fetch("http://45.138.158.149:9090/api/v1/category/get/all-for-front");
+    let region = await fetch("http://45.138.158.149:9090/api/v1/region/get/all-tree");
     ApiCategoryData.value = (await res.json()).body;
     ApiRegionData.value = (await region.json()).body;
   } catch (error) {
