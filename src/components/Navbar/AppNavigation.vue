@@ -66,8 +66,9 @@ const toggle = (event) => {
   <div class="bg-white border-b fixed w-full top-0 z-50">
     <div class="container mx-auto px-2 py-2 flex justify-between items-center">
       <div class="flex items-center">
-        <RouterLink to="/">
+        <RouterLink to="/" class="flex items-center gap-2 text-2xl font-bold">
           <i class="pi pi-crown text-slate-900" style="font-size: 2rem"></i>
+          <p>Tezsot</p>
         </RouterLink>
       </div>
       <div class="flex items-center gap-4">
@@ -165,7 +166,6 @@ const toggle = (event) => {
           <span :class="item.icon" />
           <span class="text-sm">{{ item.label }}</span>
         </div>
-        
       </template>
     </Menu>
     <UserNavigation ref="childRef" />

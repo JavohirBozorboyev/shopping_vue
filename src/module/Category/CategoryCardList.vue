@@ -110,10 +110,7 @@ watchEffect(() => {
         v-if="data?.rows?.length == 0"
         class="col-span-12 bg-gray-50 rounded-md p-5 min-h-[80vh] flex flex-col gap-5 justify-center items-center"
       >
-        <i
-          class="pi pi-exclamation-circle text-black"
-          style="font-size: 3rem"
-        ></i>
+        <i class="pi pi-exclamation-circle text-black" style="font-size: 3rem"></i>
         <h1 class="text-xl uppercase text-slate-700">Махсулот Топилмади!</h1>
       </div>
       <div
@@ -137,9 +134,7 @@ watchEffect(() => {
 
             <!-- <Badge value="Янги" size="small" severity="secondary"></Badge> -->
           </div>
-          <h1
-            class="text-xs lg:text-sm mt-2 text-slate-800 font-semibold line-clamp-2"
-          >
+          <h1 class="text-xs lg:text-sm mt-2 text-slate-800 font-semibold line-clamp-2">
             {{ item.title }}
           </h1>
           <h1

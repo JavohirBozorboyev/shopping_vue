@@ -145,7 +145,7 @@ watchEffect(() => {
     </div>
   </div>
   <div
-    v-if="data?.length == 0"
+    v-if="!data"
     class="col-span-12 h-[80vh] -mt-4 bg-slate-100 p-4 rounded flex items-center justify-center flex-col gap-5"
   >
     <i

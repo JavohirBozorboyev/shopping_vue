@@ -2,7 +2,7 @@
 import { RouterView } from "vue-router";
 import AppFilter from "@/module/App/AppFilter.vue";
 import axios from "axios";
-axios.defaults.baseURL = "http://45.138.158.149:9090";
+axios.defaults.baseURL = "https://api.tez-sotish.uz";
 </script>
 
 <template>
