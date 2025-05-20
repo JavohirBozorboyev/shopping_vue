@@ -56,8 +56,13 @@ let countriesMoneyTypeSellected = ref({
 
 const ApiCall = async () => {
   try {
-    let res = await axios("/api/v1/category/get/all-for-front");
-    let region = await fetch("https://tez-sotish-api.uz/api/v1/region/get/all");
+    let res = await axios.get(
+      "https://api.tez-sotish.uz/api/v1/category/get/all-for-front"
+    );
+
+    let region = await fetch(
+      "https://api.tez-sotish.uz/api/v1/region/get/all-tree"
+    );
     ApiRegionData.value = (await region.json()).body;
     ApiCategoryData.value = res.data.body.map((item) => {
       return { name: item.name, id: item.id };
